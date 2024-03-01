@@ -1,41 +1,65 @@
 import React from "react";
 import Product from "./ProductGrid";
 import { Link } from "react-router-dom";
-import { isError, useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  useQueryClient,
+  isError,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 import { getProducts } from "../../../api/productsApi";
 import Loading from "../../Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
-import { listProductListFuenmayors } from "../../../graphql/queries";
+import { listProducts } from "../../../graphql/queries";
 import amplifyconfig from "../../../amplifyconfiguration.json";
+import { Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategories } from "../../../features/categories/categorySlice";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
 
 const GridProductList = () => {
   const [products, setProducts] = React.useState([]);
+  // const [categories, setCategories] = React.useState("");
 
-  // React.useEffect(() => {
-  //   fetchProducts();
-  // }, []);
+  const dispatch = useDispatch();
 
-  const { data, isLoading, isError } = useQuery(
-    ["listProductListFuenmayors"],
+  const handleDeleteCategories = () => {
+    dispatch(setCategories(""));
+  };
+
+  const { category: categorystate, search } = useSelector(
+    (state) => state.categories
+  );
+
+  console.log("El estado de la categoria es:", categorystate);
+  console.log("El estado de SEARCH es:", search);
+
+  const { data, isLoading, isFetching, isError, refetch } = useQuery(
+    ["listProducts"],
     async () => {
       try {
+        const filter = {
+          ...(categorystate !== ""
+            ? { categories: { contains: categorystate } }
+            : {}),
+          ...(search !== "" ? { name: { contains: search } } : {}),
+        };
         const productsData = await client.graphql({
-          query: listProductListFuenmayors,
+          query: listProducts,
           variables: {
             limit: 20,
-            filter: { nombre: { contains: "" } },
+            filter,
           },
         });
 
-        return productsData.data.listProductListFuenmayors.items;
+        return productsData.data.listProducts.items;
       } catch (err) {
-        console.error("Error fetching todos", err);
+        console.error("Error fetching todos", err.errors);
         throw err;
       }
     },
@@ -46,7 +70,15 @@ const GridProductList = () => {
     }
   );
 
-  console.log(data, isError);
+  React.useEffect(() => {
+    refetch();
+  }, [categorystate, refetch, search]);
+
+  // React.useEffect(() => {
+  //   if (categories !== "") {
+  //     queryClient.invalidateQueries({ queryKey: ["listProducts"] });
+  //   }
+  // }, [categories, queryClient]);
 
   // async function fetchProducts() {
   //   try {
@@ -87,23 +119,65 @@ const GridProductList = () => {
 
   // const productList = data?.pages.flatMap((page) => page.products) ?? [];
 
-  // if (isLoading) return <Loading />;
-  // else {
-  return (
-    <div className=" grid mx-auto ">
-      {products?.map((product) => (
-        <div key={product._id}>
-          <Link to={`/products/${product._id}`}>
-            <Product
-              // url={product.photo[0].url}
-              name={product.nombre}
-              description={product.departamento}
-              price={product.price}
-            />
-          </Link>
+  if (isFetching || isLoading)
+    return (
+      <div style={{ minHeight: "50vh" }}>
+        <h1>Cargando...</h1>
+        <Loading />
+      </div>
+    );
+  if (data.length < 1)
+    return (
+      <div style={{ minHeight: "50vh" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <h1>Sin Resultados </h1>
+          <button
+            style={{ marginLeft: "10px" }}
+            onClick={() => handleDeleteCategories()}
+          >
+            X
+          </button>
         </div>
-      ))}
-    </div>
+      </div>
+    );
+
+  return (
+    <>
+      {categorystate && (
+        <div className="" style={{ display: "flex", alignItems: "center" }}>
+          <h3 className="" style={{ margin: "20px" }}>
+            Filtrando por categoria : {categorystate}
+          </h3>
+          <button onClick={() => handleDeleteCategories()}>X</button>
+        </div>
+      )}
+
+      <div className=" grid mx-auto " style={{ minHeight: "50vh" }}>
+        {products?.map((product) => (
+          <div key={product.id}>
+            {/* {console.log(product)} */}
+            <Link to={`/products/${product._id}`}>
+              <Product
+                url={
+                  product.photo && product.photo[0]
+                    ? product.photo[0].url
+                    : null
+                }
+                name={product.name}
+                description={product.departamento}
+                price={product.price}
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
+
     // <>
     //   <h2>Todos los Articulos</h2>
     //   <InfiniteScroll

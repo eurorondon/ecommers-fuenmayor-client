@@ -1,60 +1,71 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setCategories } from "../../features/categories/categorySlice";
+import { Button } from "@mui/material";
+
+const categories = [
+  {
+    name: "Conservadores",
+    products: 8,
+    imageUrl: "images/cocina.png",
+  },
+  {
+    name: "Limpieza",
+    products: 5,
+    imageUrl: "/images/limpieza.png",
+  },
+  {
+    name: "Aluminio",
+    products: 12,
+    imageUrl: "/images/aluminio.png",
+  },
+  {
+    name: "Combos",
+    products: 12,
+    imageUrl: "/images/combos.png",
+  },
+  {
+    name: "Hombres",
+    products: 12,
+    imageUrl: "/images/aluminio.png",
+  },
+  {
+    name: "Mujer",
+    products: 12,
+    imageUrl: "/images/belleza.png",
+  },
+  {
+    name: "Contenedor",
+    products: 12,
+    imageUrl: "/images/contenedores.png",
+  },
+  {
+    name: "Electricos",
+    products: 12,
+    imageUrl: "/images/limpieza.png",
+  },
+  // {
+  //   name: "Sonido",
+  //   products: 12,
+  //   imageUrl: "/images/sonido.png",
+  // },
+
+  // {
+  //   name: "Coleccionables",
+  //   products: 12,
+  //   imageUrl: "/images/coleccionables.png",
+  // },
+  // Agrega más categorías según sea necesario
+];
 
 const Categorias = () => {
-  const categories = [
-    {
-      name: "Cocina",
-      products: 8,
-      imageUrl: "images/cocina.png",
-    },
-    {
-      name: "Limpieza",
-      products: 5,
-      imageUrl: "/images/limpieza.png",
-    },
-    {
-      name: "Aluminio",
-      products: 12,
-      imageUrl: "/images/aluminio.png",
-    },
-    {
-      name: "Combos",
-      products: 12,
-      imageUrl: "/images/combos.png",
-    },
-    {
-      name: "Hombres",
-      products: 12,
-      imageUrl: "/images/aluminio.png",
-    },
-    {
-      name: "Mujer",
-      products: 12,
-      imageUrl: "/images/belleza.png",
-    },
-    {
-      name: "Contenedor",
-      products: 12,
-      imageUrl: "/images/contenedores.png",
-    },
-    {
-      name: "Electricos",
-      products: 12,
-      imageUrl: "/images/limpieza.png",
-    },
-    // {
-    //   name: "Sonido",
-    //   products: 12,
-    //   imageUrl: "/images/sonido.png",
-    // },
+  const dispatch = useDispatch();
 
-    // {
-    //   name: "Coleccionables",
-    //   products: 12,
-    //   imageUrl: "/images/coleccionables.png",
-    // },
-    // Agrega más categorías según sea necesario
-  ];
+  const handleCategories = (category) => {
+    console.log(category);
+    dispatch(setCategories(category));
+  };
+
   if (window.innerWidth > 1150)
     return (
       <div
@@ -68,7 +79,8 @@ const Categorias = () => {
       >
         {categories.map((category, index) => (
           <div key={index} style={{ margin: "10px", textAlign: "center" }}>
-            <div
+            <Button
+              onClick={() => handleCategories(category.name)}
               style={{
                 width: "120px",
                 height: "120px",
@@ -86,7 +98,7 @@ const Categorias = () => {
                 alt={category.name}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </div>
+            </Button>
             <div style={{ marginTop: "10px" }}>{category.name}</div>
           </div>
         ))}

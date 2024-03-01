@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { LocationOn, PersonOutline } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "../features/categories/categorySlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [searchInput, setSetsearchInput] = useState("");
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -14,6 +18,18 @@ const Header = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submited");
+    dispatch(setSearch(searchInput));
+  };
+
+  const handleClear = () => {
+    setSetsearchInput("");
+    dispatch(setSearch(""));
+  };
+
   return (
     <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
       {/* Top Header */}
@@ -137,13 +153,14 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="col-12 d-flex align-items-center">
-                  <form className="input-group">
+                  <form className="input-group" onSubmit={handleSubmit}>
                     <input
                       type="search"
                       className="form-control rounded-left search"
                       placeholder="Search"
+                      onChange={(e) => setSetsearchInput(e.target.value)}
                     />
-                    <button type="submit" className="search-button ">
+                    <button type="submit" className="search-button">
                       search
                     </button>
                   </form>
@@ -168,12 +185,23 @@ const Header = () => {
                 </Link>
               </div>
               <div className="col-md-6 col-8 d-flex align-items-center">
-                <form className="input-group">
+                <form className="input-group" onSubmit={handleSubmit}>
                   <input
-                    type="search"
+                    type=""
                     className="form-control rounded-left search"
                     placeholder="Search"
+                    value={searchInput}
+                    onChange={(e) => setSetsearchInput(e.target.value)}
                   />
+                  {searchInput && (
+                    <button
+                      type="button"
+                      className="clear-button"
+                      onClick={handleClear}
+                    >
+                      x
+                    </button>
+                  )}
                   <button
                     type="submit"
                     className="search-button"

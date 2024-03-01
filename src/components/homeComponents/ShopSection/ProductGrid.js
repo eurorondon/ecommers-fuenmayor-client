@@ -3,19 +3,21 @@ export default function Product(props) {
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
   return (
-    <div className=" card  text-start  ">
+    <div className=" card  text-start   " style={{ borderRadius: "10px" }}>
       <div
-        className="mx-auto d-flex justify-content-center align-items-center"
-        style={{ maxWidth: "14rem" }}
+        className=" d-flex justify-content-center align-items-center  "
+        style={{ width: "100%", padding: "5px" }}
       >
         <img
           className="mx-auto"
           src={props.url}
-          alt="product image"
+          alt="product "
           style={{
-            width: "95%",
-            height: "150px",
+            width: "100%",
+            // height: "150px",
             objectFit: "scale-down",
+            borderTopLeftRadius: "5px",
+            borderTopRightRadius: "5px",
           }}
         />
       </div>
