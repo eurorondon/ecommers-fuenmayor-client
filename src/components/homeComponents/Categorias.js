@@ -2,12 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setCategories } from "../../features/categories/categorySlice";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
     name: "Conservadores",
     products: 8,
-    imageUrl: "images/cocina.png",
+    imageUrl: "/images/cocina.png",
   },
   {
     name: "Limpieza",
@@ -63,7 +64,7 @@ const Categorias = () => {
 
   const handleCategories = (category) => {
     console.log(category);
-    dispatch(setCategories(category));
+    // dispatch(setCategories(category));
   };
 
   if (window.innerWidth > 1150)
@@ -79,7 +80,8 @@ const Categorias = () => {
       >
         {categories.map((category, index) => (
           <div key={index} style={{ margin: "10px", textAlign: "center" }}>
-            <Button
+            <Link
+              to={`/categories/${category.name}`}
               onClick={() => handleCategories(category.name)}
               style={{
                 width: "120px",
@@ -98,7 +100,7 @@ const Categorias = () => {
                 alt={category.name}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Button>
+            </Link>
             <div style={{ marginTop: "10px" }}>{category.name}</div>
           </div>
         ))}

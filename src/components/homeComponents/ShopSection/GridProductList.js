@@ -1,132 +1,90 @@
 import React from "react";
 import Product from "./ProductGrid";
 import { Link } from "react-router-dom";
-import {
-  useQueryClient,
-  isError,
-  useInfiniteQuery,
-  useQuery,
-} from "@tanstack/react-query";
-import { getProducts } from "../../../api/productsApi";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Loading from "../../Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import { listProducts } from "../../../graphql/queries";
 import amplifyconfig from "../../../amplifyconfiguration.json";
-import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../../../features/categories/categorySlice";
+import { useParams } from "react-router-dom";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
 
 const GridProductList = () => {
   const [products, setProducts] = React.useState([]);
-  // const [categories, setCategories] = React.useState("");
+  const [cargando, setCargando] = React.useState(true);
 
-  const dispatch = useDispatch();
+  const { category, search } = useParams();
+  console.log(category);
 
-  const handleDeleteCategories = () => {
-    dispatch(setCategories(""));
-  };
+  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
+    useInfiniteQuery(
+      [category ? `infinity-products-${category}` : "infinity-products"],
+      async ({ pageParam }) => {
+        try {
+          // const filter = {
+          //   ...(category ? { categories: { contains: category } } : {}),
+          //   // ...(search !== "" ? { name: { contains: search } } : {}),
+          // };
 
-  const { category: categorystate, search } = useSelector(
-    (state) => state.categories
-  );
+          let filter;
+          if (category) {
+            filter = { categories: { contains: category } };
+          }
 
-  console.log("El estado de la categoria es:", categorystate);
-  console.log("El estado de SEARCH es:", search);
+          if (search) {
+            filter = { name: { contains: search } };
+          }
 
-  const { data, isLoading, isFetching, isError, refetch } = useQuery(
-    ["listProducts"],
-    async () => {
-      try {
-        const filter = {
-          ...(categorystate !== ""
-            ? { categories: { contains: categorystate } }
-            : {}),
-          ...(search !== "" ? { name: { contains: search } } : {}),
-        };
-        const productsData = await client.graphql({
-          query: listProducts,
-          variables: {
-            limit: 20,
-            filter,
-          },
-        });
+          const productsData = await client.graphql({
+            query: listProducts,
+            variables: {
+              limit: 6,
+              filter,
+              nextToken: pageParam,
+            },
+          });
 
-        return productsData.data.listProducts.items;
-      } catch (err) {
-        console.error("Error fetching todos", err.errors);
-        throw err;
-      }
-    },
-    {
-      onSuccess: (data) => {
-        setProducts(data);
+          return productsData.data.listProducts;
+        } catch (err) {
+          console.error("Error fetching todos", err.errors);
+          throw err;
+        }
       },
-    }
-  );
+      {
+        onSuccess: (data) => {
+          const productList =
+            data?.pages.reduce(
+              (prevProducts, page) => prevProducts.concat(page.items),
+              []
+            ) ?? [];
+
+          setProducts(productList);
+          setCargando(false);
+        },
+        getNextPageParam: (lastPage) => {
+          return lastPage.nextToken || null;
+        },
+      }
+    );
 
   React.useEffect(() => {
     refetch();
-  }, [categorystate, refetch, search]);
+  }, [category, refetch, search]);
 
-  // React.useEffect(() => {
-  //   if (categories !== "") {
-  //     queryClient.invalidateQueries({ queryKey: ["listProducts"] });
-  //   }
-  // }, [categories, queryClient]);
-
-  // async function fetchProducts() {
-  //   try {
-  //     const productsData = await client.graphql({
-  //       query: listProductListFuenmayors,
-  //       variables: {
-  //         limit: 20,
-  //         filter: { nombre: { contains: "" } },
-  //       },
-  //     });
-  //     const products = productsData;
-
-  //     setProducts(products.data.listProductListFuenmayors.items);
-  //   } catch (err) {
-  //     console.log("error fetching todos", err);
-  //   }
-  // }
-  // console.log(products.data?.listProductListFuenmayors?.items);
-  // const { data, isLoading, error, hasNextPage, fetchNextPage } =
-  //   useInfiniteQuery(
-  //     ["infinity-products"],
-  //     ({ pageParam = 0 }) =>
-  //       getProducts(`/api/products?pageNumber=${pageParam}`),
-
-  //     {
-  //       getNextPageParam: (lastPage) => {
-  //         if (lastPage.page === lastPage.pages) return false;
-  //         return lastPage.page + 1;
-  //       },
-  //     }
-  //   );
-
-  // const productList =
-  //   data?.pages.reduce(
-  //     (prevProducts, page) => prevProducts.concat(page.products),
-  //     []
-  //   ) ?? [];
-
-  // const productList = data?.pages.flatMap((page) => page.products) ?? [];
-
-  if (isFetching || isLoading)
+  if (isLoading)
     return (
       <div style={{ minHeight: "50vh" }}>
         <h1>Cargando...</h1>
         <Loading />
       </div>
     );
-  if (data.length < 1)
+  if (products.length < 1)
     return (
       <div style={{ minHeight: "50vh" }}>
         <div
@@ -136,78 +94,53 @@ const GridProductList = () => {
           }}
         >
           <h1>Sin Resultados </h1>
-          <button
-            style={{ marginLeft: "10px" }}
-            onClick={() => handleDeleteCategories()}
-          >
+          <Link to={"/"} style={{ marginLeft: "10px" }}>
             X
-          </button>
+          </Link>
         </div>
       </div>
     );
 
   return (
     <>
-      {categorystate && (
+      {category ? (
         <div className="" style={{ display: "flex", alignItems: "center" }}>
           <h3 className="" style={{ margin: "20px" }}>
-            Filtrando por categoria : {categorystate}
+            Filtrando por categoria : {category}
           </h3>
-          <button onClick={() => handleDeleteCategories()}>X</button>
+          <Link to={"/"}>X</Link>
         </div>
+      ) : (
+        <h2>Todos los Articulos</h2>
       )}
 
-      <div className=" grid mx-auto " style={{ minHeight: "50vh" }}>
-        {products?.map((product) => (
-          <div key={product.id}>
-            {/* {console.log(product)} */}
-            <Link to={`/products/${product._id}`}>
-              <Product
-                url={
-                  product.photo && product.photo[0]
-                    ? product.photo[0].url
-                    : null
-                }
-                name={product.name}
-                description={product.departamento}
-                price={product.price}
-              />
-            </Link>
-          </div>
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={products ? products.length : 0}
+        hasMore={hasNextPage}
+        next={() => fetchNextPage()}
+        // loader={
+        //   <div className="mx-auto">
+        //     <Loading />
+        //   </div>
+        // }
+      >
+        <div className=" grid mx-auto ">
+          {products?.map((product) => (
+            <div key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <Product
+                  url={product.photo[0].url}
+                  name={product.name}
+                  description={product.description}
+                  price={product.price}
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </InfiniteScroll>
     </>
-
-    // <>
-    //   <h2>Todos los Articulos</h2>
-    //   <InfiniteScroll
-    //     dataLength={productList.length}
-    //     hasMore={hasNextPage}
-    //     next={() => fetchNextPage()}
-    //     loader={
-    //       <div className="mx-auto">
-    //         <Loading />
-    //       </div>
-    //     }
-    //   >
-    //     <div className=" grid mx-auto ">
-    //       {products?.map((product) => (
-    //         <div key={product._id}>
-    //           <Link to={`/products/${product._id}`}>
-    //             <Product
-    //               // url={product.photo[0].url}
-    //               name={product.nombre}
-    //               description={product.description}
-    //               price={product.price}
-    //             />
-    //           </Link>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </InfiniteScroll>
-    // </>
   );
 };
-// };
 
 export default GridProductList;

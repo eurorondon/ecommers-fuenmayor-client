@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { LocationOn, PersonOutline } from "@mui/icons-material";
@@ -11,6 +11,8 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchInput, setSetsearchInput] = useState("");
 
+  const navigate = useNavigate();
+
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -21,13 +23,13 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submited");
-    dispatch(setSearch(searchInput));
+
+    navigate(`/search/${searchInput}`);
   };
 
   const handleClear = () => {
     setSetsearchInput("");
-    dispatch(setSearch(""));
+    navigate(`/`);
   };
 
   return (

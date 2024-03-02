@@ -15,8 +15,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/categories/:category" element={<Home />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart/:id?" element={<CartScreen />} />
+        <Route path="/search/:search" element={<Home />} />
       </Routes>
     </Router>
   );

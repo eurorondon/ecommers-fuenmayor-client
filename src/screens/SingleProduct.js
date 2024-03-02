@@ -6,16 +6,21 @@ import { getProudct } from "../api/productsApi";
 import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductDetails } from "../features/products/productsSlice";
-// import { Link } from "react-router-dom";
-// import Rating from "../components/homeComponents/Rating";
-// import Message from "./../components/LoadingError/Error";
-// import products from "../data/Products";
+
+import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
+import { listProducts } from "../graphql/queries";
+import amplifyconfig from "../amplifyconfiguration.json";
 
 const SingleProduct = ({ match }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
+
+  const client = generateClient();
+
+  const result = () => {};
 
   // Ejecutamos la llamada a la API, react-query nos ayuda con el estado de la petición
   const { isLoading, data, isError, error } = useQuery(["product", id], () =>
