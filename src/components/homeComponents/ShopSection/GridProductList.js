@@ -1,6 +1,6 @@
 import React from "react";
 import Product from "./ProductGrid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Loading from "../../Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -16,11 +16,14 @@ Amplify.configure(amplifyconfig);
 const client = generateClient();
 
 const GridProductList = () => {
-  const [products, setProducts] = React.useState([]);
+  // const [products, setProducts] = React.useState([]);
   const [cargando, setCargando] = React.useState(true);
 
+  const navigate = useNavigate();
+
   const { category, search } = useParams();
-  console.log(category);
+  const parametros = useParams();
+  console.log(parametros);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
@@ -57,21 +60,29 @@ const GridProductList = () => {
         }
       },
       {
-        onSuccess: (data) => {
-          const productList =
-            data?.pages.reduce(
-              (prevProducts, page) => prevProducts.concat(page.items),
-              []
-            ) ?? [];
-
-          setProducts(productList);
-          setCargando(false);
-        },
+        // refetchOnMount: false,
+        // refetchInterval: false,
+        // refetchOnWindowFocus: false,
+        // refetchIntervalInBackground: false,
+        // onSuccess: (data) => {},
         getNextPageParam: (lastPage) => {
           return lastPage.nextToken || null;
         },
       }
     );
+
+  const products =
+    data?.pages.reduce(
+      (prevProducts, page) => prevProducts.concat(page.items),
+      []
+    ) ?? [];
+
+  console.log("la lista de productos es", products);
+
+  const handleNavigate = (id) => {
+    window.scroll(0, 0);
+    navigate(`/products/${id}`);
+  };
 
   React.useEffect(() => {
     refetch();
@@ -84,22 +95,22 @@ const GridProductList = () => {
         <Loading />
       </div>
     );
-  if (products.length < 1)
-    return (
-      <div style={{ minHeight: "50vh" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <h1>Sin Resultados </h1>
-          <Link to={"/"} style={{ marginLeft: "10px" }}>
-            X
-          </Link>
-        </div>
-      </div>
-    );
+  // if (products.length < 1)
+  //   return (
+  //     <div style={{ minHeight: "50vh" }}>
+  //       <div
+  //         style={{
+  //           display: "flex",
+  //           alignItems: "center",
+  //         }}
+  //       >
+  //         <h1>Sin Resultados </h1>
+  //         <Link to={"/"} style={{ marginLeft: "10px" }}>
+  //           X
+  //         </Link>
+  //       </div>
+  //     </div>
+  //   );
 
   return (
     <>
@@ -127,14 +138,19 @@ const GridProductList = () => {
         <div className=" grid mx-auto ">
           {products?.map((product) => (
             <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <div
+                style={{ cursor: "pointer" }}
+                className=""
+                onClick={() => handleNavigate(product.id)}
+                //  to={`/products/${product.id}`}
+              >
                 <Product
                   url={product.photo[0].url}
                   name={product.name}
                   description={product.description}
                   price={product.price}
                 />
-              </Link>
+              </div>
             </div>
           ))}
         </div>

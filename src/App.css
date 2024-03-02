@@ -376,16 +376,17 @@ textarea:focus {
 }
 .product-dtl p {
   line-height: 24px;
-  color: #7a7a7a;
+  /* color: #6f0e0e; */
 }
 .product-count {
-  border: 2px solid #f3f3f3;
+  /* border: 2px solid #ab1515; */
   border-radius: 5px;
   margin-top: 40px;
+  background-color: #ffffff;
 }
 .product-count .flex-box {
   padding: 15px 25px;
-  border-bottom: 2px solid #f3f3f3;
+  border-bottom: 2px solid #dcdcdc;
 }
 .product-count .flex-box h6 {
   font-size: 16px;
@@ -395,7 +396,7 @@ textarea:focus {
   color: #000000;
 }
 .product-count .flex-box select {
-  background-color: #f3f3f3;
+  background-color: #7d1111;
   width: 100px;
   height: 40px;
   text-align: center;
