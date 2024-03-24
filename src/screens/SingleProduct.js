@@ -15,7 +15,7 @@ import amplifyconfig from "../amplifyconfiguration.json";
 const SingleProduct = ({ match }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
+
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const [product, setProduct] = React.useState({});
@@ -46,10 +46,13 @@ const SingleProduct = ({ match }) => {
     }
   );
   useEffect(() => {
-    setProduct(data?.data.getProduct);
+    setProduct(data?.data?.getProduct);
   }, [data]);
 
-  console.log(data?.data.getProduct);
+  const handleQtyChange = (event) => {
+    const newQty = parseInt(event.target.value, 10); // Obtener el nuevo valor seleccionado como un entero
+    setQty(newQty); // Actualizar el estado qty
+  };
 
   // enviamos los datos extraídos de la API a REDUX
   // useEffect(() => {
@@ -63,6 +66,7 @@ const SingleProduct = ({ match }) => {
 
   const AddToCartHandle = (e) => {
     e.preventDefault();
+
     navigate(`/cart/${id}?qty=${qty}`);
   };
 
@@ -123,7 +127,7 @@ const SingleProduct = ({ match }) => {
                   <>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Quantity</h6>
-                      <select>
+                      <select value={qty} onChange={handleQtyChange}>
                         {[...Array(product?.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}

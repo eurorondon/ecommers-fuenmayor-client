@@ -1,18 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Obtén los productos guardados en el localStorage al cargar la página
+const getCartItemsFromLocalStorage = () => {
+  const cartItems = localStorage.getItem("cartItems");
+  return cartItems ? JSON.parse(cartItems) : [];
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    cartItems: [],
+    cartItems: getCartItemsFromLocalStorage(),
+    // cartItems: [],
   },
   reducers: {
     addToCart: (state, action) => {
       const newItem = action.payload;
-      const existingItemIndex = state.cartItems.findIndex(
-        (item) => item.data._id === newItem.data._id
-      );
-      if (existingItemIndex === -1) {
-        state.cartItems.push(newItem);
+      console.log(newItem);
+
+      if (newItem) {
+        const existingItem = state.cartItems.find(
+          (item) => item.product === newItem.product
+        );
+
+        if (existingItem) {
+          existingItem.qty = newItem.qty;
+        } else {
+          state.cartItems.push(newItem);
+        }
+
+        saveCartItemsToLocalStorage(state.cartItems);
       }
     },
   },
@@ -35,5 +51,9 @@ export const { addToCart } = cartSlice.actions;
 
 //   return result;
 // };
+
+const saveCartItemsToLocalStorage = (cartItems) => {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
 
 export default cartSlice.reducer;

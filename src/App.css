@@ -396,7 +396,7 @@ textarea:focus {
   color: #000000;
 }
 .product-count .flex-box select {
-  background-color: #7d1111;
+  background-color: #dcdcdc;
   width: 100px;
   height: 40px;
   text-align: center;

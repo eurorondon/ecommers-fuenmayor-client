@@ -23,7 +23,6 @@ const GridProductList = () => {
 
   const { category, search } = useParams();
   const parametros = useParams();
-  console.log(parametros);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
@@ -76,8 +75,6 @@ const GridProductList = () => {
       (prevProducts, page) => prevProducts.concat(page.items),
       []
     ) ?? [];
-
-  console.log("la lista de productos es", products);
 
   const handleNavigate = (id) => {
     window.scroll(0, 0);

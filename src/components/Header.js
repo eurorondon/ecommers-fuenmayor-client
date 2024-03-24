@@ -10,6 +10,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchInput, setSetsearchInput] = useState("");
+  const { cartItems } = useSelector((state) => state.cart);
+  const [cartCount, setCartCount] = useState(cartItems.length);
+
+  React.useEffect(() => {
+    setCartCount(cartItems.length);
+  }, [cartItems]);
 
   const navigate = useNavigate();
 
@@ -150,7 +156,7 @@ const Header = () => {
                       style={{ fontSize: "1.1rem" }}
                     ></i>
                     <span className="badge" style={{ fontSize: "0.8rem" }}>
-                      4
+                      {cartCount}
                     </span>
                   </Link>
                 </div>
@@ -240,7 +246,7 @@ const Header = () => {
                     className="fas fa-shopping-bag me-3 text-white"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  <span className="badge">4</span>
+                  <span className="badge">{cartCount}</span>
                 </Link>
               </div>
             </div>

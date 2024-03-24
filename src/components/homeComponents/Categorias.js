@@ -63,7 +63,6 @@ const Categorias = () => {
   const dispatch = useDispatch();
 
   const handleCategories = (category) => {
-    console.log(category);
     // dispatch(setCategories(category));
   };
 
