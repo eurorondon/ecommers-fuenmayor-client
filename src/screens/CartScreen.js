@@ -8,7 +8,11 @@ import {
 } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProudct } from "../api/productsApi";
-import { addToCart } from "../features/cart/cartSlice";
+import {
+  addToCart,
+  clearCart,
+  removeFromCart,
+} from "../features/cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { generateClient } from "aws-amplify/api";
 import { getProduct } from "../graphql/queries";
@@ -41,7 +45,7 @@ const CartScreen = () => {
 
   console.log(productos);
   const name = "euro";
-  const telefono = "04126773234";
+  const telefono = "+584126773234";
   const mensaje = `👋 Hola, mi nombre es ${name}.\n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
 
   const checkOutHandler = () => {
@@ -49,6 +53,8 @@ const CartScreen = () => {
       mensaje
     )}`;
     window.open(url, "_blank"); // Abre la URL en una nueva pestaña o ventana del navegador
+
+    dispatch(clearCart());
   };
 
   const { data, isLoading, isFetching, isError, refetch } = useQuery(
@@ -129,6 +135,9 @@ const CartScreen = () => {
       );
     }
   }, [data]);
+  const removeFromCartHandle = (id) => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
     <>
@@ -165,7 +174,7 @@ const CartScreen = () => {
             {cartItems.map((item, index) => (
               <div className="cart-iterm row " key={index}>
                 <div
-                  // onClick={() => removeFromCartHandle(item.product)}
+                  onClick={() => removeFromCartHandle(item.product)}
                   className="  remove-button d-flex justify-content-center align-items-center"
                 >
                   <i className="fas fa-times"></i>
@@ -213,11 +222,11 @@ const CartScreen = () => {
             <hr />
             <div className="cart-buttons d-flex align-items-center row">
               <Link to="/" className="col-md-6 ">
-                <button>Continue To Shopping</button>
+                <button>Agregar mas Productos</button>
               </Link>
 
               <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                <button onClick={checkOutHandler}>Checkout</button>
+                <button onClick={checkOutHandler}>Concretar Compra</button>
               </div>
             </div>
           </div>

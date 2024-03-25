@@ -31,10 +31,24 @@ const cartSlice = createSlice({
         saveCartItemsToLocalStorage(state.cartItems);
       }
     },
+    removeFromCart: (state, action) => {
+      const productId = action.payload;
+      const cartItems = getCartItemsFromLocalStorage();
+      const updatedCartItems = cartItems.filter(
+        (item) => item.product !== productId
+      );
+      saveCartItemsToLocalStorage(updatedCartItems);
+      state.cartItems = updatedCartItems;
+    },
+    // Nuevo reducer para vaciar el carrito
+    clearCart: (state) => {
+      state.cartItems = [];
+      saveCartItemsToLocalStorage(state.cartItems);
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 // // Función para almacenar los datos del carrito en el localStorage
 // const saveCartItemsToLocalStorage = (cartItems) => {

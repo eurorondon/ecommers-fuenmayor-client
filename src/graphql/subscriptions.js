@@ -97,3 +97,45 @@ export const onDeleteProduct = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCategories = /* GraphQL */ `
+  subscription OnCreateCategories(
+    $filter: ModelSubscriptionCategoriesFilterInput
+  ) {
+    onCreateCategories(filter: $filter) {
+      id
+      categoryName
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateCategories = /* GraphQL */ `
+  subscription OnUpdateCategories(
+    $filter: ModelSubscriptionCategoriesFilterInput
+  ) {
+    onUpdateCategories(filter: $filter) {
+      id
+      categoryName
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteCategories = /* GraphQL */ `
+  subscription OnDeleteCategories(
+    $filter: ModelSubscriptionCategoriesFilterInput
+  ) {
+    onDeleteCategories(filter: $filter) {
+      id
+      categoryName
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

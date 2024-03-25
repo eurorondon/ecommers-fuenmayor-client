@@ -53,10 +53,38 @@ export const listProducts = /* GraphQL */ `
         updatedAt
         id
         __typename
-        photo {
-          url
-          publicId
-        }
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getCategories = /* GraphQL */ `
+  query GetCategories($id: ID!) {
+    getCategories(id: $id) {
+      id
+      categoryName
+      description
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listCategories = /* GraphQL */ `
+  query ListCategories(
+    $filter: ModelCategoriesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCategories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        categoryName
+        description
+        createdAt
+        updatedAt
+        __typename
       }
       nextToken
       __typename

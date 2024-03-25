@@ -70,6 +70,8 @@ const GridProductList = () => {
       }
     );
 
+  console.log(data);
+
   const products =
     data?.pages.reduce(
       (prevProducts, page) => prevProducts.concat(page.items),
