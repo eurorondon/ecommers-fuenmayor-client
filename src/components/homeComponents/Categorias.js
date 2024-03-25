@@ -3,64 +3,88 @@ import { useDispatch } from "react-redux";
 import { setCategories } from "../../features/categories/categorySlice";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-const categories = [
-  {
-    name: "Conservadores",
-    products: 8,
-    imageUrl: "/images/cocina.png",
-  },
-  {
-    name: "Limpieza",
-    products: 5,
-    imageUrl: "/images/limpieza.png",
-  },
-  {
-    name: "Aluminio",
-    products: 12,
-    imageUrl: "/images/aluminio.png",
-  },
-  {
-    name: "Combos",
-    products: 12,
-    imageUrl: "/images/combos.png",
-  },
-  {
-    name: "Hombres",
-    products: 12,
-    imageUrl: "/images/aluminio.png",
-  },
-  {
-    name: "Mujer",
-    products: 12,
-    imageUrl: "/images/belleza.png",
-  },
-  {
-    name: "Contenedor",
-    products: 12,
-    imageUrl: "/images/contenedores.png",
-  },
-  {
-    name: "Electricos",
-    products: 12,
-    imageUrl: "/images/limpieza.png",
-  },
-  // {
-  //   name: "Sonido",
-  //   products: 12,
-  //   imageUrl: "/images/sonido.png",
-  // },
+import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
+import amplifyconfig from "../../aws-exports";
+import { listCategories } from "../../graphql/queries";
+import { getCategories } from "../../utils/graphqlFunctions";
+Amplify.configure(amplifyconfig);
 
-  // {
-  //   name: "Coleccionables",
-  //   products: 12,
-  //   imageUrl: "/images/coleccionables.png",
-  // },
-  // Agrega más categorías según sea necesario
-];
+// const categories = [
+//   {
+//     name: "Conservadores",
+//     products: 8,
+//     imageUrl: "/images/cocina.png",
+//   },
+//   {
+//     name: "Limpieza",
+//     products: 5,
+//     imageUrl: "/images/limpieza.png",
+//   },
+//   {
+//     name: "Aluminio",
+//     products: 12,
+//     imageUrl: "/images/aluminio.png",
+//   },
+//   {
+//     name: "Combos",
+//     products: 12,
+//     imageUrl: "/images/combos.png",
+//   },
+//   {
+//     name: "Hombres",
+//     products: 12,
+//     imageUrl: "/images/aluminio.png",
+//   },
+//   {
+//     name: "Mujer",
+//     products: 12,
+//     imageUrl: "/images/belleza.png",
+//   },
+//   {
+//     name: "Contenedor",
+//     products: 12,
+//     imageUrl: "/images/contenedores.png",
+//   },
+//   {
+//     name: "Electricos",
+//     products: 12,
+//     imageUrl: "/images/limpieza.png",
+//   },
+//   // {
+//   //   name: "Sonido",
+//   //   products: 12,
+//   //   imageUrl: "/images/sonido.png",
+//   // },
+
+//   // {
+//   //   name: "Coleccionables",
+//   //   products: 12,
+//   //   imageUrl: "/images/coleccionables.png",
+//   // },
+//   // Agrega más categorías según sea necesario
+// ];
 
 const Categorias = () => {
-  const dispatch = useDispatch();
+  const [categories, setCategories] = React.useState([]);
+  const { data: dataCategories, error } = useQuery(
+    ["AllCategories"],
+    getCategories,
+    {
+      onSuccess: () => {
+        console.log("dataCategories");
+        setCategories(dataCategories);
+      },
+    }
+  );
+  // setCategories(dataCategories);
+  console.log(categories);
+
+  React.useEffect(() => {
+    setCategories(dataCategories);
+  }, [dataCategories]);
 
   const handleCategories = (category) => {
     // dispatch(setCategories(category));
@@ -77,10 +101,10 @@ const Categorias = () => {
           color: "white",
         }}
       >
-        {categories.map((category, index) => (
+        {categories?.map((category, index) => (
           <div key={index} style={{ margin: "10px", textAlign: "center" }}>
             <Link
-              to={`/categories/${category.name}`}
+              to={`/categories/${category.categoryName}`}
               onClick={() => handleCategories(category.name)}
               style={{
                 width: "120px",
@@ -95,11 +119,16 @@ const Categorias = () => {
               }}
             >
               <img
-                src={category.imageUrl}
-                alt={category.name}
+                src={
+                  category.imgUrl
+                    ? category.imgUrl
+                    : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                }
+                alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
             </Link>
+            <h6 className="mt-1">{category.categoryName}</h6>
             <div style={{ marginTop: "10px" }}>{category.name}</div>
           </div>
         ))}
@@ -116,10 +145,11 @@ const Categorias = () => {
             backgroundColor: "",
           }}
         >
-          {categories.slice(0, 4).map((category, index) => (
+          {categories?.slice(0, 4).map((category, index) => (
             <div key={index} style={{ margin: "10px", textAlign: "center" }}>
               <Link
-                to={`/categories/${category.name}`}
+                to={`/categories/${category.categoryName}`}
+                onClick={() => handleCategories(category.name)}
                 style={{
                   width: "120px",
                   height: "120px",
@@ -133,11 +163,16 @@ const Categorias = () => {
                 }}
               >
                 <img
-                  src={category.imageUrl}
-                  alt={category.name}
+                  src={
+                    category.imgUrl
+                      ? category.imgUrl
+                      : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                  }
+                  alt={category.categoryName}
                   style={{ maxWidth: "100%", maxHeight: "100%" }}
                 />
               </Link>
+              <h5>{category.categoryName}</h5>
               <div style={{ marginTop: "10px" }}>{category.name}</div>
             </div>
           ))}
@@ -149,10 +184,11 @@ const Categorias = () => {
             // backgroundColor: "#D8EAF2",
           }}
         >
-          {categories.slice(4, 8).map((category, index) => (
+          {categories?.slice(4, 8).map((category, index) => (
             <div key={index} style={{ margin: "10px", textAlign: "center" }}>
               <Link
-                to={`/categories/${category.name}`}
+                to={`/categories/${category.categoryName}`}
+                onClick={() => handleCategories(category.name)}
                 style={{
                   width: "120px",
                   height: "120px",
@@ -166,11 +202,16 @@ const Categorias = () => {
                 }}
               >
                 <img
-                  src={category.imageUrl}
-                  alt={category.name}
+                  src={
+                    category.imgUrl
+                      ? category.imgUrl
+                      : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                  }
+                  alt={category.categoryName}
                   style={{ maxWidth: "100%", maxHeight: "100%" }}
                 />
               </Link>
+              <h5>{category.categoryName}</h5>
               <div style={{ marginTop: "10px" }}>{category.name}</div>
             </div>
           ))}
@@ -191,10 +232,11 @@ const Categorias = () => {
             margin: "10px 0px",
           }}
         >
-          {categories.slice(0, 4).map((category, index) => (
+          {categories?.slice(0, 4).map((category, index) => (
             <div key={index} style={{ margin: "5px", textAlign: "center" }}>
               <Link
-                to={`/categories/${category.name}`}
+                to={`/categories/${category.categoryName}`}
+                onClick={() => handleCategories(category.name)}
                 style={{
                   width: "20vw",
                   height: "20vw",
@@ -208,11 +250,18 @@ const Categorias = () => {
                 }}
               >
                 <img
-                  src={category.imageUrl}
-                  alt={category.name}
+                  src={
+                    category.imgUrl
+                      ? category.imgUrl
+                      : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                  }
+                  alt={category.categoryName}
                   style={{ maxWidth: "100%", maxHeight: "100%" }}
                 />
               </Link>
+              <span style={{ fontSize: "0.8rem" }}>
+                {category.categoryName}
+              </span>
               <div style={{ marginTop: "" }}>{category.name}</div>
             </div>
           ))}
@@ -224,10 +273,11 @@ const Categorias = () => {
             // backgroundColor: "#D8EAF2",
           }}
         >
-          {categories.slice(4, 8).map((category, index) => (
+          {categories?.slice(4, 8).map((category, index) => (
             <div key={index} style={{ margin: "5px", textAlign: "center" }}>
               <Link
-                to={`/categories/${category.name}`}
+                to={`/categories/${category.categoryName}`}
+                onClick={() => handleCategories(category.name)}
                 style={{
                   width: "20vw",
                   height: "20vw",
@@ -241,11 +291,18 @@ const Categorias = () => {
                 }}
               >
                 <img
-                  src={category.imageUrl}
-                  alt={category.name}
+                  src={
+                    category.imgUrl
+                      ? category.imgUrl
+                      : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                  }
+                  alt={category.categoryName}
                   style={{ maxWidth: "100%", maxHeight: "100%" }}
                 />
               </Link>
+              <span style={{ fontSize: "0.8rem" }}>
+                {category.categoryName}
+              </span>
               <div style={{ marginTop: "" }}>{category.name}</div>
             </div>
           ))}

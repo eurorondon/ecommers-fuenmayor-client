@@ -53,6 +53,10 @@ export const listProducts = /* GraphQL */ `
         updatedAt
         id
         __typename
+        photo {
+          url
+          publicId
+        }
       }
       nextToken
       __typename
@@ -65,6 +69,7 @@ export const getCategories = /* GraphQL */ `
       id
       categoryName
       description
+      imgUrl
       createdAt
       updatedAt
       __typename
@@ -82,6 +87,7 @@ export const listCategories = /* GraphQL */ `
         id
         categoryName
         description
+        imgUrl
         createdAt
         updatedAt
         __typename

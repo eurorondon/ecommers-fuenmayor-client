@@ -20,8 +20,6 @@ import { getProduct } from "../graphql/queries";
 const CartScreen = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
-  console.log(cartItems);
-
   const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
 
   const dispatch = useDispatch();
@@ -43,7 +41,6 @@ const CartScreen = () => {
     )
     .join("");
 
-  console.log(productos);
   const name = "euro";
   const telefono = "+584126773234";
   const mensaje = `👋 Hola, mi nombre es ${name}.\n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;

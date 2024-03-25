@@ -7,7 +7,6 @@ const productsApi = axios.create({
 export const getProducts = async (path) => {
   const res = await productsApi.get(path);
   return res.data;
-  console.log(path);
 };
 
 export const getProudct = async (id) => {

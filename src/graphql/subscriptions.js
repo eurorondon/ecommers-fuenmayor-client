@@ -105,6 +105,7 @@ export const onCreateCategories = /* GraphQL */ `
       id
       categoryName
       description
+      imgUrl
       createdAt
       updatedAt
       __typename
@@ -119,6 +120,7 @@ export const onUpdateCategories = /* GraphQL */ `
       id
       categoryName
       description
+      imgUrl
       createdAt
       updatedAt
       __typename
@@ -133,6 +135,7 @@ export const onDeleteCategories = /* GraphQL */ `
       id
       categoryName
       description
+      imgUrl
       createdAt
       updatedAt
       __typename

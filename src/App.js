@@ -9,7 +9,6 @@ import CartScreen from "./screens/CartScreen";
 function App() {
   const productsState = useSelector((state) => state.products);
   if (productsState.productList.length > 0) {
-    // console.log(productsState);
   }
   return (
     <Router>
