@@ -4,22 +4,27 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
-import Product from "../NewProducts/Product";
+import Product from "../Ofertas/ProductOfertas";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../../utils/graphqlFunctions";
 // import Loading from "../../Loading";
+// import Message from "../../LoadingError/Error";
 
-const NewProducts = () => {
-  const { isLoading, data, isError, error } = useQuery(
-    ["newProducts"], // Incluir el parámetro 'page' en el array de dependencias de la queryKey
-    () => getProducts("/api/products") // Pasar una función anónima que invoque getProudcts con el parámetro page
-  );
-  const productList = data?.products;
+const Ofertas = () => {
+  const { data, isLoading, isError } = useQuery(["NewProducts"], getProducts, {
+    onSuccess: () => {
+      console.log("dataCategories");
+      // setCategories(dataCategories);
+    },
+  });
+  const productList = data;
   const sliderRef = useRef(null);
 
   if (isLoading) return null;
+  if (isError) return null;
 
   const renderArrows = () => {
     return (
@@ -51,7 +56,7 @@ const NewProducts = () => {
         breakpoint: 4000,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 5,
+          slidesToScroll: 2,
         },
       },
       {
@@ -71,15 +76,15 @@ const NewProducts = () => {
       {
         breakpoint: 464,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
         },
       },
     ],
   };
 
   const products = productList
-    ? productList?.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
+    ? productList.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
         <Link key={item._id} to={`/products/${item._id}`}>
           <Product
             url={item.photo[0].url}
@@ -93,7 +98,7 @@ const NewProducts = () => {
 
   return (
     <div className="container mx-auto my-4">
-      <h2>Lo más Nuevo</h2>
+      <h2>Ofertas</h2>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}
@@ -114,7 +119,6 @@ const NewProducts = () => {
           left: 0;
           right: 0;
           background-color: black;
-          display: none;
         }
         .arrow-btn {
           font-size: 2rem;
@@ -139,4 +143,4 @@ const NewProducts = () => {
   );
 };
 
-export default NewProducts;
+export default Ofertas;

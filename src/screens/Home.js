@@ -5,6 +5,8 @@ import Categorias from "../components/homeComponents/Categorias";
 import { useSelector } from "react-redux";
 import Portada from "../components/homeComponents/Portada";
 import Whatsapp from "../components/homeComponents/Whatsapp";
+import NewProducts from "../components/NewProducts/NewProducts";
+import Ofertas from "../components/Ofertas/Ofertas";
 
 // import GridProductList from "../components/homeComponents/GridProductList";
 
@@ -18,9 +20,9 @@ const Home = () => {
       <Header />
       <Portada />
       <Categorias />
-      {/* <NewProducts />
+      <NewProducts />
       <Ofertas />
-      <Destacados /> */}
+      {/* <Destacados /> */}
       {isLoading ? null : <></>}
       <ShopSections />
       <Whatsapp />

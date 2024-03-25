@@ -5,21 +5,24 @@ import "slick-carousel/slick/slick-theme.css";
 import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import Product from "../NewProducts/Product";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
-// import Loading from "../../Loading";
+// import Message from "../../LoadingError/Error";
+import { getProducts } from "../../utils/graphqlFunctions";
 
 const NewProducts = () => {
-  const { isLoading, data, isError, error } = useQuery(
-    ["newProducts"], // Incluir el parámetro 'page' en el array de dependencias de la queryKey
-    () => getProducts("/api/products") // Pasar una función anónima que invoque getProudcts con el parámetro page
-  );
-  const productList = data?.products;
+  const { data, isLoading, isError } = useQuery(["NewProducts"], getProducts, {
+    onSuccess: () => {
+      console.log("dataCategories");
+      // setCategories(dataCategories);
+    },
+  });
+  const productList = data;
   const sliderRef = useRef(null);
 
   if (isLoading) return null;
+  if (isError) return null;
 
   const renderArrows = () => {
     return (
@@ -114,7 +117,7 @@ const NewProducts = () => {
           left: 0;
           right: 0;
           background-color: black;
-          display: none;
+          
         }
         .arrow-btn {
           font-size: 2rem;
