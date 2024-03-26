@@ -7,6 +7,7 @@ import Portada from "../components/homeComponents/Portada";
 import Whatsapp from "../components/homeComponents/Whatsapp";
 import NewProducts from "../components/NewProducts/NewProducts";
 import Ofertas from "../components/Ofertas/Ofertas";
+import Destacados from "../components/Destacados/Destacados";
 
 // import GridProductList from "../components/homeComponents/GridProductList";
 
@@ -20,9 +21,9 @@ const Home = () => {
       <Header />
       <Portada />
       <Categorias />
-      <NewProducts />
       <Ofertas />
-      {/* <Destacados /> */}
+      <NewProducts />
+      <Destacados />
       {isLoading ? null : <></>}
       <ShopSections />
       <Whatsapp />
