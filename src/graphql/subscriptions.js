@@ -28,6 +28,8 @@ export const onCreateProduct = /* GraphQL */ `
       countInStock
       createdAt
       updatedAt
+      inOffer
+      discountPercentage
       id
       __typename
     }
@@ -60,6 +62,8 @@ export const onUpdateProduct = /* GraphQL */ `
       countInStock
       createdAt
       updatedAt
+      inOffer
+      discountPercentage
       id
       __typename
     }
@@ -92,6 +96,8 @@ export const onDeleteProduct = /* GraphQL */ `
       countInStock
       createdAt
       updatedAt
+      inOffer
+      discountPercentage
       id
       __typename
     }
