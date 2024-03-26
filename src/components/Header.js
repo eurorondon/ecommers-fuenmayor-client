@@ -4,12 +4,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { LocationOn, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../features/categories/categorySlice";
+// import { setSearch } from "../features/categories/categorySlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchInput, setSetsearchInput] = useState("");
+  const [searchInput, setSearchInput] = React.useState("");
+
+  console.log(searchInput);
+
   const { cartItems } = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(cartItems.length);
 
@@ -34,7 +37,7 @@ const Header = () => {
   };
 
   const handleClear = () => {
-    setSetsearchInput("");
+    setSearchInput("");
     navigate(`/`);
   };
 
@@ -166,7 +169,7 @@ const Header = () => {
                       type="search"
                       className="form-control rounded-left search"
                       placeholder="Search"
-                      onChange={(e) => setSetsearchInput(e.target.value)}
+                      onChange={(e) => setSearchInput(e.target.value)}
                     />
                     <button type="submit" className="search-button">
                       search
@@ -199,7 +202,7 @@ const Header = () => {
                     className="form-control rounded-left search"
                     placeholder="Search"
                     value={searchInput}
-                    onChange={(e) => setSetsearchInput(e.target.value)}
+                    onChange={(e) => setSearchInput(e.target.value)}
                   />
                   {searchInput && (
                     <button

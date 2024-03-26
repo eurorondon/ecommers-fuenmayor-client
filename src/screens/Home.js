@@ -16,7 +16,7 @@ const Home = () => {
   // console.log(products.data?.listProductListFuenmayors?.items);
 
   return (
-    <div className="bg-neutral-100">
+    <div className="bg-neutral-100" style={{ overflow: "hidden" }}>
       <Header />
       <Portada />
       <Categorias />

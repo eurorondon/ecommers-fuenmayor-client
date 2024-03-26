@@ -22,7 +22,6 @@ const GridProductList = () => {
   const navigate = useNavigate();
 
   const { category, search } = useParams();
-  const parametros = useParams();
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
@@ -115,6 +114,13 @@ const GridProductList = () => {
         <div className="" style={{ display: "flex", alignItems: "center" }}>
           <h3 className="" style={{ margin: "20px" }}>
             Filtrando por categoria : {category}
+          </h3>
+          <Link to={"/"}>X</Link>
+        </div>
+      ) : search ? (
+        <div className="" style={{ display: "flex", alignItems: "center" }}>
+          <h3 className="" style={{ margin: "20px" }}>
+            Resultado de Busqueda : {search}
           </h3>
           <Link to={"/"}>X</Link>
         </div>
