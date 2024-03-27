@@ -30,6 +30,7 @@ export const getProduct = /* GraphQL */ `
       updatedAt
       inOffer
       discountPercentage
+      bestSellers
       id
       __typename
     }
@@ -55,6 +56,7 @@ export const listProducts = /* GraphQL */ `
         updatedAt
         inOffer
         discountPercentage
+        bestSellers
         id
         __typename
         photo {

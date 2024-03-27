@@ -9,17 +9,25 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../utils/graphqlFunctions";
+import {
+  getProducts,
+  getProductsBestSellers,
+} from "../../utils/graphqlFunctions";
 // import Loading from "../../Loading";
 // import Message from "../../LoadingError/Error";
 
 const Destacados = () => {
-  const { data, isLoading, isError } = useQuery(["NewProducts"], getProducts, {
-    onSuccess: () => {
-      console.log("dataCategories");
-      // setCategories(dataCategories);
-    },
-  });
+  const { data, isLoading, isError } = useQuery(
+    ["ProductsBestSellers"],
+    getProductsBestSellers,
+    {
+      onSuccess: () => {
+        console.log("this is the best seller ", data);
+        // setCategories(dataCategories);
+      },
+    }
+  );
+
   const productList = data;
   const sliderRef = useRef(null);
 

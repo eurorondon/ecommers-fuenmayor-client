@@ -30,6 +30,7 @@ export const onCreateProduct = /* GraphQL */ `
       updatedAt
       inOffer
       discountPercentage
+      bestSellers
       id
       __typename
     }
@@ -64,6 +65,7 @@ export const onUpdateProduct = /* GraphQL */ `
       updatedAt
       inOffer
       discountPercentage
+      bestSellers
       id
       __typename
     }
@@ -98,6 +100,7 @@ export const onDeleteProduct = /* GraphQL */ `
       updatedAt
       inOffer
       discountPercentage
+      bestSellers
       id
       __typename
     }

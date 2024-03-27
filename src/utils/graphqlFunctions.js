@@ -64,6 +64,17 @@ export async function getProductsInOfert() {
   return res.data.listProducts.items;
 }
 
+export async function getProductsBestSellers() {
+  const res = await client.graphql({
+    query: listProducts,
+    variables: {
+      filter: { bestSellers: { eq: true } },
+    },
+  });
+
+  return res.data.listProducts.items;
+}
+
 export async function productDetails(id) {
   const res = await client.graphql({
     query: getProduct,
