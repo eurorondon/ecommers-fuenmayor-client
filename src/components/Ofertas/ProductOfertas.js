@@ -7,6 +7,25 @@ export default function Product(props) {
       className="card text-start"
       style={{ border: "none", borderRadius: "0" }}
     >
+      {props.offer && (
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            backgroundColor: "yellow",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "50%",
+            position: "absolute",
+          }}
+        >
+          <span
+            className=""
+            style={{ fontSize: "15px" }}
+          >{`${props.discountPercentage}%`}</span>
+        </div>
+      )}
       <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
           className="mx-auto"
@@ -36,9 +55,31 @@ export default function Product(props) {
           )}
         </div>
 
-        <p className="price" style={{ fontWeight: "" }}>
-          {props.price} $
-        </p>
+        <div
+          className="price      "
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p
+            style={{
+              color: "#3b83bd",
+              fontWeight: "bold",
+              // fontSize: "14px",
+              marginRight: "20px",
+            }}
+          >
+            {props.price - props.price * (props.discountPercentage / 100)}${" "}
+          </p>
+          <p
+            style={{
+              textDecoration: "line-through",
+              fontSize: "16px",
+              color: "gray",
+            }}
+          >
+            {" "}
+            {props.price}$
+          </p>
+        </div>
       </div>
     </div>
   );

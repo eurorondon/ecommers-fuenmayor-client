@@ -4,6 +4,25 @@ export default function Product(props) {
 
   return (
     <div className=" card  text-start   " style={{ borderRadius: "10px" }}>
+      {props.offer && (
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            backgroundColor: "yellow",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "50%",
+            position: "absolute",
+          }}
+        >
+          <span
+            className=""
+            style={{ fontSize: "15px" }}
+          >{`${props.discountPercentage}%`}</span>
+        </div>
+      )}
       <div
         className=" d-flex justify-content-center align-items-center  "
         style={{ width: "100%", padding: "5px" }}
@@ -55,9 +74,27 @@ export default function Product(props) {
           )}
         </div>
 
-        <p className="price" style={{ fontWeight: "" }}>
-          {props.price} $
-        </p>
+        {props.offer ? (
+          <div className="price d-flex gap-4 " style={{}}>
+            <p style={{ color: "#3b83bd", fontWeight: "bold" }}>
+              {props.price - props.price * (props.discountPercentage / 100)} USD{" "}
+            </p>
+            <p
+              style={{
+                textDecoration: "line-through",
+                fontSize: "16px",
+                color: "gray",
+              }}
+            >
+              {" "}
+              {props.price} USD
+            </p>
+          </div>
+        ) : (
+          <p className="price" style={{ color: "#3b83bd", fontWeight: "bold" }}>
+            {props.price} $
+          </p>
+        )}
       </div>
     </div>
   );

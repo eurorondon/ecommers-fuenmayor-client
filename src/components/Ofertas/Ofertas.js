@@ -95,6 +95,8 @@ const Ofertas = () => {
             name={item.name}
             description={item.description}
             price={item.price}
+            offer={item.inOffer}
+            discountPercentage={item.discountPercentage}
           />
         </Link>
       ))

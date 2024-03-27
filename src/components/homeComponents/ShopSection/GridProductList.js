@@ -152,6 +152,8 @@ const GridProductList = () => {
                   name={product.name}
                   description={product.description}
                   price={product.price}
+                  offer={product.inOffer}
+                  discountPercentage={product.discountPercentage}
                 />
               </div>
             </div>
