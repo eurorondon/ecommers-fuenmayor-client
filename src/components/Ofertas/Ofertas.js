@@ -53,11 +53,11 @@ const Ofertas = () => {
     dots: true,
     arrows: false,
     // infinite: false,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 4000,
+        breakpoint: 1900,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 2,
@@ -88,10 +88,10 @@ const Ofertas = () => {
   };
 
   const products = productList
-    ? productList.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
+    ? productList.map((item) => (
         <Link key={item._id} to={`/products/${item._id}`}>
           <Product
-            url={item.photo[0].url}
+            url={item?.photo[0]?.url}
             name={item.name}
             description={item.description}
             price={item.price}
@@ -102,7 +102,7 @@ const Ofertas = () => {
       ))
     : null;
 
-  return (
+  const FeaturedProducts = () => (
     <div className="container mx-auto my-4">
       <h2>Ofertas</h2>
       <div
@@ -114,6 +114,20 @@ const Ofertas = () => {
         </Slider>
         {renderArrows()}
       </div>
+    </div>
+  );
+
+  console.log(productList.length);
+
+  return (
+    <>
+      {(window.innerWidth > 1024 && productList.length >= 5) ||
+      (window.innerWidth > 800 &&
+        window.innerWidth <= 1024 &&
+        productList.length >= 4) ||
+      (window.innerWidth <= 800 && productList.length >= 3) ? (
+        <FeaturedProducts />
+      ) : null}
 
       <style>{`
         .slider-arrow {
@@ -145,7 +159,7 @@ const Ofertas = () => {
           margin: 0;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

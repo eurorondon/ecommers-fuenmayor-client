@@ -92,19 +92,20 @@ const Destacados = () => {
   };
 
   const products = productList
-    ? productList.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
+    ? productList.map((item) => (
         <Link key={item._id} to={`/products/${item._id}`}>
           <Product
-            url={item.photo[0].url}
+            url={item?.photo[0]?.url}
             name={item.name}
             description={item.description}
             price={item.price}
+            offer={item.inOffer}
+            discountPercentage={item.discountPercentage}
           />
         </Link>
       ))
     : null;
-
-  return (
+  const FeaturedProducts = () => (
     <div className="container mx-auto my-4">
       <h2>Destacados</h2>
       <div
@@ -116,38 +117,19 @@ const Destacados = () => {
         </Slider>
         {renderArrows()}
       </div>
-
-      <style>{`
-        .slider-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 1;
-          width: 100%;
-          left: 0;
-          right: 0;
-          background-color: black;
-        }
-        .arrow-btn {
-          font-size: 2rem;
-          position: absolute;
-        }
-        .prev {
-          left: -50px;
-        }
-        .next {
-          right: -50px;
-        }
-        .slick-dots li {
-          margin: 0;
-          width: 15px;
-          height: 15px;
-        }
-        .slick-active {
-          margin: 0;
-        }
-      `}</style>
     </div>
+  );
+
+  return (
+    <>
+      {(window.innerWidth > 1024 && productList.length >= 5) ||
+      (window.innerWidth > 800 &&
+        window.innerWidth <= 1024 &&
+        productList.length >= 4) ||
+      (window.innerWidth <= 800 && productList.length >= 3) ? (
+        <FeaturedProducts />
+      ) : null}
+    </>
   );
 };
 

@@ -148,7 +148,7 @@ const GridProductList = () => {
                 //  to={`/products/${product.id}`}
               >
                 <Product
-                  url={product.photo[0].url}
+                  url={product?.photo[0]?.url}
                   name={product.name}
                   description={product.description}
                   price={product.price}

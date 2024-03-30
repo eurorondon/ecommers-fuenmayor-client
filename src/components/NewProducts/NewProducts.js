@@ -6,21 +6,17 @@ import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import Product from "../NewProducts/Product";
 import { Link } from "react-router-dom";
-
 import { useQuery } from "@tanstack/react-query";
-// import Message from "../../LoadingError/Error";
 import { getProducts } from "../../utils/graphqlFunctions";
 
 const NewProducts = () => {
   const { data, isLoading, isError } = useQuery(["NewProducts"], getProducts, {
     onSuccess: () => {
       console.log("dataCategories");
-      // setCategories(dataCategories);
     },
   });
   const productList = data;
   const sliderRef = useRef(null);
-
   if (isLoading) return null;
   if (isError) return null;
 
@@ -85,7 +81,7 @@ const NewProducts = () => {
     ? productList?.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
         <Link key={item._id} to={`/products/${item._id}`}>
           <Product
-            url={item.photo[0].url}
+            url={item?.photo[0]?.url}
             name={item.name}
             description={item.description}
             price={item.price}
@@ -94,9 +90,9 @@ const NewProducts = () => {
       ))
     : null;
 
-  return (
+  const FeaturedProducts = () => (
     <div className="container mx-auto my-4">
-      <h2>Lo más Nuevo</h2>
+      <h2>Lo mas Nuevo</h2>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}
@@ -106,39 +102,51 @@ const NewProducts = () => {
         </Slider>
         {renderArrows()}
       </div>
+    </div>
+  );
+
+  return (
+    <>
+      {(window.innerWidth > 1024 && productList.length >= 5) ||
+      (window.innerWidth > 800 &&
+        window.innerWidth <= 1024 &&
+        productList.length >= 4) ||
+      (window.innerWidth <= 800 && productList.length >= 3) ? (
+        <FeaturedProducts />
+      ) : null}
 
       <style>{`
-        .slider-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 1;
-          width: 100%;
-          left: 0;
-          right: 0;
-          background-color: black;
-          
-        }
-        .arrow-btn {
-          font-size: 2rem;
-          position: absolute;
-        }
-        .prev {
-          left: -50px;
-        }
-        .next {
-          right: -50px;
-        }
-        .slick-dots li {
-          margin: 0;
-          width: 15px;
-          height: 15px;
-        }
-        .slick-active {
-          margin: 0;
-        }
-      `}</style>
-    </div>
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      right: 0;
+      background-color: black;
+      
+    }
+    .arrow-btn {
+      font-size: 2rem;
+      position: absolute;
+    }
+    .prev {
+      left: -50px;
+    }
+    .next {
+      right: -50px;
+    }
+    .slick-dots li {
+      margin: 0;
+      width: 15px;
+      height: 15px;
+    }
+    .slick-active {
+      margin: 0;
+    }
+  `}</style>
+    </>
   );
 };
 
