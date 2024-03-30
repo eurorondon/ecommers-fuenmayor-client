@@ -10,13 +10,16 @@ export default function Product(props) {
       {props.offer && (
         <div
           style={{
-            width: "40px",
-            height: "40px",
+            width: "35px",
+            height: "35px",
             backgroundColor: "yellow",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             borderRadius: "50%",
+            left: "10px",
+            top: "5px",
+            // zIndex: "10px",
             position: "absolute",
           }}
         >
@@ -26,7 +29,7 @@ export default function Product(props) {
           >{`${props.discountPercentage}%`}</span>
         </div>
       )}
-      <div className="mx-auto" style={{ maxWidth: "14rem" }}>
+      {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
           className="mx-auto"
           src={props.url}
@@ -37,6 +40,38 @@ export default function Product(props) {
             objectFit: "scale-down",
           }}
         />
+      </div> */}
+      <div
+        className=" d-flex justify-content-center align-items-center  "
+        style={{
+          width: "100%",
+          // padding: "5px"
+        }}
+      >
+        {props.url ? (
+          <img
+            className=""
+            src={props.url}
+            alt="product "
+            style={{
+              width: "100%",
+              height: "120px",
+              objectFit: "scale-down",
+              // borderTopLeftRadius: "5px",
+              // borderTopRightRadius: "5px",
+            }}
+          />
+        ) : (
+          <img
+            src={
+              "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+            }
+            width={"100%"}
+            // height={180}
+            alt="Product"
+            className="rounded-md"
+          />
+        )}
       </div>
 
       <div className="p-2" style={{ backgroundColor: "" }}>

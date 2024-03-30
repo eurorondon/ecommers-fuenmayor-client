@@ -121,7 +121,7 @@ const SingleProduct = ({ match }) => {
   return (
     <>
       <Header />
-      <button onClick={handleGoBack}>Volver</button>
+      {/* <button onClick={handleGoBack}>Volver</button> */}
       <div className="container single-product">
         <div className="row">
           <div className="col-md-6">
@@ -129,7 +129,7 @@ const SingleProduct = ({ match }) => {
               className=""
               style={{
                 width: "100%",
-                borderRadius: "4%",
+                // borderRadius: "4%",
                 backgroundColor: "#ffff",
               }}
             >
@@ -139,7 +139,10 @@ const SingleProduct = ({ match }) => {
                     <img
                       src={image.url}
                       alt={product?.name}
-                      style={{ width: "100%", borderRadius: "4%" }}
+                      style={{
+                        width: "100%",
+                        // borderRadius: "4%"
+                      }}
                     />
                   </div>
                 ))}

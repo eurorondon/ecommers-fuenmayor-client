@@ -79,7 +79,7 @@ const NewProducts = () => {
 
   const products = productList
     ? productList?.slice(0, window.innerWidth > 767 ? 30 : 12).map((item) => (
-        <Link key={item._id} to={`/products/${item._id}`}>
+        <Link key={item.id} to={`/products/${item.id}`}>
           <Product
             url={item?.photo[0]?.url}
             name={item.name}
@@ -92,7 +92,7 @@ const NewProducts = () => {
 
   const FeaturedProducts = () => (
     <div className="container mx-auto my-4">
-      <h2>Lo mas Nuevo</h2>
+      <h2 className=" my-2">Lo mas Nuevo</h2>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}

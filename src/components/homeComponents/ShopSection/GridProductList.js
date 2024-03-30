@@ -125,7 +125,7 @@ const GridProductList = () => {
           <Link to={"/"}>X</Link>
         </div>
       ) : (
-        <h2>Todos los Articulos</h2>
+        <h2 className="mb-2">Todos los Articulos</h2>
       )}
 
       <InfiniteScroll

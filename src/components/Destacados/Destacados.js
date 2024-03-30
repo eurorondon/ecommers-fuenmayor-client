@@ -93,7 +93,7 @@ const Destacados = () => {
 
   const products = productList
     ? productList.map((item) => (
-        <Link key={item._id} to={`/products/${item._id}`}>
+        <Link key={item.id} to={`/products/${item.id}`}>
           <Product
             url={item?.photo[0]?.url}
             name={item.name}
@@ -106,8 +106,8 @@ const Destacados = () => {
       ))
     : null;
   const FeaturedProducts = () => (
-    <div className="container mx-auto my-4">
-      <h2>Destacados</h2>
+    <div className=" mx-auto my-4">
+      <h2 className="container my-2">Destacados</h2>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}

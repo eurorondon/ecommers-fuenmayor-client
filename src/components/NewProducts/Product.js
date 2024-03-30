@@ -4,7 +4,7 @@ export default function Product(props) {
 
   return (
     <div className=" card  text-start mx-1 " style={{ borderRadius: "10px" }}>
-      <div className="mx-auto" style={{ maxWidth: "14rem" }}>
+      {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
           className="mx-auto"
           src={props.url}
@@ -15,6 +15,35 @@ export default function Product(props) {
             objectFit: "scale-down",
           }}
         />
+      </div> */}
+      <div
+        className=" d-flex justify-content-center align-items-center  "
+        style={{ width: "100%", padding: "5px" }}
+      >
+        {props.url ? (
+          <img
+            className="mx-auto"
+            src={props.url}
+            alt="product "
+            style={{
+              width: "100%",
+              // height: "150px",
+              objectFit: "scale-down",
+              borderTopLeftRadius: "5px",
+              borderTopRightRadius: "5px",
+            }}
+          />
+        ) : (
+          <img
+            src={
+              "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+            }
+            width={"100%"}
+            // height={180}
+            alt="Product"
+            className="rounded-md"
+          />
+        )}
       </div>
 
       <div className="p-2" style={{ backgroundColor: "" }}>

@@ -2,7 +2,7 @@ import GridProductList from "./GridProductList";
 
 const ShopSections = () => {
   return (
-    <div className="container my-5">
+    <div className="container  " style={{ paddingTop: "10px" }}>
       <GridProductList />
     </div>
   );
