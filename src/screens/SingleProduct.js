@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./../components/Header";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -11,10 +11,50 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import { getProduct } from "../graphql/queries";
 import amplifyconfig from "../amplifyconfiguration.json";
+import Slider from "react-slick";
+
+const settings = {
+  dots: true,
+  arrows: false,
+  infinite: false,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 4000,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 464,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
 const SingleProduct = ({ match }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const sliderRef = useRef(null);
 
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
@@ -93,17 +133,28 @@ const SingleProduct = ({ match }) => {
                 backgroundColor: "#ffff",
               }}
             >
-              <img
+              <Slider {...settings}>
+                {product?.photo?.map((image) => (
+                  <div className="">
+                    <img
+                      src={image.url}
+                      alt={product?.name}
+                      style={{ width: "100%", borderRadius: "4%" }}
+                    />
+                  </div>
+                ))}
+              </Slider>
+              {/* <img
                 src={product?.photo?.[0]?.url}
                 alt={product?.name}
                 style={{ width: "100%", borderRadius: "4%" }}
-              />
+              /> */}
             </div>
           </div>
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name">{product?.name}</div>
+                <div className="product-name mt-5">{product?.name}</div>
               </div>
               <p>{product?.description}</p>
 
