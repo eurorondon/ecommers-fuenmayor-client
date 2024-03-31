@@ -30,6 +30,9 @@ type Product @model {
   countInStock: Int
   createdAt: String
   updatedAt: String
+  inOffer: Boolean
+  discountPercentage: Float
+  bestSellers: Boolean
 }
 
 type Categories @model {
