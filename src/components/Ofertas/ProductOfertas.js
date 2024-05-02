@@ -1,6 +1,6 @@
 export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
-  const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción
+  const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
   return (
     <div
@@ -42,24 +42,20 @@ export default function Product(props) {
         />
       </div> */}
       <div
-        className=" d-flex justify-content-center align-items-center   "
-        style={{
-          width: "100%",
-          backgroundColor: "red",
-          // padding: "5px"
-        }}
+        className=" d-flex justify-content-center align-items-center  "
+        style={{ width: "100%", padding: "5px" }}
       >
         {props.url ? (
           <img
-            className=""
+            className="mx-auto"
             src={props.url}
             alt="product "
             style={{
               width: "100%",
-              // height: "2%",
+              // height: "150px",
               objectFit: "scale-down",
-              // borderTopLeftRadius: "5px",
-              // borderTopRightRadius: "5px",
+              borderTopLeftRadius: "5px",
+              borderTopRightRadius: "5px",
             }}
           />
         ) : (
@@ -87,7 +83,7 @@ export default function Product(props) {
                 : props.description}
             </p>
           ) : (
-            <p className="description">Sin Descripcion</p>
+            <p className="description"> Sin Descripcion</p>
           )}
         </div>
 

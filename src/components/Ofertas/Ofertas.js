@@ -103,7 +103,7 @@ const Ofertas = () => {
     : null;
 
   const FeaturedProducts = () => (
-    <div className="mx-auto my-3 ">
+    <div className="container mx-auto my-4 ">
       <h2 className="container  my-2">Ofertas</h2>
       <div
         className=""
