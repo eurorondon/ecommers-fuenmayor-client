@@ -75,7 +75,11 @@ export const getCategories = /* GraphQL */ `
       id
       categoryName
       description
-      imgUrl
+      photo {
+        url
+        publicId
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -93,7 +97,10 @@ export const listCategories = /* GraphQL */ `
         id
         categoryName
         description
-        imgUrl
+        photo {
+          url
+          publicId
+        }
         createdAt
         updatedAt
         __typename

@@ -86,6 +86,8 @@ const Categorias = () => {
     setCategories(dataCategories);
   }, [dataCategories]);
 
+  console.log(dataCategories);
+
   const handleCategories = (category) => {
     // dispatch(setCategories(category));
   };
@@ -120,8 +122,8 @@ const Categorias = () => {
             >
               <img
                 src={
-                  category.imgUrl
-                    ? category.imgUrl
+                  category.photo
+                    ? category.photo[0].url
                     : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
                 }
                 alt={category.categoryName}
@@ -147,6 +149,7 @@ const Categorias = () => {
         >
           {categories?.slice(0, 4).map((category, index) => (
             <div key={index} style={{ margin: "10px", textAlign: "center" }}>
+              {console.log("this is category", category)}
               <Link
                 to={`/categories/${category.categoryName}`}
                 onClick={() => handleCategories(category.name)}
@@ -164,8 +167,8 @@ const Categorias = () => {
               >
                 <img
                   src={
-                    category.imgUrl
-                      ? category.imgUrl
+                    category.photo
+                      ? category.photo[0].url
                       : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
                   }
                   alt={category.categoryName}
@@ -203,8 +206,8 @@ const Categorias = () => {
               >
                 <img
                   src={
-                    category.imgUrl
-                      ? category.imgUrl
+                    category.photo
+                      ? category.photo[0].url
                       : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
                   }
                   alt={category.categoryName}
@@ -251,8 +254,8 @@ const Categorias = () => {
               >
                 <img
                   src={
-                    category.imgUrl
-                      ? category.imgUrl
+                    category.photo
+                      ? category.photo[0].url
                       : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
                   }
                   alt={category.categoryName}
@@ -292,8 +295,8 @@ const Categorias = () => {
               >
                 <img
                   src={
-                    category.imgUrl
-                      ? category.imgUrl
+                    category.photo
+                      ? category.photo[0].url
                       : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
                   }
                   alt={category.categoryName}

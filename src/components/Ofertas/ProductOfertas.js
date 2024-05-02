@@ -42,9 +42,10 @@ export default function Product(props) {
         />
       </div> */}
       <div
-        className=" d-flex justify-content-center align-items-center  "
+        className=" d-flex justify-content-center align-items-center   "
         style={{
           width: "100%",
+          backgroundColor: "red",
           // padding: "5px"
         }}
       >
@@ -55,7 +56,7 @@ export default function Product(props) {
             alt="product "
             style={{
               width: "100%",
-              height: "120px",
+              // height: "2%",
               objectFit: "scale-down",
               // borderTopLeftRadius: "5px",
               // borderTopRightRadius: "5px",

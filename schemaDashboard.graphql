@@ -32,11 +32,12 @@ type Product @model {
   updatedAt: String
   inOffer: Boolean
   discountPercentage: Float
+  bestSellers: Boolean
 }
 
 type Categories @model {
   id: ID!
   categoryName: String
   description: String
-  imageUrl: String
+  photo: [Photo]
 }

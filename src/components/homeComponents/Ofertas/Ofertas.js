@@ -93,7 +93,7 @@ const Ofertas = () => {
 
   return (
     <div className="container mx-auto my-4">
-      <h2>Ofertas</h2>
+      <h2>Ofertasss</h2>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}
