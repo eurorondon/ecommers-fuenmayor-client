@@ -1,12 +1,34 @@
 export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
-  const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción
+  const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
   return (
     <div
       className="card text-start"
       style={{ border: "none", borderRadius: "0" }}
     >
+      {props.offer && (
+        <div
+          style={{
+            width: "35px",
+            height: "35px",
+            backgroundColor: "yellow",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: "50%",
+            left: "10px",
+            top: "5px",
+            // zIndex: "10px",
+            position: "absolute",
+          }}
+        >
+          <span
+            className=""
+            style={{ fontSize: "15px" }}
+          >{`${props.discountPercentage}%`}</span>
+        </div>
+      )}
       {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
           className="mx-auto"
@@ -30,7 +52,7 @@ export default function Product(props) {
             alt="product "
             style={{
               width: "100%",
-              height: "120px",
+              // height: "150px",
               objectFit: "scale-down",
               borderTopLeftRadius: "5px",
               borderTopRightRadius: "5px",
@@ -61,13 +83,35 @@ export default function Product(props) {
                 : props.description}
             </p>
           ) : (
-            <p className="description">Sin Descripcion</p>
+            <p className="description"> Sin Descripcion</p>
           )}
         </div>
 
-        <p className="price" style={{ color: "#3b83bd", fontWeight: "bold" }}>
-          {props.price} $
-        </p>
+        <div
+          className="price      "
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p
+            style={{
+              color: "#3b83bd",
+              fontWeight: "bold",
+              // fontSize: "14px",
+              marginRight: "20px",
+            }}
+          >
+            {props.price - props.price * (props.discountPercentage / 100)}${" "}
+          </p>
+          <p
+            style={{
+              textDecoration: "line-through",
+              fontSize: "16px",
+              color: "gray",
+            }}
+          >
+            {" "}
+            {props.price}$
+          </p>
+        </div>
       </div>
     </div>
   );

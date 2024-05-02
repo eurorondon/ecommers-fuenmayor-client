@@ -106,7 +106,14 @@ const Destacados = () => {
       ))
     : null;
   const FeaturedProducts = () => (
-    <div className=" mx-auto my-4">
+    <div
+      className={
+        window.innerWidth > 1900
+          ? " container mx-auto my-4 "
+          : " container mx-auto my-4"
+      }
+      // style={window.innerWidth >= 1900 && { margin: "150px" }}
+    >
       <h2 className="container my-2">Destacados</h2>
       <div
         className=""

@@ -84,10 +84,9 @@ const GridProductList = () => {
     refetch();
   }, [category, refetch, search]);
 
-  if (isLoading)
+  if (isLoading | isFetching)
     return (
       <div style={{ minHeight: "50vh" }}>
-        <h1>Cargando...</h1>
         <Loading />
       </div>
     );
