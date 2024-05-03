@@ -2,14 +2,12 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ButtonBase } from "@mui/material";
-import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+
 import Product from "../Ofertas/ProductOfertas";
-import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import { getProducts } from "../../../api/productsApi";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../Loading";
 
 const Ofertas = () => {
   const { isLoading, data, isError, error } = useQuery(
@@ -21,24 +19,24 @@ const Ofertas = () => {
 
   if (isLoading) return null;
 
-  const renderArrows = () => {
-    return (
-      <div className="slider-arrow">
-        <ButtonBase
-          className="arrow-btn prev bg-black text-white rounded-circle"
-          onClick={() => sliderRef.current.slickPrev()}
-        >
-          <ArrowLeft />
-        </ButtonBase>
-        <ButtonBase
-          className="arrow-btn next bg-black text-white rounded-circle"
-          onClick={() => sliderRef.current.slickNext()}
-        >
-          <ArrowRight />
-        </ButtonBase>
-      </div>
-    );
-  };
+  // const renderArrows = () => {
+  //   return (
+  //     <div className="slider-arrow">
+  //       <ButtonBase
+  //         className="arrow-btn prev bg-black text-white rounded-circle"
+  //         onClick={() => sliderRef.current.slickPrev()}
+  //       >
+  //         <ArrowLeft />
+  //       </ButtonBase>
+  //       <ButtonBase
+  //         className="arrow-btn next bg-black text-white rounded-circle"
+  //         onClick={() => sliderRef.current.slickNext()}
+  //       >
+  //         <ArrowRight />
+  //       </ButtonBase>
+  //     </div>
+  //   );
+  // };
 
   const settings = {
     dots: true,
@@ -101,7 +99,7 @@ const Ofertas = () => {
         <Slider {...settings} ref={sliderRef}>
           {products}
         </Slider>
-        {renderArrows()}
+        {/* {renderArrows()} */}
       </div>
 
       <style>{`

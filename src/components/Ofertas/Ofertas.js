@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import { getProductsInOfert } from "../../utils/graphqlFunctions";
+// import RenderArrows from "../RenderArrows";
 // import Loading from "../../Loading";
 // import Message from "../../LoadingError/Error";
 

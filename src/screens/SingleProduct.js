@@ -12,6 +12,8 @@ import { generateClient } from "aws-amplify/api";
 import { getProduct } from "../graphql/queries";
 import amplifyconfig from "../amplifyconfiguration.json";
 import Slider from "react-slick";
+import { ButtonBase } from "@mui/material";
+import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 
 const settings = {
   dots: true,
@@ -52,7 +54,6 @@ const settings = {
 };
 
 const SingleProduct = ({ match }) => {
-  const dispatch = useDispatch();
   const { id } = useParams();
   const sliderRef = useRef(null);
 
@@ -62,6 +63,25 @@ const SingleProduct = ({ match }) => {
 
   Amplify.configure(amplifyconfig);
   const client = generateClient();
+
+  const renderArrows = () => {
+    return (
+      <div className="slider-arrow">
+        <ButtonBase
+          className="arrow-btn prev bg-black text-white rounded-circle"
+          onClick={() => sliderRef.current.slickPrev()}
+        >
+          <ArrowLeft />
+        </ButtonBase>
+        <ButtonBase
+          className="arrow-btn next bg-black text-white rounded-circle"
+          onClick={() => sliderRef.current.slickNext()}
+        >
+          <ArrowRight />
+        </ButtonBase>
+      </div>
+    );
+  };
 
   const { data, isLoading, isFetching, isError, refetch } = useQuery(
     [`Product ${id}`],
@@ -124,16 +144,19 @@ const SingleProduct = ({ match }) => {
       {/* <button onClick={handleGoBack}>Volver</button> */}
       <div className="container single-product">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6  ">
             <div
               className=""
               style={{
-                width: "100%",
-                // borderRadius: "4%",
-                backgroundColor: "#ffff",
+                width: window.innerWidth >= 1024 ? "24vw" : "100%",
+                position: "relative",
+                borderRadius: "3%",
+                padding: "10px",
+                backgroundColor: "rgba(199, 255, 51, 0.2)",
+                boxShadow: "0px 4px 50px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <Slider {...settings}>
+              <Slider {...settings} ref={sliderRef}>
                 {product?.photo?.map((image) => (
                   <div className="">
                     <img
@@ -141,12 +164,17 @@ const SingleProduct = ({ match }) => {
                       alt={product?.name}
                       style={{
                         width: "100%",
-                        // borderRadius: "4%"
+
+                        // height: "60vh",
+                        borderRadius: "2%",
                       }}
                     />
                   </div>
                 ))}
               </Slider>
+              {window.innerWidth >= 1024 &&
+                product?.photo.length > 1 &&
+                renderArrows()}
               {/* <img
                 src={product?.photo?.[0]?.url}
                 alt={product?.name}
@@ -258,6 +286,36 @@ const SingleProduct = ({ match }) => {
           </div>
         </div> */}
       </div>
+      <style>{`
+        .slider-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%); 
+          // z-index: 20;
+          width: 100%;
+          left: 1;
+          right: 1;
+          background-color: black;
+        }
+        .arrow-btn {
+          font-size: 2rem;
+          position: absolute;
+        }
+        .prev {
+          left: -50px;
+        }
+        .next {
+          right: -50px;
+        }
+        .slick-dots li {
+          margin: 0;
+          width: 15px;
+          height: 15px;
+        }
+        .slick-active {
+          margin: 0;
+        }
+      `}</style>
     </>
   );
 };

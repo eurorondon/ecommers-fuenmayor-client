@@ -1,12 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
-import ShopSections from "../components/homeComponents/ShopSection/ShopSection";
+
+import GridProductSearch from "../components/GridProductSearch";
 
 export default function SearchResult() {
   return (
     <>
       <Header />
-      <ShopSections />
+      <div className="container  " style={{ paddingTop: "10px" }}>
+        <GridProductSearch />
+      </div>
     </>
   );
 }

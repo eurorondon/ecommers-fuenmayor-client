@@ -1,21 +1,22 @@
 import React from "react";
-import Product from "./ProductGrid";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import Loading from "../../Loading";
+import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
-import { listProducts } from "../../../graphql/queries";
-import amplifyconfig from "../../../amplifyconfiguration.json";
+import { listProducts } from "./../graphql/queries";
+import amplifyconfig from "./../amplifyconfiguration.json";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategories } from "../../../features/categories/categorySlice";
+
 import { useParams } from "react-router-dom";
+import Product from "./homeComponents/ShopSection/ProductGrid";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
 
-const GridProductList = () => {
+const GridProductSearch = () => {
   // const [products, setProducts] = React.useState([]);
   const [cargando, setCargando] = React.useState(true);
 
@@ -25,7 +26,7 @@ const GridProductList = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
-      [category ? `infinity-products-${category}` : "infinity-products"],
+      ["infinity-products-search"],
       async ({ pageParam }) => {
         try {
           // const filter = {
@@ -45,7 +46,7 @@ const GridProductList = () => {
           const productsData = await client.graphql({
             query: listProducts,
             variables: {
-              limit: 6,
+              limit: 100,
               filter,
               nextToken: pageParam,
             },
@@ -84,7 +85,7 @@ const GridProductList = () => {
     refetch();
   }, [category, refetch, search]);
 
-  if (isLoading)
+  if (isLoading | isFetching)
     return (
       <div style={{ minHeight: "50vh" }}>
         <Loading />
@@ -163,4 +164,4 @@ const GridProductList = () => {
   );
 };
 
-export default GridProductList;
+export default GridProductSearch;
