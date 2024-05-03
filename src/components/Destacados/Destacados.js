@@ -114,7 +114,7 @@ const Destacados = () => {
       }
       // style={window.innerWidth >= 1900 && { margin: "150px" }}
     >
-      <h2 className="container my-2">Destacados</h2>
+      <h4 className=" my-2"> Destacados</h4>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}

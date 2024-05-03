@@ -92,7 +92,7 @@ const NewProducts = () => {
 
   const FeaturedProducts = () => (
     <div className="container mx-auto my-4">
-      <h2 className=" my-2">Lo mas Nuevo</h2>
+      <h4 className=" my-2">Lo mas Nuevo</h4>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}

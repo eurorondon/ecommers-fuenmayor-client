@@ -105,7 +105,7 @@ const Ofertas = () => {
 
   const FeaturedProducts = () => (
     <div className="container  my-4 ">
-      <h2 className="container  my-2">Ofertas</h2>
+      <h4 className="  my-2">Nuestras Ofertas</h4>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}

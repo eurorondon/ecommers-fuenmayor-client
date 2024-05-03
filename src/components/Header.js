@@ -4,6 +4,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { LocationOn, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import CancelIcon from "@mui/icons-material/Cancel";
+import SearchIcon from "@mui/icons-material/Search";
 // import { setSearch } from "../features/categories/categorySlice";
 
 const Header = () => {
@@ -34,11 +36,7 @@ const Header = () => {
     e.preventDefault();
 
     navigate(`/search/${searchInput}`);
-  };
-
-  const handleClear = () => {
     setSearchInput("");
-    navigate(`/`);
   };
 
   return (
@@ -169,10 +167,16 @@ const Header = () => {
                       type="search"
                       className="form-control rounded-left search"
                       placeholder="Search"
+                      value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
                     />
-                    <button type="submit" className="search-button">
-                      search
+
+                    <button
+                      type="search"
+                      className="search-button"
+                      // style={{ backgroundColor: "#1cb803" }}
+                    >
+                      <SearchIcon />
                     </button>
                   </form>
                 </div>
@@ -198,27 +202,19 @@ const Header = () => {
               <div className="col-md-6 col-8 d-flex align-items-center">
                 <form className="input-group" onSubmit={handleSubmit}>
                   <input
-                    type=""
+                    type="search"
                     className="form-control rounded-left search"
                     placeholder="Search"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
-                  {searchInput && (
-                    <button
-                      type="button"
-                      className="clear-button"
-                      onClick={handleClear}
-                    >
-                      x
-                    </button>
-                  )}
+
                   <button
-                    type="submit"
+                    type="search"
                     className="search-button"
                     // style={{ backgroundColor: "#1cb803" }}
                   >
-                    search
+                    <SearchIcon />
                   </button>
                 </form>
               </div>

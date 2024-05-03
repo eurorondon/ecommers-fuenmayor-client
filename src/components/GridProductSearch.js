@@ -8,7 +8,7 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import { listProducts } from "./../graphql/queries";
 import amplifyconfig from "./../amplifyconfiguration.json";
-import { useDispatch, useSelector } from "react-redux";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 import { useParams } from "react-router-dom";
 import Product from "./homeComponents/ShopSection/ProductGrid";
@@ -118,11 +118,19 @@ const GridProductSearch = () => {
           <Link to={"/"}>X</Link>
         </div>
       ) : search ? (
-        <div className="" style={{ display: "flex", alignItems: "center" }}>
-          <h3 className="" style={{ margin: "20px" }}>
-            Resultado de Busqueda : {search}
-          </h3>
-          <Link to={"/"}>X</Link>
+        <div
+          className=""
+          style={{ display: "flex", alignItems: "center", gap: "15px" }}
+        >
+          <h6 className="" style={{ margin: "20px 0px " }}>
+            Resultado de Busqueda :{" "}
+            <span style={{ fontWeight: "bold" }}>{search} </span>
+          </h6>
+          <Link to={"/"}>
+            <div style={{ marginRight: "10px" }}>
+              <CancelIcon color="warning" />
+            </div>
+          </Link>
         </div>
       ) : (
         <h2 className="mb-2">Todos los Articulos</h2>

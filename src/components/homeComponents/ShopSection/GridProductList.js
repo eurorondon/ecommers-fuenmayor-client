@@ -11,6 +11,7 @@ import amplifyconfig from "../../../amplifyconfiguration.json";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../../../features/categories/categorySlice";
 import { useParams } from "react-router-dom";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
@@ -114,14 +115,19 @@ const GridProductList = () => {
           <h3 className="" style={{ margin: "20px" }}>
             Filtrando por categoria : {category}
           </h3>
-          <Link to={"/"}>X</Link>
+          <Link to={"/"}>
+            {" "}
+            <CancelIcon color="warning" />
+          </Link>
         </div>
       ) : search ? (
         <div className="" style={{ display: "flex", alignItems: "center" }}>
-          <h3 className="" style={{ margin: "20px" }}>
-            Resultado de Busqueda : {search}
-          </h3>
-          <Link to={"/"}>X</Link>
+          <span className="" style={{ margin: "20px", fontSize: "10px" }}>
+            {/* Resultado de Busqueda : {search} */}
+          </span>
+          <Link to={"/"}>
+            <CancelIcon color="warning" />
+          </Link>
         </div>
       ) : (
         <h2 className="mb-2">Todos los Articulos</h2>

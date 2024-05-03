@@ -173,7 +173,7 @@ const SingleProduct = ({ match }) => {
                 ))}
               </Slider>
               {window.innerWidth >= 1024 &&
-                product?.photo.length > 1 &&
+                product?.photo?.length > 1 &&
                 renderArrows()}
               {/* <img
                 src={product?.photo?.[0]?.url}

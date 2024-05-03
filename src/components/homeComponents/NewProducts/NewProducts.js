@@ -93,7 +93,7 @@ const NewProducts = () => {
 
   return (
     <div className="container mx-auto my-4">
-      <h2>Lo más Nuevo</h2>
+      <h4>Lo más Nuevo</h4>
       <div
         className=""
         style={{ position: "relative", width: "100%", margin: "auto" }}
