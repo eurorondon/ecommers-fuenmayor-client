@@ -12,61 +12,6 @@ import { listCategories } from "../../graphql/queries";
 import { getCategories } from "../../utils/graphqlFunctions";
 Amplify.configure(amplifyconfig);
 
-// const categories = [
-//   {
-//     name: "Conservadores",
-//     products: 8,
-//     imageUrl: "/images/cocina.png",
-//   },
-//   {
-//     name: "Limpieza",
-//     products: 5,
-//     imageUrl: "/images/limpieza.png",
-//   },
-//   {
-//     name: "Aluminio",
-//     products: 12,
-//     imageUrl: "/images/aluminio.png",
-//   },
-//   {
-//     name: "Combos",
-//     products: 12,
-//     imageUrl: "/images/combos.png",
-//   },
-//   {
-//     name: "Hombres",
-//     products: 12,
-//     imageUrl: "/images/aluminio.png",
-//   },
-//   {
-//     name: "Mujer",
-//     products: 12,
-//     imageUrl: "/images/belleza.png",
-//   },
-//   {
-//     name: "Contenedor",
-//     products: 12,
-//     imageUrl: "/images/contenedores.png",
-//   },
-//   {
-//     name: "Electricos",
-//     products: 12,
-//     imageUrl: "/images/limpieza.png",
-//   },
-//   // {
-//   //   name: "Sonido",
-//   //   products: 12,
-//   //   imageUrl: "/images/sonido.png",
-//   // },
-
-//   // {
-//   //   name: "Coleccionables",
-//   //   products: 12,
-//   //   imageUrl: "/images/coleccionables.png",
-//   // },
-//   // Agrega más categorías según sea necesario
-// ];
-
 const Categorias = () => {
   const [categories, setCategories] = React.useState([]);
   const { data: dataCategories, error } = useQuery(
@@ -90,6 +35,7 @@ const Categorias = () => {
 
   const handleCategories = (category) => {
     // dispatch(setCategories(category));
+    window.scroll(0, 0);
   };
 
   if (window.innerWidth > 1150)

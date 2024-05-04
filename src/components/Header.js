@@ -127,7 +127,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
-                  <div className="btn-group">
+                  {/* <div className="btn-group">
                     <button
                       type="button"
                       className="name-button dropdown-toggle text-white"
@@ -151,7 +151,7 @@ const Header = () => {
                         Logout
                       </Link>
                     </div>
-                  </div>
+                  </div> */}
                   <Link to="/cart" className="cart-mobile-icon text-white">
                     <i
                       className="fas fa-shopping-bag me-3"
@@ -214,7 +214,7 @@ const Header = () => {
                 </form>
               </div>
               <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                <div className="btn-group">
+                {/* <div className="btn-group">
                   <button
                     type="button"
                     className="name-button dropdown-toggle"
@@ -233,7 +233,7 @@ const Header = () => {
                       Logout
                     </Link>
                   </div>
-                </div>
+                </div> */}
 
                 <Link to="/cart">
                   <i

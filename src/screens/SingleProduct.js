@@ -191,15 +191,15 @@ const SingleProduct = ({ match }) => {
 
               <div className="product-count col-lg-7 ">
                 <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Price</h6>
+                  <h6>Precio</h6>
                   <span>${product?.price}</span>
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
-                  <h6>Status</h6>
+                  <h6>Estado</h6>
                   {product?.countInStock > 0 ? (
-                    <span>In Stock</span>
+                    <span>Disponible</span>
                   ) : (
-                    <span>unavailable</span>
+                    <span>No Disponible</span>
                   )}
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">

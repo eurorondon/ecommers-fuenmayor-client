@@ -1,24 +1,23 @@
 import React from "react";
-
+import Product from "./ProductGrid";
 import { Link, useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import Loading from "./Loading";
+import Loading from "../../Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
-import { listProducts } from "./../graphql/queries";
-import amplifyconfig from "./../amplifyconfiguration.json";
-import CancelIcon from "@mui/icons-material/Cancel";
-import SearchIcon from "@mui/icons-material/Search";
-
+import { listProducts } from "../../../graphql/queries";
+import amplifyconfig from "../../../amplifyconfiguration.json";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategories } from "../../../features/categories/categorySlice";
 import { useParams } from "react-router-dom";
-import Product from "./homeComponents/ShopSection/ProductGrid";
-import { capitalizeFirstLetter } from "../utils/capitalizerFirstLetter";
+import CancelIcon from "@mui/icons-material/Cancel";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
 
-const GridProductSearch = () => {
+const CategoriesResultItemes = () => {
   // const [products, setProducts] = React.useState([]);
   const [cargando, setCargando] = React.useState(true);
 
@@ -28,8 +27,7 @@ const GridProductSearch = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
-      ["infinity-products-search"],
-
+      [category ? `infinity-products-${category}` : "infinity-products"],
       async ({ pageParam }) => {
         try {
           // const filter = {
@@ -43,15 +41,13 @@ const GridProductSearch = () => {
           }
 
           if (search) {
-            filter = {
-              name: { contains: capitalizeFirstLetter(search.slice(0, -1)) },
-            };
+            filter = { name: { contains: search } };
           }
 
           const productsData = await client.graphql({
             query: listProducts,
             variables: {
-              limit: 100,
+              limit: 200,
               filter,
               nextToken: pageParam,
             },
@@ -66,7 +62,7 @@ const GridProductSearch = () => {
       {
         // refetchOnMount: false,
         // refetchInterval: false,
-        refetchOnWindowFocus: false,
+        // refetchOnWindowFocus: false,
         // refetchIntervalInBackground: false,
         // onSuccess: (data) => {},
         getNextPageParam: (lastPage) => {
@@ -90,7 +86,7 @@ const GridProductSearch = () => {
     refetch();
   }, [category, refetch, search]);
 
-  if (isLoading | isFetching)
+  if (isLoading)
     return (
       <div style={{ minHeight: "50vh" }}>
         <Loading />
@@ -114,30 +110,40 @@ const GridProductSearch = () => {
   //   );
 
   return (
-    <>
+    <div className="container mt-4">
       {category ? (
-        <div className="" style={{ display: "flex", alignItems: "center" }}>
-          <h3 className="" style={{ margin: "20px" }}>
-            Filtrando por categoria : {category}
-          </h3>
-          <Link to={"/"}>X</Link>
-        </div>
-      ) : search ? (
         <div
-          className="rounded-pill border px-4 py-1 mt-3 mb-4 shadow"
+          className="  px-4 py-1 mt-2 mb-4 border shadow   bg-white rounded-pill"
           style={{ display: "inline-block" }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <h6 className="" style={{ margin: " 0px " }}>
-              <SearchIcon /> Busqueda:{" "}
-              <span style={{ fontWeight: "bold" }}>{search} </span>
-            </h6>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "auto",
+              // overflow: "hidden",
+            }}
+          >
+            <div className="mr-5" style={{ margin: "0 10px 0 0" }}>
+              <FilterAltIcon />
+            </div>
             <Link to={"/"}>
-              <div style={{ marginRight: "10px" }}>
-                <CancelIcon color="warning" />
-              </div>
+              <CancelIcon color="warning" fontSize="small" />
             </Link>
+            <span className="" style={{ margin: "5px" }}>
+              {category}
+            </span>
           </div>
+        </div>
+      ) : search ? (
+        <div className="" style={{ display: "flex", alignItems: "center" }}>
+          <span className="" style={{ margin: "20px", fontSize: "10px" }}>
+            {/* Resultado de Busqueda : {search} */}
+          </span>
+          <Link to={"/"}>
+            <CancelIcon color="warning" />
+          </Link>
         </div>
       ) : (
         <h2 className="mb-2">Todos los Articulos</h2>
@@ -154,40 +160,48 @@ const GridProductSearch = () => {
         </div>
       )}
 
-      <InfiniteScroll
-        dataLength={products ? products.length : 0}
-        hasMore={hasNextPage}
-        next={() => fetchNextPage()}
-        // loader={
-        //   <div className="mx-auto">
-        //     <Loading />
-        //   </div>
-        // }
-      >
-        <div className=" grid mx-auto ">
-          {products?.map((product) => (
-            <div key={product.id}>
-              <div
-                style={{ cursor: "pointer" }}
-                className=""
-                onClick={() => handleNavigate(product.id)}
-                //  to={`/products/${product.id}`}
-              >
-                <Product
-                  url={product?.photo[0]?.url}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  offer={product.inOffer}
-                  discountPercentage={product.discountPercentage}
-                />
+      <div className="mb-5">
+        <InfiniteScroll
+          dataLength={products ? products.length : 0}
+          hasMore={hasNextPage}
+          next={() => fetchNextPage()}
+          // loader={
+          //   <div className="mx-auto">
+          //     <Loading />
+          //   </div>
+          // }
+        >
+          <div className=" grid mx-auto ">
+            {products?.map((product) => (
+              <div key={product.id}>
+                <div
+                  style={{ cursor: "pointer" }}
+                  className=""
+                  onClick={() => handleNavigate(product.id)}
+                  //  to={`/products/${product.id}`}
+                >
+                  <Product
+                    url={product?.photo[0]?.url}
+                    name={product.name}
+                    description={product.description}
+                    price={product.price}
+                    offer={product.inOffer}
+                    discountPercentage={product.discountPercentage}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </InfiniteScroll>
+      </div>
+
+      {isFetching && (
+        <div style={{ minHeight: "10vh" }}>
+          <Loading />
         </div>
-      </InfiniteScroll>
-    </>
+      )}
+    </div>
   );
 };
 
-export default GridProductSearch;
+export default CategoriesResultItemes;

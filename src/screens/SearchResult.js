@@ -7,7 +7,7 @@ import Destacados from "../components/Destacados/Destacados";
 
 export default function SearchResult() {
   return (
-    <>
+    <div style={{ overflow: "hidden" }}>
       <Header />
       <div className="container  " style={{ paddingTop: "10px" }}>
         <GridProductSearch />
@@ -18,6 +18,6 @@ export default function SearchResult() {
         <div style={{ margin: "70px" }}></div>
         <Destacados />
       </div>
-    </>
+    </div>
   );
 }
