@@ -54,13 +54,13 @@ const Ofertas = () => {
     dots: true,
     arrows: false,
     // infinite: false,
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1900,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 2,
         },
       },

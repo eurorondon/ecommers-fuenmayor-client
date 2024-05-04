@@ -34,9 +34,10 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    navigate(`/search/${searchInput}`);
-    setSearchInput("");
+    if (searchInput) {
+      navigate(`/search/${searchInput}`);
+      setSearchInput("");
+    }
   };
 
   return (
@@ -167,15 +168,9 @@ const Header = () => {
                       type="search"
                       className="form-control rounded-left search"
                       placeholder="Search"
-                      value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
                     />
-
-                    <button
-                      type="search"
-                      className="search-button"
-                      // style={{ backgroundColor: "#1cb803" }}
-                    >
+                    <button type="submit" className="search-button">
                       <SearchIcon />
                     </button>
                   </form>

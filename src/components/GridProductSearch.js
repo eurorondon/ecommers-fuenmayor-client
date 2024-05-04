@@ -9,6 +9,7 @@ import { generateClient } from "aws-amplify/api";
 import { listProducts } from "./../graphql/queries";
 import amplifyconfig from "./../amplifyconfiguration.json";
 import CancelIcon from "@mui/icons-material/Cancel";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { useParams } from "react-router-dom";
 import Product from "./homeComponents/ShopSection/ProductGrid";
@@ -27,6 +28,7 @@ const GridProductSearch = () => {
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
       ["infinity-products-search"],
+
       async ({ pageParam }) => {
         try {
           // const filter = {
@@ -61,7 +63,7 @@ const GridProductSearch = () => {
       {
         // refetchOnMount: false,
         // refetchInterval: false,
-        // refetchOnWindowFocus: false,
+        refetchOnWindowFocus: false,
         // refetchIntervalInBackground: false,
         // onSuccess: (data) => {},
         getNextPageParam: (lastPage) => {
@@ -119,18 +121,20 @@ const GridProductSearch = () => {
         </div>
       ) : search ? (
         <div
-          className=""
-          style={{ display: "flex", alignItems: "center", gap: "15px" }}
+          className="rounded-pill border px-4 py-1 mt-3 mb-4 shadow"
+          style={{ display: "inline-block" }}
         >
-          <h6 className="" style={{ margin: "20px 0px " }}>
-            Resultado de Busqueda :{" "}
-            <span style={{ fontWeight: "bold" }}>{search} </span>
-          </h6>
-          <Link to={"/"}>
-            <div style={{ marginRight: "10px" }}>
-              <CancelIcon color="warning" />
-            </div>
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+            <h6 className="" style={{ margin: " 0px " }}>
+              <SearchIcon /> Busqueda:{" "}
+              <span style={{ fontWeight: "bold" }}>{search} </span>
+            </h6>
+            <Link to={"/"}>
+              <div style={{ marginRight: "10px" }}>
+                <CancelIcon color="warning" />
+              </div>
+            </Link>
+          </div>
         </div>
       ) : (
         <h2 className="mb-2">Todos los Articulos</h2>

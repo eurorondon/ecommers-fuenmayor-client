@@ -49,14 +49,14 @@ const Destacados = () => {
       {
         breakpoint: 4000,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 2,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 6,
           slidesToScroll: 2,
         },
       },

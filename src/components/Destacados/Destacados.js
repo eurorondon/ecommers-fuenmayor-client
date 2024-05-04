@@ -63,7 +63,7 @@ const Destacados = () => {
       {
         breakpoint: 4000,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 2,
         },
       },

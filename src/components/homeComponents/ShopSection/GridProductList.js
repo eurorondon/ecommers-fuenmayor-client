@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../../../features/categories/categorySlice";
 import { useParams } from "react-router-dom";
 import CancelIcon from "@mui/icons-material/Cancel";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
@@ -107,18 +108,33 @@ const GridProductList = () => {
   //       </div>
   //     </div>
   //   );
-  console.log(products);
+
   return (
     <>
       {category ? (
-        <div className="" style={{ display: "flex", alignItems: "center" }}>
-          <h3 className="" style={{ margin: "20px" }}>
-            Filtrando por categoria : {category}
-          </h3>
-          <Link to={"/"}>
-            {" "}
-            <CancelIcon color="warning" />
-          </Link>
+        <div
+          className="  px-4 py-1 mt-2 mb-4 border shadow   bg-white rounded-pill"
+          style={{ display: "inline-block" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "auto",
+              // overflow: "hidden",
+            }}
+          >
+            <div className="mr-5" style={{ margin: "0 10px 0 0" }}>
+              <FilterAltIcon />
+            </div>
+            <Link to={"/"}>
+              <CancelIcon color="warning" fontSize="small" />
+            </Link>
+            <span className="" style={{ margin: "5px" }}>
+              {category}
+            </span>
+          </div>
         </div>
       ) : search ? (
         <div className="" style={{ display: "flex", alignItems: "center" }}>
@@ -132,39 +148,46 @@ const GridProductList = () => {
       ) : (
         <h2 className="mb-2">Todos los Articulos</h2>
       )}
-
-      <InfiniteScroll
-        dataLength={products ? products.length : 0}
-        hasMore={hasNextPage}
-        next={() => fetchNextPage()}
-        // loader={
-        //   <div className="mx-auto">
-        //     <Loading />
-        //   </div>
-        // }
-      >
-        <div className=" grid mx-auto ">
-          {products?.map((product) => (
-            <div key={product.id}>
-              <div
-                style={{ cursor: "pointer" }}
-                className=""
-                onClick={() => handleNavigate(product.id)}
-                //  to={`/products/${product.id}`}
-              >
-                <Product
-                  url={product?.photo[0]?.url}
-                  name={product.name}
-                  description={product.description}
-                  price={product.price}
-                  offer={product.inOffer}
-                  discountPercentage={product.discountPercentage}
-                />
+      <div className="mb-5">
+        <InfiniteScroll
+          dataLength={products ? products.length : 0}
+          hasMore={hasNextPage}
+          next={() => fetchNextPage()}
+          // loader={
+          //   <div className="mx-auto">
+          //     <Loading />
+          //   </div>
+          // }
+        >
+          <div className=" grid mx-auto ">
+            {products?.map((product) => (
+              <div key={product.id}>
+                <div
+                  style={{ cursor: "pointer" }}
+                  className=""
+                  onClick={() => handleNavigate(product.id)}
+                  //  to={`/products/${product.id}`}
+                >
+                  <Product
+                    url={product?.photo[0]?.url}
+                    name={product.name}
+                    description={product.description}
+                    price={product.price}
+                    offer={product.inOffer}
+                    discountPercentage={product.discountPercentage}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </InfiniteScroll>
+      </div>
+
+      {isFetching && (
+        <div style={{ minHeight: "10vh" }}>
+          <Loading />
         </div>
-      </InfiniteScroll>
+      )}
     </>
   );
 };
