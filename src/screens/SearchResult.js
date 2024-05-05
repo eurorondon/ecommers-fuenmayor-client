@@ -7,15 +7,18 @@ import Destacados from "../components/Destacados/Destacados";
 
 export default function SearchResult() {
   return (
-    <div style={{ overflow: "hidden" }}>
-      <Header />
+    <div>
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       <div className="container  " style={{ paddingTop: "10px" }}>
         <GridProductSearch />
         <div style={{ margin: "70px" }}></div>
+        <div style={{ overflow: "hidden" }}>
+          <Ofertas />
+        </div>
 
-        <Ofertas />
-
-        <div style={{ margin: "70px" }}></div>
+        <div style={{ margin: "70px", overflow: "hidden" }}></div>
         <Destacados />
       </div>
     </div>

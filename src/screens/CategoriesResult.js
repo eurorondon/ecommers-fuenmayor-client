@@ -8,15 +8,19 @@ import CategoriesResultItemes from "../components/homeComponents/ShopSection/Cat
 
 export default function CategoriesResult() {
   return (
-    <div style={{ overflow: "hidden" }}>
-      <Header />
+    <div>
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       {/* <Categorias /> */}
       <CategoriesResultItemes />
       <div style={{ margin: "70px" }}></div>
 
-      <Ofertas />
+      <div style={{ overflow: "hidden" }}>
+        <Ofertas />
+      </div>
 
-      <div style={{ margin: "70px" }}></div>
+      <div style={{ margin: "70px", overflow: "hidden" }}></div>
       <Destacados />
     </div>
   );
