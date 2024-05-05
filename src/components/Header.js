@@ -77,46 +77,13 @@ const Header = () => {
           backgroundColor: "#040915",
         }}
       >
-        <div className="container">
+        <div className="">
           {/* MOBILE HEADER */}
           <div className="mobile-header pb-2">
-            <div className="container ">
-              <div className="row ">
-                <div className="col-6 d-flex align-items-center">
-                  <div>
-                    <MenuIcon
-                      aria-controls="menu"
-                      aria-haspopup="true"
-                      onClick={handleMenuClick}
-                      color="white"
-                      className="text-white"
-                      style={{ fontSize: "2.2rem" }}
-                    >
-                      <MenuIcon className="text-white" />
-                    </MenuIcon>
-                    <Menu
-                      id="menu"
-                      anchorEl={anchorEl}
-                      open={Boolean(anchorEl)}
-                      onClose={handleMenuClose}
-                    >
-                      {/* Agrega aquí los elementos de menú desplegable */}
-                      <MenuItem className="menu-item" onClick={handleMenuClose}>
-                        Item 1
-                      </MenuItem>
-                      <MenuItem className="menu-item" onClick={handleMenuClose}>
-                        Item 2
-                      </MenuItem>
-                      <MenuItem
-                        className="menu-item"
-                        onClick={handleMenuClose}
-                        style={{ backgroundColor: "" }}
-                      >
-                        Item 3
-                      </MenuItem>
-                    </Menu>
-                  </div>
-                  <Link className="navbar-brand ms-3" to="/">
+            <div className="container">
+              <div className=" row   ">
+                <div className="col-2  d-flex justify-content-center align-items-center ">
+                  <Link className=" " to="/">
                     <div className="  ">
                       <img
                         alt="logo"
@@ -126,7 +93,20 @@ const Header = () => {
                     </div>
                   </Link>
                 </div>
-                <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
+                <div className="col-9 d-flex mt-2">
+                  <form className="input-group" onSubmit={handleSubmit}>
+                    <input
+                      type="search"
+                      className="form-control rounded-left search"
+                      placeholder="Search"
+                      onChange={(e) => setSearchInput(e.target.value)}
+                    />
+                    <button type="submit" className="search-button">
+                      <SearchIcon />
+                    </button>
+                  </form>
+                </div>
+                <div className="col-1   d-flex align-items-center justify-content-center  Login-Register">
                   {/* <div className="btn-group">
                     <button
                       type="button"
@@ -161,19 +141,6 @@ const Header = () => {
                       {cartCount}
                     </span>
                   </Link>
-                </div>
-                <div className="col-12 d-flex align-items-center">
-                  <form className="input-group" onSubmit={handleSubmit}>
-                    <input
-                      type="search"
-                      className="form-control rounded-left search"
-                      placeholder="Search"
-                      onChange={(e) => setSearchInput(e.target.value)}
-                    />
-                    <button type="submit" className="search-button">
-                      <SearchIcon />
-                    </button>
-                  </form>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import ShopSections from "../components/homeComponents/ShopSection/ShopSection";
 import Header from "../components/Header";
-import Categorias from "../components/homeComponents/Categorias";
+
 import { useSelector } from "react-redux";
 import Portada from "../components/homeComponents/Portada";
 import Whatsapp from "../components/homeComponents/Whatsapp";
@@ -9,6 +9,7 @@ import NewProducts from "../components/NewProducts/NewProducts";
 import Ofertas from "../components/Ofertas/Ofertas";
 
 import Destacados from "../components/Destacados/Destacados";
+import Categorias from "../components/homeComponents/categorias/Categorias";
 
 const Home = () => {
   const { isLoading } = useSelector((state) => state.products);
