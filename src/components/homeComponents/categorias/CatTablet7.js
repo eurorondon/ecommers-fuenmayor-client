@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CatTablet7({ categories }) {
+function CatTablet7({ categories, handleCategories }) {
   return (
     <div className="py-3" style={{ backgroundColor: "#040915" }}>
       <div
@@ -16,7 +16,7 @@ function CatTablet7({ categories }) {
           <div key={index} style={{ margin: "10px", textAlign: "center" }}>
             <Link
               to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              onClick={() => handleCategories(category.name)}
               style={{
                 width: "120px",
                 height: "120px",
@@ -56,7 +56,7 @@ function CatTablet7({ categories }) {
           <div key={index} style={{ margin: "10px", textAlign: "center" }}>
             <Link
               to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              onClick={() => handleCategories}
               style={{
                 width: "120px",
                 height: "120px",

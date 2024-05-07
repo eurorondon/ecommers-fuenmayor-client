@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CatResponsive8({ categories }) {
+function CatResponsive8({ categories, handleCategories }) {
   return (
     <div
       className=" py-3"
@@ -24,7 +24,7 @@ function CatResponsive8({ categories }) {
             <Link
               className=" mx-auto"
               to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              onClick={() => handleCategories()}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -68,7 +68,7 @@ function CatResponsive8({ categories }) {
             <Link
               className="mx-auto"
               to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              onClick={() => handleCategories()}
               style={{
                 width: "20vw",
                 height: "20vw",

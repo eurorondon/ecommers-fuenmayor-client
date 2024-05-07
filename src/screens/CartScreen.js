@@ -43,7 +43,8 @@ const CartScreen = () => {
 
   const name = "euro";
   const telefono = "+584126773234";
-  const mensaje = `👋 Hola, mi nombre es ${name}.\n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
+  // const mensaje = `👋 Hola, mi nombre es ${name}.\n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
+  const mensaje = `👋 Hola Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
 
   const checkOutHandler = () => {
     const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(

@@ -87,34 +87,58 @@ const Categorias = () => {
   if (window.innerWidth > 1150)
     return (
       <>
-        {categories?.length > 5 ? (
-          <CategoriasMayorA5 categories={categories} />
+        {categories?.length >= 5 ? (
+          <CategoriasMayorA5
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         ) : (
-          <CategoriasMenorA5 categories={categories} />
+          <CategoriasMenorA5
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         )}
       </>
     );
   if (window.innerWidth < 1150 && window.innerWidth > 768)
     return categories?.length < 5 ? (
-      <CategoriasMenorA5 categories={categories} />
+      <CategoriasMenorA5
+        categories={categories}
+        handleCategories={handleCategories}
+      />
     ) : categories?.length === 7 ? (
-      <CatTablet7 categories={categories} />
+      <CatTablet7 categories={categories} handleCategories={handleCategories} />
     ) : categories?.length === 8 ? (
-      <CatTablet8 categories={categories} />
+      <CatTablet8 categories={categories} handleCategories={handleCategories} />
     ) : (
-      <CategoriasMayorA5 categories={categories} />
+      <CategoriasMayorA5
+        categories={categories}
+        handleCategories={handleCategories}
+      />
     );
   if (window.innerWidth < 769 && categories?.length > 1)
     return (
       <>
         {categories.length === 5 ? (
-          <CatResponsive5 categories={categories} />
+          <CatResponsive5
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         ) : categories.length === 6 ? (
-          <CatResponsive6 categories={categories} />
+          <CatResponsive6
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         ) : categories.length === 8 ? (
-          <CatResponsive8 categories={categories} />
+          <CatResponsive8
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         ) : (
-          <CategoriasMobile categories={categories} />
+          <CategoriasMobile
+            categories={categories}
+            handleCategories={handleCategories}
+          />
         )}
       </>
     );

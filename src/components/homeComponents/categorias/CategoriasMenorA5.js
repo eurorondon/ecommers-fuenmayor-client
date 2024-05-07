@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function CategoriasMenorA5({ categories }) {
-  console.log("mmmm", categories);
+function CategoriasMenorA5({ categories, handleCategories }) {
   if (categories?.length <= 1 || categories?.length > 5) {
     return null;
   }
@@ -13,27 +13,38 @@ function CategoriasMenorA5({ categories }) {
           <div class="row gap-3 ">
             {categories?.map((category) => (
               <div
-                class="col bg-info  text-white d-flex justify-content-center align-items-center "
-                style={{ borderRadius: "2rem", maxHeight: "350px" }}
+                class="col   d-flex justify-content-center align-items-center gap-4"
+                style={{
+                  borderRadius: "2rem",
+                  maxHeight: "350px",
+                  backgroundColor: "#f2f2f2",
+                }}
               >
                 <div className="  ">
                   <div class="">
-                    <h5 class="mb-2">Enjoy With Earphone</h5>
-                    {/* <p class="">With</p>
-             <p class="">Earphone</p> */}
-                    <button class="btn btn-primary">Browse</button>
+                    <h5 class="mb-2">{category.categoryName}</h5>
+                    <Link
+                      onClick={() => handleCategories()}
+                      to={`/categories/${category.categoryName} `}
+                    >
+                      <button class="btn btn-primary">Ver mas</button>
+                    </Link>
                   </div>
                 </div>
-                {/* <div
-           className="position-absolute top-50 translate-middle  "
-           style={{ right: "-100px" }}
-         > */}
-                <div className=" ">
+
+                <div
+                  className=" "
+                  style={{ maxWidth: "10rem", minWidth: "10rem" }}
+                >
                   <img
-                    src="/images/notFound.png"
-                    style={{ maxWidth: "200px" }}
-                  ></img>
-                  {/* <h3 className="text-center">Category 1</h3> */}
+                    src={
+                      category.photo
+                        ? category.photo[0].url
+                        : "https://img.freepik.com/vector-premium/vector-icono-imagen-predeterminado-pagina-imagen-faltante-diseno-sitio-web-o-aplicacion-movil-no-hay-foto-disponible_87543-11093.jpg"
+                    }
+                    alt={category.categoryName}
+                    style={{ maxWidth: "100%", maxHeight: "100%" }}
+                  />
                 </div>
               </div>
             ))}
