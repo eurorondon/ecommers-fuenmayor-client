@@ -104,7 +104,7 @@ const Ofertas = () => {
     : null;
 
   const FeaturedProducts = () => (
-    <div className="container  my-4 ">
+    <div className="container  my-4 " style={{ overflow: "hidden" }}>
       <h4 className="  my-2">Nuestras Ofertas</h4>
       <div
         className=""

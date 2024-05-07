@@ -91,7 +91,7 @@ const NewProducts = () => {
     : null;
 
   const FeaturedProducts = () => (
-    <div className="container mx-auto my-4">
+    <div className="container mx-auto my-4" style={{ overflow: "hidden" }}>
       <h4 className=" my-2">Lo mas Nuevo</h4>
       <div
         className=""

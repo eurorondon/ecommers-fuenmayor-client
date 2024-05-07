@@ -107,6 +107,7 @@ const Destacados = () => {
     : null;
   const FeaturedProducts = () => (
     <div
+      style={{ overflow: "hidden" }}
       className={
         window.innerWidth > 1900
           ? " container mx-auto my-4 "
