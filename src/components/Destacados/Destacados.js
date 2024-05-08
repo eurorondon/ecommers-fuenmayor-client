@@ -105,25 +105,27 @@ const Destacados = () => {
         </Link>
       ))
     : null;
+
   const FeaturedProducts = () => (
-    <div
-      style={{ overflow: "hidden" }}
-      className={
-        window.innerWidth > 1900
-          ? " container mx-auto my-4 "
-          : " container mx-auto my-4"
-      }
-      // style={window.innerWidth >= 1900 && { margin: "150px" }}
-    >
-      <h4 className=" my-2"> Destacados</h4>
+    <div style={{ overflow: "hidden" }}>
       <div
-        className=""
-        style={{ position: "relative", width: "100%", margin: "auto" }}
+        className={
+          window.innerWidth > 1900
+            ? " container mx-auto my-4 "
+            : " container mx-auto my-4"
+        }
+        // style={window.innerWidth >= 1900 && { margin: "150px" }}
       >
-        <Slider {...settings} ref={sliderRef}>
-          {products}
-        </Slider>
-        {renderArrows()}
+        <h4 className=" my-2"> Destacados</h4>
+        <div
+          className=""
+          style={{ position: "relative", width: "100%", margin: "auto" }}
+        >
+          <Slider {...settings} ref={sliderRef}>
+            {products}
+          </Slider>
+          {renderArrows()}
+        </div>
       </div>
     </div>
   );

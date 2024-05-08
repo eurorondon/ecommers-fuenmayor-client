@@ -97,16 +97,18 @@ const NewProducts = () => {
     : null;
 
   const FeaturedProducts = () => (
-    <div className="container mx-auto my-4" style={{ overflow: "hidden" }}>
-      <h4 className=" my-2">Lo mas Nuevo</h4>
-      <div
-        className=""
-        style={{ position: "relative", width: "100%", margin: "auto" }}
-      >
-        <Slider {...settings} ref={sliderRef}>
-          {products}
-        </Slider>
-        {renderArrows()}
+    <div style={{ overflow: "hidden" }}>
+      <div className="container mx-auto my-4">
+        <h4 className=" my-2">Lo mas Nuevo</h4>
+        <div
+          className=""
+          style={{ position: "relative", width: "100%", margin: "auto" }}
+        >
+          <Slider {...settings} ref={sliderRef}>
+            {products}
+          </Slider>
+          {renderArrows()}
+        </div>
       </div>
     </div>
   );

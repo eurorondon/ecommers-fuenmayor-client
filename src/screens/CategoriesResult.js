@@ -16,11 +16,9 @@ export default function CategoriesResult() {
       <CategoriesResultItemes />
       <div style={{ margin: "70px" }}></div>
 
-      <div style={{ overflow: "hidden" }}>
-        <Ofertas />
-      </div>
+      <Ofertas />
 
-      <div style={{ margin: "70px", overflow: "hidden" }}></div>
+      <div style={{ margin: "70px" }}></div>
       <Destacados />
     </div>
   );

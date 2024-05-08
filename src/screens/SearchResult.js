@@ -14,11 +14,10 @@ export default function SearchResult() {
       <div className="container  " style={{ paddingTop: "10px" }}>
         <GridProductSearch />
         <div style={{ margin: "70px" }}></div>
-        <div style={{ overflow: "hidden" }}>
-          <Ofertas />
-        </div>
 
-        <div style={{ margin: "70px", overflow: "hidden" }}></div>
+        <Ofertas />
+
+        <div style={{ margin: "70px" }}></div>
         <Destacados />
       </div>
     </div>
