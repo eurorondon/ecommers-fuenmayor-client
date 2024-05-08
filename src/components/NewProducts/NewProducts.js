@@ -7,14 +7,20 @@ import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import Product from "../NewProducts/Product";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../../utils/graphqlFunctions";
+import { ListProductsByDate, getProducts } from "../../utils/graphqlFunctions";
 
 const NewProducts = () => {
-  const { data, isLoading, isError } = useQuery(["NewProducts"], getProducts, {
-    onSuccess: () => {
-      console.log("dataCategories");
-    },
-  });
+  const { data, isLoading, isError } = useQuery(
+    ["NewProducts"],
+    ListProductsByDate,
+    {
+      onSuccess: () => {
+        // console.log("dataCategories");
+      },
+    }
+  );
+
+  console.log("data sort", data);
   const productList = data;
   const sliderRef = useRef(null);
   if (isLoading) return null;

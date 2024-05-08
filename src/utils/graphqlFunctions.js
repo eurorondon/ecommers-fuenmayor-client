@@ -2,7 +2,12 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import amplifyconfig from "../aws-exports";
 
-import { getProduct, listCategories, listProducts } from "../graphql/queries";
+import {
+  ProductsByDate,
+  getProduct,
+  listCategories,
+  listProducts,
+} from "../graphql/queries";
 import {
   createCategories,
   createProduct,
@@ -129,11 +134,18 @@ export async function deleteCategory(id) {
 }
 
 export async function getCategoria(id) {
-  console.log(id);
   const res = await client.graphql({
     query: listCategories,
     variables: { id },
   });
 
   return res.data.getCategories;
+}
+
+export async function ListProductsByDate() {
+  const res = await client.graphql({
+    query: ProductsByDate,
+    variables: { type: "Producto", sortDirection: "DESC", limit: 10 },
+  });
+  return res.data.ProductsByDate.items;
 }

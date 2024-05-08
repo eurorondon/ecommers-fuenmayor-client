@@ -27,6 +27,7 @@ export const getProduct = /* GraphQL */ `
       price
       countInStock
       createdAt
+      type
       updatedAt
       inOffer
       discountPercentage
@@ -53,6 +54,7 @@ export const listProducts = /* GraphQL */ `
         price
         countInStock
         createdAt
+        type
         updatedAt
         inOffer
         discountPercentage
@@ -103,6 +105,50 @@ export const listCategories = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ProductsByDate = /* GraphQL */ `
+  query ProductsByDate(
+    $type: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ProductsByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        name
+        categories
+        color
+        description
+        photo {
+          url
+          publicId
+        }
+        rating
+        numReviews
+        price
+        countInStock
+        createdAt
+        type
+        updatedAt
+        inOffer
+        discountPercentage
+        bestSellers
+        id
         __typename
       }
       nextToken
