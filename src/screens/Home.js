@@ -10,6 +10,7 @@ import Ofertas from "../components/Ofertas/Ofertas";
 
 import Destacados from "../components/Destacados/Destacados";
 import Categorias from "../components/homeComponents/categorias/Categorias";
+import TabMenu from "../components/TabMenu";
 
 const Home = () => {
   const { isLoading } = useSelector((state) => state.products);
@@ -28,7 +29,9 @@ const Home = () => {
       <Destacados />
       {isLoading ? null : <></>}
       <ShopSections />
-      <Whatsapp />
+      <TabMenu />
+
+      {/* <Whatsapp />` */}
     </div>
   );
 };
