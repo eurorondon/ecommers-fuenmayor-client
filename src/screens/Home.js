@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ShopSections from "../components/homeComponents/ShopSection/ShopSection";
 import Header from "../components/Header";
 
@@ -11,9 +11,11 @@ import Ofertas from "../components/Ofertas/Ofertas";
 import Destacados from "../components/Destacados/Destacados";
 import Categorias from "../components/homeComponents/categorias/Categorias";
 import TabMenu from "../components/TabMenu";
+import ModalCategories from "../components/ModalCategories";
 
 const Home = () => {
   const { isLoading } = useSelector((state) => state.products);
+  const [showModal, setShowModal] = useState(false);
 
   // console.log(products.data?.listProductListFuenmayors?.items);
 
@@ -23,15 +25,15 @@ const Home = () => {
         <Header />
       </div>
       <Portada />
+
       <Categorias />
       <Ofertas />
       <NewProducts />
       <Destacados />
       {isLoading ? null : <></>}
       <ShopSections />
-      <TabMenu />
-
-      {/* <Whatsapp />` */}
+      <TabMenu setShowModal={setShowModal} />
+      {/* <Whatsapp /> */}
     </div>
   );
 };
