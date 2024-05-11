@@ -1,22 +1,42 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Menu, MenuItem } from "@mui/material";
 import { LocationOn, PersonOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import CancelIcon from "@mui/icons-material/Cancel";
 import SearchIcon from "@mui/icons-material/Search";
+import TabMenu from "./TabMenu";
+import { useParams } from "react-router-dom";
 // import { setSearch } from "../features/categories/categorySlice";
 
 const Header = () => {
+  const location = useLocation();
+  const currentUrl = location.pathname;
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchInput, setSearchInput] = React.useState("");
-
-  console.log(searchInput);
+  const params = useParams();
 
   const { cartItems } = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(cartItems.length);
+  const [activeButton, setActiveButton] = useState(0);
+  console.log("this is params", activeButton);
+
+  useEffect(() => {
+    if (currentUrl === "/categories") {
+      setActiveButton(1);
+    }
+    if (currentUrl === "/ofertas") {
+      setActiveButton(2);
+    }
+    if (currentUrl === "/destacados") {
+      setActiveButton(3);
+    }
+    if (currentUrl === "/perfil") {
+      setActiveButton(4);
+    }
+  }, [currentUrl]);
 
   React.useEffect(() => {
     setCartCount(cartItems.length);
@@ -34,6 +54,7 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.scroll(0, 0);
     if (searchInput) {
       navigate(`/search/${searchInput}`);
       setSearchInput("");
@@ -80,12 +101,12 @@ const Header = () => {
         >
           <div className="container">
             {/* MOBILE HEADER */}
-            <div className="mobile-header pb-2">
+            <div className="mobile-header ">
               <div className="container">
                 <div className=" row   ">
                   <div className="col-2  d-flex justify-content-center align-items-center ">
                     <Link className=" " to="/">
-                      <div className="  ">
+                      <div className="  " style={{ minHeight: "60px" }}>
                         <img
                           alt="logo"
                           src="/images/logo.jpg"
@@ -99,7 +120,7 @@ const Header = () => {
                       <input
                         type="search"
                         className="form-control rounded-left search"
-                        placeholder="Search"
+                        placeholder="Buscar..."
                         onChange={(e) => setSearchInput(e.target.value)}
                       />
                       <button type="submit" className="search-button">
@@ -145,6 +166,7 @@ const Header = () => {
                   </div>
                 </div>
               </div>
+              <TabMenu activeButton={activeButton} />
             </div>
 
             {/* PC HEADER */}
@@ -167,7 +189,7 @@ const Header = () => {
                     <input
                       type="search"
                       className="form-control rounded-left search"
-                      placeholder="Search"
+                      placeholder="Buscar..."
                       value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
                     />

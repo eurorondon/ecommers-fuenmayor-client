@@ -9,6 +9,9 @@ import CategoriesResult from "./screens/CategoriesResult";
 import SearchResult from "./screens/SearchResult";
 import ModalCategories from "./components/ModalCategories";
 import GridCategories from "./components/homeComponents/categorias/GridCategories";
+import OfertaScreen from "./screens/OfertaScreen";
+import DestacadosScreen from "./screens/DestacadosScreen";
+import PerfilScreen from "./screens/PerfilScreen";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -25,6 +28,9 @@ function App() {
         <Route path="/cart/:id?" element={<CartScreen />} />
         <Route path="/search/:search" element={<SearchResult />} />
         <Route path="/categories" element={<GridCategories />} />
+        <Route path="/ofertas" element={<OfertaScreen />} />
+        <Route path="/destacados" element={<DestacadosScreen />} />
+        <Route path="/perfil" element={<PerfilScreen />} />
       </Routes>
     </Router>
   );

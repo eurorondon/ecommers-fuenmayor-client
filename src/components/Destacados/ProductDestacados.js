@@ -75,7 +75,7 @@ export default function Product(props) {
         <h5 className="name" style={{ fontWeight: "bold", color: "#00789D" }}>
           {props.name}
         </h5>
-        <div>
+        {/* <div>
           {props.description ? (
             <p className="description">
               {props.description.length > MAX_DESCRIPTION_LENGTH
@@ -85,7 +85,7 @@ export default function Product(props) {
           ) : (
             <p className="description"> Sin Descripcion</p>
           )}
-        </div>
+        </div> */}
 
         <div
           className="price      "

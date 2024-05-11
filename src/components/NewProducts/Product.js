@@ -50,7 +50,7 @@ export default function Product(props) {
         <h5 className="name" style={{ fontWeight: "bold", color: "#00789D" }}>
           {props.name}
         </h5>
-        <div
+        {/* <div
           className=""
           // style={
           //   window.innerWidth > 767 ? { height: "50px" } : { height: "40px" }
@@ -65,7 +65,7 @@ export default function Product(props) {
           ) : (
             <p className="description"> Sin Descripcion</p>
           )}
-        </div>
+        </div> */}
 
         <p className="price" style={{ color: "#3b83bd", fontWeight: "bold" }}>
           {props.price} $

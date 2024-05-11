@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setCategories } from "../../../features/categories/categorySlice";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { Amplify } from "aws-amplify";
@@ -64,6 +64,8 @@ const categories = [
 ];
 
 const Categorias = () => {
+  const navigate = useNavigate();
+
   const [categories, setCategories] = React.useState([]);
   const { data: dataCategories, error } = useQuery(
     ["AllCategories"],
@@ -82,6 +84,7 @@ const Categorias = () => {
 
   const handleCategories = (category) => {
     window.scroll(0, 0);
+    navigate(`/categories/${category.categoryName}`);
   };
 
   if (window.innerWidth > 1150)

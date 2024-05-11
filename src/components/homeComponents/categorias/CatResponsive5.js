@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CatResponsive5({ categories }) {
+function CatResponsive5({ categories, handleCategories }) {
   return (
     <div
       className=" py-3"
@@ -21,10 +21,10 @@ function CatResponsive5({ categories }) {
             key={index}
             style={{ margin: "5px", textAlign: "center" }}
           >
-            <Link
+            <div
               className=" mx-auto"
-              to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -46,7 +46,7 @@ function CatResponsive5({ categories }) {
                 alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Link>
+            </div>
             <span className="" style={{ fontSize: "0.8rem" }}>
               {category.categoryName}
             </span>
@@ -67,8 +67,8 @@ function CatResponsive5({ categories }) {
           <div key={index} style={{ margin: "5px", textAlign: "center" }}>
             <Link
               className="mx-auto"
-              to={`/categories/${category.categoryName}`}
-              // onClick={() => handleCategories(category.name)}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",

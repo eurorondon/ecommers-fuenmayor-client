@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCategories } from "../../../utils/graphqlFunctions";
 import { useQuery } from "@tanstack/react-query";
 import Header from "../../Header";
 
 function GridCategories() {
+  const navigate = useNavigate();
+
   const [categories, setCategories] = React.useState([]);
   const { data: dataCategories, error } = useQuery(
     ["AllCategories"],
@@ -16,6 +18,12 @@ function GridCategories() {
       },
     }
   );
+
+  const handleCategories = (category) => {
+    window.scroll(0, 0);
+    navigate(`/categories/${category.categoryName}`);
+  };
+
   return (
     <div>
       <Header />
@@ -29,6 +37,7 @@ function GridCategories() {
       >
         {categories?.map((category) => (
           <div
+            onClick={() => handleCategories(category)}
             key={category.id}
             className=" shadow p-2 d-flex flex-column justify-content-start align-items-center "
             style={{

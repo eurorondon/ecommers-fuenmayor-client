@@ -21,10 +21,10 @@ function CatResponsive8({ categories, handleCategories }) {
             key={index}
             style={{ margin: "5px", textAlign: "center" }}
           >
-            <Link
+            <div
               className=" mx-auto"
-              to={`/categories/${category.categoryName}`}
-              onClick={() => handleCategories()}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -46,7 +46,7 @@ function CatResponsive8({ categories, handleCategories }) {
                 alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Link>
+            </div>
             <span className="" style={{ fontSize: "0.8rem" }}>
               {category.categoryName}
             </span>
@@ -65,10 +65,10 @@ function CatResponsive8({ categories, handleCategories }) {
       >
         {categories?.slice(4, 8).map((category, index) => (
           <div key={index} style={{ margin: "5px", textAlign: "center" }}>
-            <Link
+            <div
               className="mx-auto"
-              to={`/categories/${category.categoryName}`}
-              onClick={() => handleCategories()}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -90,7 +90,7 @@ function CatResponsive8({ categories, handleCategories }) {
                 alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Link>
+            </div>
             <span style={{ fontSize: "0.8rem" }}>{category.categoryName}</span>
             <div style={{ marginTop: "" }}>{category.name}</div>
           </div>

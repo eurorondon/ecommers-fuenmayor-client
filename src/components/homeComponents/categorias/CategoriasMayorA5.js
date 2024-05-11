@@ -16,7 +16,7 @@ function CategoriasMayorA5({ categories, handleCategories }) {
         <div key={index} style={{ margin: "10px", textAlign: "center" }}>
           <Link
             to={`/categories/${category.categoryName}`}
-            onClick={() => handleCategories()}
+            onClick={() => handleCategories(category)}
             style={{
               width: "120px",
               height: "120px",

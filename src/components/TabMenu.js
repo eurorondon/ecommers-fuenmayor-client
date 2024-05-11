@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
+import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
+
 import { useNavigate } from "react-router-dom";
 
-function TabMenu({ setShowModal }) {
+function TabMenu({ activeButton }) {
   const navigate = useNavigate();
   const [showObject, setShowObject] = useState(false);
   useEffect(() => {
@@ -26,22 +31,22 @@ function TabMenu({ setShowModal }) {
     };
   }, []);
 
-  const handleNavigate = (id) => {
+  const handleNavigate = (path) => {
+    console.log(path);
     window.scroll(0, 0);
-    navigate(`/categories`);
+    navigate(path);
   };
 
   return (
     <div>
-      {showObject && (
+      {
         <div
-          className="  pt-3 pb-4  "
+          className="pt-2    "
           style={{
-            backgroundColor: "#040915",
-            position: "fixed",
-            borderTopRightRadius: "5px",
-            borderTopLeftRadius: "5px",
-
+            // backgroundColor: "#040915",
+            // position: "fixed",
+            // borderTopRightRadius: "5px",
+            // borderTopLeftRadius: "5px",
             bottom: "0px",
             width: "100%",
           }}
@@ -50,23 +55,31 @@ function TabMenu({ setShowModal }) {
             className=""
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            {/* <div
-            className=" "
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <OtherHousesOutlinedIcon
-              fontSize="large"
-              style={{ color: "#007aff" }}
-            />
-            <span style={{ fontSize: "10px" }}>Home</span>
-          </div> */}
-            <div className="col-6   ">
+            <div
+              onClick={() => handleNavigate("/")}
+              className="col "
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <OtherHousesOutlinedIcon
+                // fontSize="large"
+                style={{ color: "#ffff", fontSize: "20px" }}
+              />
+              <span style={{ fontSize: "10px", color: "white" }}>Home</span>
+            </div>
+            <div
+              className="col rounded   "
+              style={
+                activeButton === 1
+                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  : {}
+              }
+            >
               <div
-                onClick={handleNavigate}
+                onClick={() => handleNavigate("/categories")}
                 className=" "
                 style={{
                   display: "flex",
@@ -77,17 +90,36 @@ function TabMenu({ setShowModal }) {
                 <CategoryOutlinedIcon
                   // fontSize="large"
                   // style={{ color: "#007aff", fontSize: "25px" }}
-                  style={{ color: "#ffff", fontSize: "25px" }}
+                  style={
+                    activeButton === 1
+                      ? { color: "#007aff", fontSize: "20px" }
+                      : { color: "#ffff", fontSize: "20px" }
+                  }
                 />
                 {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
-                <span className="" style={{ fontSize: "10px", color: "#ffff" }}>
+                <span
+                  className=""
+                  style={
+                    activeButton === 1
+                      ? { fontSize: "10px", color: "#007aff" }
+                      : { fontSize: "10px", color: "#ffff" }
+                  }
+                >
                   Categorias
                 </span>
               </div>
             </div>
             {/* <div>Cupon</div> */}
-            <div className="col-6      ">
+            <div
+              className="col      "
+              style={
+                activeButton === 2
+                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  : {}
+              }
+            >
               <div
+                onClick={() => handleNavigate("/ofertas")}
                 className=" "
                 style={{
                   display: "flex",
@@ -96,21 +128,114 @@ function TabMenu({ setShowModal }) {
                   justifyContent: "center",
                 }}
               >
-                <MessageOutlinedIcon
+                <LocalOfferOutlinedIcon
                   // fontSize="large"
 
                   // style={{ color: "#007aff", fontSize: "25px" }}
-                  style={{ color: "#ffff", fontSize: "25px" }}
+                  style={
+                    activeButton === 2
+                      ? { color: "#007aff", fontSize: "20px" }
+                      : { color: "#ffff", fontSize: "20px" }
+                  }
                 />
                 {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
-                <span className="" style={{ fontSize: "10px", color: "#ffff" }}>
-                  Mensaje
+                <span
+                  className=""
+                  style={
+                    activeButton === 2
+                      ? { fontSize: "10px", color: "#007aff" }
+                      : { fontSize: "10px", color: "#ffff" }
+                  }
+                >
+                  Ofertas
+                </span>
+              </div>
+            </div>
+            <div
+              className="col     "
+              style={
+                activeButton === 3
+                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  : {}
+              }
+            >
+              <div
+                onClick={() => handleNavigate("/destacados")}
+                className=" "
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <BookmarkAddOutlinedIcon
+                  // fontSize="large"
+
+                  // style={{ color: "#007aff", fontSize: "25px" }}
+                  style={
+                    activeButton === 3
+                      ? { color: "#007aff", fontSize: "20px" }
+                      : { color: "#ffff", fontSize: "20px" }
+                  }
+                />
+                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                <span
+                  className=""
+                  style={
+                    activeButton === 3
+                      ? { fontSize: "10px", color: "#007aff" }
+                      : { fontSize: "10px", color: "#ffff" }
+                  }
+                >
+                  +Vendidos
+                </span>
+              </div>
+            </div>
+            <div
+              className="col"
+              style={
+                activeButton === 4
+                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  : {}
+              }
+            >
+              <div
+                onClick={() => handleNavigate("/perfil")}
+                className=" "
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Person2OutlinedIcon
+                  // fontSize="large"
+
+                  // style={{ color: "#007aff", fontSize: "25px" }}
+                  style={
+                    activeButton === 4
+                      ? { color: "#007aff", fontSize: "20px" }
+                      : { color: "#ffff", fontSize: "20px" }
+                  }
+                />
+                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                <span
+                  className=""
+                  style={
+                    activeButton === 4
+                      ? { fontSize: "10px", color: "#007aff" }
+                      : { fontSize: "10px", color: "#ffff" }
+                  }
+                >
+                  Perfil
                 </span>
               </div>
             </div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 }

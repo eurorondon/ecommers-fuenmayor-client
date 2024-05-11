@@ -21,10 +21,10 @@ function CategoriasMobile({ categories, handleCategories }) {
             key={index}
             style={{ margin: "5px", textAlign: "center" }}
           >
-            <Link
+            <div
               className=" mx-auto"
-              to={`/categories/${category.categoryName}`}
-              onClick={() => handleCategories()}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -46,7 +46,7 @@ function CategoriasMobile({ categories, handleCategories }) {
                 alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Link>
+            </div>
             <span className="" style={{ fontSize: "0.8rem" }}>
               {category.categoryName}
             </span>
@@ -67,8 +67,8 @@ function CategoriasMobile({ categories, handleCategories }) {
           <div key={index} style={{ margin: "5px", textAlign: "center" }}>
             <Link
               className="mx-auto"
-              to={`/categories/${category.categoryName}`}
-              onClick={() => handleCategories()}
+              // to={`/categories/${category.categoryName}`}
+              onClick={() => handleCategories(categories)}
               style={{
                 width: "20vw",
                 height: "20vw",

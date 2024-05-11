@@ -62,6 +62,7 @@ export async function getProductsInOfert() {
   const res = await client.graphql({
     query: listProducts,
     variables: {
+      limit: 100,
       filter: { inOffer: { eq: true } },
     },
   });

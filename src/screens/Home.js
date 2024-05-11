@@ -32,8 +32,8 @@ const Home = () => {
       <Destacados />
       {isLoading ? null : <></>}
       <ShopSections />
-      <TabMenu setShowModal={setShowModal} />
-      {/* <Whatsapp /> */}
+      {/* <TabMenu setShowModal={setShowModal} /> */}
+      <Whatsapp />
     </div>
   );
 };
