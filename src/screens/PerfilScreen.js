@@ -8,13 +8,16 @@ function PerfilScreen() {
       <Header />
       <div className="container">
         <div
-          className="d-flex align-items-center"
+          className="d-flex align-items-center justify-content-center"
           style={{ minHeight: "60vh" }}
         >
-          <div className=" alert alert-info text-center mt-3">
-            Cliente no Registrado
+          <div
+            className=" alert alert-info text-center mt-3"
+            style={{ width: "100%" }}
+          >
+            <div className="mb-3">Cliente no Registrado</div>
             <Link
-              className="btn btn-success mx-5 px-5 py-3"
+              className="btn btn-success mx-5 px-5 py-2"
               to="/"
               style={{
                 fontSize: "12px",

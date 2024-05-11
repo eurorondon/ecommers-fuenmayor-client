@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getCategories } from "../../../utils/graphqlFunctions";
 import { useQuery } from "@tanstack/react-query";
@@ -9,15 +9,24 @@ function GridCategories() {
 
   const [categories, setCategories] = React.useState([]);
   const { data: dataCategories, error } = useQuery(
-    ["AllCategories"],
+    ["AllCategoriesGridScreen"],
     getCategories,
     {
       onSuccess: () => {
         console.log("dataCategories");
         setCategories(dataCategories);
       },
+      // refetchOnMount: false,
+      // refetchInterval: false,
+      // refetchOnWindowFocus: false,
+      // refetchIntervalInBackground: false,
     }
   );
+  useEffect(() => {
+    if (dataCategories) {
+      setCategories(dataCategories);
+    }
+  }, [dataCategories]);
 
   const handleCategories = (category) => {
     window.scroll(0, 0);

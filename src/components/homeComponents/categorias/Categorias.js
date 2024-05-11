@@ -67,16 +67,15 @@ const Categorias = () => {
   const navigate = useNavigate();
 
   const [categories, setCategories] = React.useState([]);
-  const { data: dataCategories, error } = useQuery(
-    ["AllCategories"],
-    getCategories,
-    {
-      onSuccess: () => {
-        console.log("dataCategories");
-        setCategories(dataCategories);
-      },
-    }
-  );
+  const {
+    data: dataCategories,
+    isError,
+    error,
+  } = useQuery(["AllCategories"], getCategories, {
+    onSuccess: () => {
+      setCategories(dataCategories);
+    },
+  });
 
   React.useEffect(() => {
     setCategories(dataCategories);
@@ -119,32 +118,36 @@ const Categorias = () => {
         handleCategories={handleCategories}
       />
     );
-  if (window.innerWidth < 769 && categories?.length > 1)
-    return (
-      <>
-        {categories.length === 5 ? (
-          <CatResponsive5
-            categories={categories}
-            handleCategories={handleCategories}
-          />
-        ) : categories.length === 6 ? (
-          <CatResponsive6
-            categories={categories}
-            handleCategories={handleCategories}
-          />
-        ) : categories.length === 8 ? (
-          <CatResponsive8
-            categories={categories}
-            handleCategories={handleCategories}
-          />
-        ) : (
-          <CategoriasMobile
-            categories={categories}
-            handleCategories={handleCategories}
-          />
-        )}
-      </>
-    );
+  if (window.innerWidth < 769 && categories?.length > 1) if (isError) return;
+  <div class="alert alert-danger" role="alert">
+    {error?.message}
+  </div>;
+
+  return (
+    <>
+      {categories.length === 5 ? (
+        <CatResponsive5
+          categories={categories}
+          handleCategories={handleCategories}
+        />
+      ) : categories.length === 6 ? (
+        <CatResponsive6
+          categories={categories}
+          handleCategories={handleCategories}
+        />
+      ) : categories.length === 8 ? (
+        <CatResponsive8
+          categories={categories}
+          handleCategories={handleCategories}
+        />
+      ) : (
+        <CategoriasMobile
+          categories={categories}
+          handleCategories={handleCategories}
+        />
+      )}
+    </>
+  );
 };
 
 export default Categorias;

@@ -25,7 +25,6 @@ const Home = () => {
         <Header />
       </div>
       <Portada />
-
       <Categorias />
       <Ofertas />
       <NewProducts />

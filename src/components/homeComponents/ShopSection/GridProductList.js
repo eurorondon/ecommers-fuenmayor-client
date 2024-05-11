@@ -25,51 +25,60 @@ const GridProductList = () => {
 
   const { category, search } = useParams();
 
-  const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
-    useInfiniteQuery(
-      [category ? `infinity-products-${category}` : "infinity-products"],
-      async ({ pageParam }) => {
-        try {
-          // const filter = {
-          //   ...(category ? { categories: { contains: category } } : {}),
-          //   // ...(search !== "" ? { name: { contains: search } } : {}),
-          // };
+  const {
+    data,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+    isError,
+    error,
+  } = useInfiniteQuery(
+    [category ? `infinity-products-${category}` : "infinity-products"],
+    async ({ pageParam }) => {
+      // throw new Error("Simulated API failure");
+      try {
+        // const filter = {
+        //   ...(category ? { categories: { contains: category } } : {}),
+        //   // ...(search !== "" ? { name: { contains: search } } : {}),
+        // };
 
-          let filter;
-          if (category) {
-            filter = { categories: { contains: category } };
-          }
-
-          if (search) {
-            filter = { name: { contains: search } };
-          }
-
-          const productsData = await client.graphql({
-            query: listProducts,
-            variables: {
-              limit: 6,
-              filter,
-              nextToken: pageParam,
-            },
-          });
-
-          return productsData.data.listProducts;
-        } catch (err) {
-          console.error("Error fetching todos", err.errors);
-          throw err;
+        let filter;
+        if (category) {
+          filter = { categories: { contains: category } };
         }
-      },
-      {
-        // refetchOnMount: false,
-        // refetchInterval: false,
-        // refetchOnWindowFocus: false,
-        // refetchIntervalInBackground: false,
-        // onSuccess: (data) => {},
-        getNextPageParam: (lastPage) => {
-          return lastPage.nextToken || null;
-        },
+
+        if (search) {
+          filter = { name: { contains: search } };
+        }
+
+        const productsData = await client.graphql({
+          query: listProducts,
+          variables: {
+            limit: 6,
+            filter,
+            nextToken: pageParam,
+          },
+        });
+
+        return productsData.data.listProducts;
+      } catch (err) {
+        console.error("Error fetching todos", err.errors);
+        throw err;
       }
-    );
+    },
+    {
+      // refetchOnMount: false,
+      // refetchInterval: false,
+      // refetchOnWindowFocus: false,
+      // refetchIntervalInBackground: false,
+      // onSuccess: (data) => {},
+      getNextPageParam: (lastPage) => {
+        return lastPage.nextToken || null;
+      },
+    }
+  );
 
   const products =
     data?.pages.reduce(
@@ -186,6 +195,11 @@ const GridProductList = () => {
       {isFetching && (
         <div style={{ minHeight: "10vh" }}>
           <Loading />
+        </div>
+      )}
+      {isError && (
+        <div class="alert alert-danger" role="alert">
+          {error.message}
         </div>
       )}
     </>

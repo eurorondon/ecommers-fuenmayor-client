@@ -31,9 +31,12 @@ function TabMenu({ activeButton }) {
     };
   }, []);
 
-  const handleNavigate = (path) => {
-    console.log(path);
-    window.scroll(0, 0);
+  const handleNavigate = async (path) => {
+    await new Promise((resolve) => {
+      window.scroll(0, 0);
+      // Resuelve la promesa después de un breve retraso para asegurarse de que el desplazamiento se complete
+      setTimeout(resolve, 100); // Puedes ajustar el tiempo según sea necesario
+    });
     navigate(path);
   };
 
