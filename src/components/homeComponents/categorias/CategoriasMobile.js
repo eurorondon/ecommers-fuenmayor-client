@@ -96,7 +96,7 @@ function CategoriasMobile({ categories, handleCategories }) {
           </div>
         ))}
       </div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
     </div>
   );
 }

@@ -72,7 +72,6 @@ const Categorias = () => {
     getCategories,
     {
       onSuccess: () => {
-        console.log("dataCategories");
         setCategories(dataCategories);
       },
     }

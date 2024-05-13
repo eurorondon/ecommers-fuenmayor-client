@@ -41,7 +41,7 @@ function DestacadosScreen() {
   //   ) ?? [];
 
   const products = data?.pages.flat();
-  console.log("productos destacados", data, isError);
+
   return (
     <div>
       <Header />

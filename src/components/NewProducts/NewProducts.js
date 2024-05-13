@@ -14,13 +14,10 @@ const NewProducts = () => {
     ["NewProducts"],
     ListProductsByDate,
     {
-      onSuccess: () => {
-        // console.log("dataCategories");
-      },
+      onSuccess: () => {},
     }
   );
 
-  console.log("data sort", data);
   const productList = data;
   const sliderRef = useRef(null);
   if (isLoading) return null;

@@ -22,7 +22,6 @@ const Destacados = () => {
     getProductsBestSellers,
     {
       onSuccess: () => {
-        console.log("this is the best seller ", data);
         // setCategories(dataCategories);
       },
     }

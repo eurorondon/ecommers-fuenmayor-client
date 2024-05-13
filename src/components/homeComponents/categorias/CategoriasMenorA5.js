@@ -10,10 +10,10 @@ function CategoriasMenorA5({ categories, handleCategories }) {
     <div>
       <div className="py-4" style={{ backgroundColor: "#040915" }}>
         <div className="mx-5">
-          <div class="row gap-3 ">
+          <div className="row gap-3 ">
             {categories?.map((category) => (
               <div
-                class="col   d-flex justify-content-center align-items-center gap-4"
+                className="col   d-flex justify-content-center align-items-center gap-4"
                 style={{
                   borderRadius: "2rem",
                   maxHeight: "350px",
@@ -21,13 +21,13 @@ function CategoriasMenorA5({ categories, handleCategories }) {
                 }}
               >
                 <div className="  ">
-                  <div class="">
-                    <h5 class="mb-2">{category.categoryName}</h5>
+                  <div className="">
+                    <h5 className="mb-2">{category.categoryName}</h5>
                     <Link
                       onClick={() => handleCategories()}
                       to={`/categories/${category.categoryName} `}
                     >
-                      <button class="btn btn-primary">Ver mas</button>
+                      <button className="btn btn-primary">Ver mas</button>
                     </Link>
                   </div>
                 </div>

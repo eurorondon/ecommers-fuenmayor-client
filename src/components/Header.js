@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Menu, MenuItem } from "@mui/material";
-import { LocationOn, PersonOutline } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { LocationOn } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import TabMenu from "./TabMenu";
-import { useParams } from "react-router-dom";
+
 // import { setSearch } from "../features/categories/categorySlice";
 
 const Header = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
-  const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState(null);
+
   const [searchInput, setSearchInput] = React.useState("");
-  const params = useParams();
 
   const { cartItems } = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(cartItems.length);
   const [activeButton, setActiveButton] = useState(0);
-  console.log("this is params", activeButton);
 
   useEffect(() => {
     if (currentUrl === "/categories") {
@@ -43,14 +37,6 @@ const Header = () => {
   }, [cartItems]);
 
   const navigate = useNavigate();
-
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

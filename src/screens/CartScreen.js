@@ -79,7 +79,7 @@ const CartScreen = () => {
   );
   // if (data) {
   //   data.qty = qty;
-  //   console.log(data);
+
   // }
 
   // useEffect(() => {

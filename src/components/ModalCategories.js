@@ -11,7 +11,6 @@ function ModalCategories({ setShowModal }) {
     getCategories,
     {
       onSuccess: () => {
-        console.log("dataCategories");
         setCategories(dataCategories);
       },
     }

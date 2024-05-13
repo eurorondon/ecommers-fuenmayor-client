@@ -20,7 +20,6 @@ const Ofertas = () => {
     getProductsInOfert,
     {
       onSuccess: () => {
-        console.log(data);
         // setCategories(dataCategories);
       },
     }
@@ -119,8 +118,6 @@ const Ofertas = () => {
       </div>
     </div>
   );
-
-  console.log(productList.length);
 
   return (
     <>
