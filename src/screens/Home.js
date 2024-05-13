@@ -12,13 +12,26 @@ import Categorias from "../components/homeComponents/categorias/Categorias";
 
 const Home = () => {
   const { isLoading } = useSelector((state) => state.products);
+  const [showModal, setShowModal] = useState(false);
+
+  async function handleSignOut() {
+    try {
+      await signOut();
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
+
+  // console.log(products.data?.listProductListFuenmayors?.items);
 
   return (
     <div className="bg-neutral-100">
       <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
         <Header />
       </div>
+
       <Portada />
+      <MyInputs />
       <Categorias />
       <Ofertas />
       <NewProducts />

@@ -1,8 +1,19 @@
 import React from "react";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "aws-amplify/auth";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function PerfilScreen() {
+  const navigate = useNavigate();
+  async function handleSignOut() {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
   return (
     <div>
       <Header />
@@ -28,8 +39,9 @@ function PerfilScreen() {
           </div>
         </div>
       </div>
+      <button onClick={handleSignOut}>Sign outsss</button>
     </div>
   );
 }
 
-export default PerfilScreen;
+export default withAuthenticator(PerfilScreen);

@@ -71,7 +71,7 @@ const GridProductList = () => {
     {
       // refetchOnMount: false,
       // refetchInterval: false,
-      // refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false,
       // refetchIntervalInBackground: false,
       // onSuccess: (data) => {},
       getNextPageParam: (lastPage) => {
@@ -79,6 +79,10 @@ const GridProductList = () => {
       },
     }
   );
+
+  if (isError) {
+    console.log(error);
+  }
 
   const products =
     data?.pages.reduce(
@@ -199,7 +203,8 @@ const GridProductList = () => {
       )}
       {isError && (
         <div className="alert alert-danger" role="alert">
-          {error.message}
+          {/* {error.message} */}
+          Error de Conexion
         </div>
       )}
     </>
