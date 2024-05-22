@@ -9,7 +9,7 @@ export default function MyInputs({ label, value, onChange, secureTextEntry }) {
         type={secureTextEntry ? "password" : "text"}
         placeholder={label}
         value={value}
-        // onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         style={styles.input}
       />
     </div>

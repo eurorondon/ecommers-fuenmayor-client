@@ -12,6 +12,8 @@ import GridCategories from "./components/homeComponents/categorias/GridCategorie
 import OfertaScreen from "./screens/OfertaScreen";
 import DestacadosScreen from "./screens/DestacadosScreen";
 import PerfilScreen from "./screens/PerfilScreen";
+import ProtectedRoute from "./components/ProtectedRoute";
+import SignIn from "./components/SignIn";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -23,7 +25,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/categories/:category" element={<CategoriesResult />} />
-        {/* <Route path="/product/:id?" element={<SingleProduct />} /> */}
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart/:id?" element={<CartScreen />} />
         <Route path="/search/:search" element={<SearchResult />} />
@@ -31,6 +32,15 @@ function App() {
         <Route path="/ofertas" element={<OfertaScreen />} />
         <Route path="/destacados" element={<DestacadosScreen />} />
         <Route path="/perfil" element={<PerfilScreen />} />
+        {/* <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <PerfilScreen />
+            </ProtectedRoute>
+          }
+        /> */}
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
   );
