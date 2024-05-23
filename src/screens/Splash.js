@@ -1,13 +1,15 @@
 import React from "react";
 import { getCurrentUser } from "aws-amplify/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/auth/AuthSlice";
 
-const Splash = ({ setIsLoading, setUser }) => {
+const Splash = ({ setIsLoading }) => {
+  const dispath = useDispatch();
   React.useEffect(() => {
     (async () => {
       try {
         const attributes = await getCurrentUser();
-        console.log("splash", attributes);
-        setUser(attributes);
+        dispath(setUser(attributes));
         setIsLoading(false);
         console.log(attributes);
       } catch (error) {

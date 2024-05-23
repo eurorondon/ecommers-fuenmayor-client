@@ -10,12 +10,16 @@ import Categorias from "../components/homeComponents/categorias/Categorias";
 import AuthScreen from "./Auth";
 import Splash from "./Splash";
 import { Hub } from "aws-amplify/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../features/auth/AuthSlice";
 
 const Home = () => {
   // const { isLoading } = useSelector((state) => state.products);
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const listener = (data) => {
     console.log("esto es data", data);
@@ -23,6 +27,7 @@ const Home = () => {
       case "signedIn":
         const attributes = data.payload.data;
         console.log("this are attributes", attributes);
+        dispatch(setUser(attributes));
         setUser(attributes);
         console.log("user signed in from hub");
         break;
@@ -42,7 +47,7 @@ const Home = () => {
   if (isLoading)
     return <Splash setUser={setUser} setIsLoading={setIsLoading} />;
 
-  return user ? (
+  return (
     <div className="bg-neutral-100">
       <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
         <Header />
@@ -58,8 +63,6 @@ const Home = () => {
       {/* <TabMenu setShowModal={setShowModal} /> */}
       <Whatsapp />
     </div>
-  ) : (
-    <AuthScreen />
   );
 };
 

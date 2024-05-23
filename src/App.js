@@ -14,6 +14,8 @@ import DestacadosScreen from "./screens/DestacadosScreen";
 import PerfilScreen from "./screens/PerfilScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import ConfirmSignUp from "./components/ConfirmSignUp";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -31,16 +33,18 @@ function App() {
         <Route path="/categories" element={<GridCategories />} />
         <Route path="/ofertas" element={<OfertaScreen />} />
         <Route path="/destacados" element={<DestacadosScreen />} />
-        <Route path="/perfil" element={<PerfilScreen />} />
-        {/* <Route
+        {/* <Route path="/perfil" element={<PerfilScreen />} /> */}
+        <Route
           path="/perfil"
           element={
             <ProtectedRoute>
               <PerfilScreen />
             </ProtectedRoute>
           }
-        /> */}
+        />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/confirmsignup" element={<ConfirmSignUp />} />
       </Routes>
     </Router>
   );

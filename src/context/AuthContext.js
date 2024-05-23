@@ -59,6 +59,7 @@ function AuthProvider({ children }) {
     try {
       setIsLoading(true);
       const user = await signIn({ username: email, password });
+      console.log(user);
       setIsLoading(false);
       setAuthState("signedIn");
     } catch (error) {

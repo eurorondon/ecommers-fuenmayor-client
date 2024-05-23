@@ -1,8 +1,12 @@
 import React from "react";
 import { Colors } from "../utils/colors";
 
-export default function MyText({ children, type = "body" }) {
-  return <span style={styles[type]}>{children}</span>;
+export default function MyText({ children, type = "body", onPress }) {
+  return (
+    <span style={styles[type]} onClick={onPress}>
+      {children}
+    </span>
+  );
 }
 
 const styles = {
