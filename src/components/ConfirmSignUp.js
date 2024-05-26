@@ -27,7 +27,6 @@ const ConfirmSignUp = () => {
     }
     try {
       dispatch(setLoading(true));
-
       const user = await confirmSignUp({
         username: email,
         confirmationCode: verificationCode,

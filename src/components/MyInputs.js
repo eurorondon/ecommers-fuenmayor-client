@@ -22,9 +22,9 @@ const styles = {
     height: 45,
     justifyContent: "center",
     margin: 10,
-    padding: 10,
+    padding: 5,
     backgroundColor: Colors.ligth,
-    borderRadius: 10,
+    borderRadius: 5,
     border: `1px solid ${Colors.primary}`,
   },
   input: {

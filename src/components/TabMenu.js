@@ -59,19 +59,40 @@ function TabMenu({ activeButton }) {
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <div
-              onClick={() => handleNavigate("/")}
-              className="col "
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
+              className="col      "
+              style={
+                activeButton === 0
+                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  : {}
+              }
             >
-              <OtherHousesOutlinedIcon
-                // fontSize="large"
-                style={{ color: "#ffff", fontSize: "20px" }}
-              />
-              <span style={{ fontSize: "10px", color: "white" }}>Home</span>
+              <div
+                onClick={() => handleNavigate("/")}
+                className="col "
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <OtherHousesOutlinedIcon
+                  // fontSize="large"
+                  style={
+                    activeButton === 0
+                      ? { color: "#007aff", fontSize: "20px" }
+                      : { color: "#ffff", fontSize: "20px" }
+                  }
+                />
+                <span
+                  style={
+                    activeButton === 0
+                      ? { fontSize: "10px", color: "#007aff" }
+                      : { fontSize: "10px", color: "#ffff" }
+                  }
+                >
+                  Home
+                </span>
+              </div>
             </div>
             <div
               className="col rounded   "

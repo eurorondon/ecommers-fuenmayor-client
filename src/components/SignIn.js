@@ -35,8 +35,6 @@ const SignIn = () => {
 
   const { email, password } = useSelector((state) => state.auth);
 
-  console.log(email);
-
   const user = useSelector((state) => state.auth.user);
 
   async function handleSignIn() {
@@ -62,6 +60,13 @@ const SignIn = () => {
     <>
       {/* <Header /> */}
       <div style={styles.container}>
+        <div className="  " style={{ width: "40%" }}>
+          <img
+            alt="logo"
+            src="/images/logo.jpg"
+            className="rounded-circle img-fluid"
+          />
+        </div>
         <MyText type="title">Sign In</MyText>
         <MyInputs
           label={"Email"}

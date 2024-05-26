@@ -22,7 +22,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const listener = (data) => {
-    console.log("esto es data", data);
     switch (data.payload.event) {
       case "signedIn":
         const attributes = data.payload.data;

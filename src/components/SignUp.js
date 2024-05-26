@@ -44,6 +44,13 @@ const SignUp = () => {
 
   return (
     <div style={styles.container}>
+      <div className="  " style={{ width: "25%" }}>
+        <img
+          alt="logo"
+          src="/images/logo.jpg"
+          className="rounded-circle img-fluid"
+        />
+      </div>
       <MyText type="title">Sign Up</MyText>
       <MyInputs
         label={"Email"}

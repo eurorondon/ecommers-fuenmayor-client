@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = React.useState(true);
-  console.log(user);
+
   // React.useEffect(() => {
   //   (async () => {
   //     try {

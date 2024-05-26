@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../features/auth/AuthSlice";
+import { setEmail, setPassword, setUser } from "../features/auth/AuthSlice";
 import Splash from "./Splash";
 
 function PerfilScreen() {
@@ -21,8 +21,6 @@ function PerfilScreen() {
     }
   }, [user]);
 
-  console.log(user.signInDetails.loginId);
-
   // React.useEffect(() => {
   //   // Cuando el componente se monta, actualiza el usuario en el store de Redux
   //   dispatch(setUser("EuritoLindo"));
@@ -31,8 +29,10 @@ function PerfilScreen() {
   async function handleSignOut() {
     try {
       await signOut();
-      navigate("/");
+      dispatch(setEmail(""));
+      dispatch(setPassword(""));
       dispatch(setUser(null));
+      navigate("/");
     } catch (error) {
       console.log("error signing out: ", error);
     }
