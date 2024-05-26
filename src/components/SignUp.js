@@ -13,6 +13,8 @@ import {
   setPassword,
 } from "../features/auth/AuthSlice";
 import { signUp } from "aws-amplify/auth";
+import Header from "./Header";
+import { Margin } from "@mui/icons-material";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -43,46 +45,42 @@ const SignUp = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <div className="  " style={{ width: "25%" }}>
-        <img
-          alt="logo"
-          src="/images/logo.jpg"
-          className="rounded-circle img-fluid"
+    <>
+      <Header />
+      <div style={styles.container}>
+        <div className="mt-2"></div>
+        <MyText type="title">Sign Up</MyText>
+        <MyInputs
+          label={"Email"}
+          onChange={(value) => dispatch(setEmail(value))}
         />
-      </div>
-      <MyText type="title">Sign Up</MyText>
-      <MyInputs
-        label={"Email"}
-        onChange={(value) => dispatch(setEmail(value))}
-      />
-      <MyInputs
-        label={"Nombre Completo"}
-        onChange={(value) => dispatch(setEmail(value))}
-      />
-      <MyInputs
-        label={"Telefono"}
-        onChange={(value) => dispatch(setEmail(value))}
-      />
-      <MyInputs
-        label={"Contraseña"}
-        onChange={(value) => dispatch(setPassword(value))}
-        // secureTextEntry
-      />
-      <MyInputs
-        label={"Confirmar Contraseña"}
-        onChange={(value) => dispatch(setPassword(value))}
-        // secureTextEntry
-      />
-      <MyButton title={"SIGN UP"} onPress={handleSignUp} />
-      <MyButton
-        title={"SIGN IN"}
-        variant={"secondary"}
-        onPress={() => {
-          navigate("/signin");
-        }}
-      />
-      {/* <MyText
+        <MyInputs
+          label={"Nombre Completo"}
+          onChange={(value) => dispatch(setEmail(value))}
+        />
+        <MyInputs
+          label={"Telefono"}
+          onChange={(value) => dispatch(setEmail(value))}
+        />
+        <MyInputs
+          label={"Contraseña"}
+          onChange={(value) => dispatch(setPassword(value))}
+          // secureTextEntry
+        />
+        <MyInputs
+          label={"Confirmar Contraseña"}
+          onChange={(value) => dispatch(setPassword(value))}
+          // secureTextEntry
+        />
+        <MyButton title={"SIGN UP"} onPress={handleSignUp} />
+        <MyButton
+          title={"SIGN IN"}
+          variant={"secondary"}
+          onPress={() => {
+            navigate("/signin");
+          }}
+        />
+        {/* <MyText
         type={"button"}
         onPress={() => {
           navigate("/");
@@ -90,7 +88,8 @@ const SignUp = () => {
       >
         HOME
       </MyText> */}
-    </div>
+      </div>
+    </>
   );
 };
 
@@ -101,8 +100,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
+    // justifyContent: "center",
+    minHeight: "80vh",
     backgroundColor: "#fff",
   },
 };

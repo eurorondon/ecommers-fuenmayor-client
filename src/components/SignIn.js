@@ -58,15 +58,9 @@ const SignIn = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div style={styles.container}>
-        <div className="  " style={{ width: "40%" }}>
-          <img
-            alt="logo"
-            src="/images/logo.jpg"
-            className="rounded-circle img-fluid"
-          />
-        </div>
+        <div className="mt-5"></div>
         <MyText type="title">Sign In</MyText>
         <MyInputs
           label={"Email"}
@@ -105,8 +99,9 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
+    // justifyContent: "center",
+
+    minHeight: "80vh",
     backgroundColor: "#fff",
   },
 };

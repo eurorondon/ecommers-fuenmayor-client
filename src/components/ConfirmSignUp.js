@@ -13,6 +13,7 @@ import {
 } from "../features/auth/AuthSlice";
 import { confirmSignUp } from "aws-amplify/auth";
 import { Password } from "@mui/icons-material";
+import Header from "./Header";
 
 const ConfirmSignUp = () => {
   const { email, verificationCode } = useSelector((state) => state.auth);
@@ -43,21 +44,25 @@ const ConfirmSignUp = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <MyText type="title">Confirm Sign Up</MyText>
-      <MyInputs
-        value={email}
-        label={"Email"}
-        onChange={(value) => dispatch(setEmail(value))}
-      />
-      <MyInputs
-        label={"Code"}
-        onChange={(value) => dispatch(setVerificationCode(value))}
-        secureTextEntry
-      />
-      <MyButton title={"Confirm"} onPress={handleConfirmSignUp} />
-      <MyText type={"button"}>Re-send code</MyText>
-    </div>
+    <>
+      <Header />
+      <div style={styles.container}>
+        <div className="mt-5"></div>
+        <MyText type="title">Confirm Sign Up</MyText>
+        <MyInputs
+          value={email}
+          label={"Email"}
+          onChange={(value) => dispatch(setEmail(value))}
+        />
+        <MyInputs
+          label={"Code"}
+          onChange={(value) => dispatch(setVerificationCode(value))}
+          secureTextEntry
+        />
+        <MyButton title={"Confirm"} onPress={handleConfirmSignUp} />
+        <MyText type={"button"}>Re-send code</MyText>
+      </div>
+    </>
   );
 };
 
@@ -68,8 +73,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
+    // justifyContent: "center",
+    minHeight: "80vh",
     backgroundColor: "#fff",
   },
 };

@@ -64,11 +64,15 @@ function CategoriasMobile({ categories, handleCategories }) {
         }}
       >
         {categories?.slice(4, 8).map((category, index) => (
-          <div key={index} style={{ margin: "5px", textAlign: "center" }}>
-            <Link
-              className="mx-auto"
+          <div
+            className=""
+            key={index}
+            style={{ margin: "5px", textAlign: "center" }}
+          >
+            <div
+              className=" mx-auto"
               // to={`/categories/${category.categoryName}`}
-              onClick={() => handleCategories(categories)}
+              onClick={() => handleCategories(category)}
               style={{
                 width: "20vw",
                 height: "20vw",
@@ -90,9 +94,13 @@ function CategoriasMobile({ categories, handleCategories }) {
                 alt={category.categoryName}
                 style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
-            </Link>
-            <span style={{ fontSize: "0.8rem" }}>{category.categoryName}</span>
-            <div style={{ marginTop: "" }}>{category.name}</div>
+            </div>
+            <span className="" style={{ fontSize: "0.8rem" }}>
+              {category.categoryName}
+            </span>
+            <div className="" style={{ marginTop: "" }}>
+              {category.name}
+            </div>
           </div>
         ))}
       </div>

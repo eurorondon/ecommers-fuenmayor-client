@@ -21,7 +21,7 @@ const Portada = () => {
                   <h1 style={{ fontWeight: "bold" }}>Todo lo que necesitas</h1>
                 </div>
                 <h5>Los mejores articulos del hogar en tu tienda favorita</h5>
-                <button className="btn btn-dark mt-3">Comprar Ahora</button>
+                {/* <button className="btn btn-dark mt-3">Comprar Ahora</button> */}
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@ const Portada = () => {
                 <h2 style={{ fontWeight: "bold" }}>Todo lo que necesitas</h2>
               </div>
               <h4>Los mejores articulos del hogar en tu tienda favorita</h4>
-              <button className="btn btn-dark mt-3">Comprar Ahora</button>
+              {/* <button className="btn btn-dark mt-3">Comprar Ahora</button> */}
             </div>
           </div>
           <div className=" m-auto ">

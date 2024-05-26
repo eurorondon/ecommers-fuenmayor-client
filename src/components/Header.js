@@ -18,6 +18,9 @@ const Header = () => {
   const [activeButton, setActiveButton] = useState(0);
 
   useEffect(() => {
+    if (currentUrl === "/") {
+      setActiveButton(0);
+    }
     if (currentUrl === "/categories") {
       setActiveButton(1);
     }
@@ -27,7 +30,12 @@ const Header = () => {
     if (currentUrl === "/destacados") {
       setActiveButton(3);
     }
-    if (currentUrl === "/perfil") {
+    if (
+      currentUrl === "/perfil" ||
+      currentUrl === "/signin" ||
+      currentUrl === "/signup" ||
+      currentUrl === "/confirmsignup"
+    ) {
       setActiveButton(4);
     }
   }, [currentUrl]);
