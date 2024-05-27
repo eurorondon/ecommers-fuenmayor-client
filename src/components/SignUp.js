@@ -20,7 +20,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { email, password } = useSelector((state) => state.auth);
+  const { email, password, isLoading } = useSelector((state) => state.auth);
 
   console.log(email);
 
@@ -47,9 +47,9 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      <div style={styles.container}>
+      <div className="container" style={styles.container}>
         <div className="mt-2"></div>
-        <MyText type="title">Sign Up</MyText>
+        <MyText type="title">Registrate</MyText>
         <MyInputs
           label={"Email"}
           onChange={(value) => dispatch(setEmail(value))}
@@ -72,9 +72,12 @@ const SignUp = () => {
           onChange={(value) => dispatch(setPassword(value))}
           // secureTextEntry
         />
-        <MyButton title={"SIGN UP"} onPress={handleSignUp} />
         <MyButton
-          title={"SIGN IN"}
+          title={isLoading ? "Cargando..." : "Registrate"}
+          onPress={handleSignUp}
+        />
+        <MyButton
+          title={"Login"}
           variant={"secondary"}
           onPress={() => {
             navigate("/signin");
@@ -99,7 +102,7 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+
     // justifyContent: "center",
     minHeight: "80vh",
     backgroundColor: "#fff",

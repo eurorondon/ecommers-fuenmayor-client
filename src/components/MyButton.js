@@ -1,21 +1,32 @@
 import React from "react";
 import { Colors } from "../utils/colors";
 
-export default function MyButton({ title, onPress, variant = "primary" }) {
+export default function MyButton({
+  title,
+  onPress,
+  variant = "primary",
+  style,
+  ...otherProps
+}) {
+  console.log(otherProps);
   return (
-    <button style={styles[variant]} onClick={onPress}>
+    <buttonW
+      style={{ ...styles[variant], ...style }}
+      onClick={onPress}
+      {...otherProps}
+    >
       <span style={styles.buttonText}>{title}</span>
-    </button>
+    </buttonW>
   );
 }
 
 const styles = {
   primary: {
-    width: "90%",
+    width: "100%",
     height: 45,
     backgroundColor: Colors.primary,
     padding: 10,
-    margin: 5,
+    marginBottom: 10,
     borderRadius: 10,
     border: "none",
     cursor: "pointer",
@@ -25,11 +36,11 @@ const styles = {
     color: Colors.ligth,
   },
   secondary: {
-    width: "90%",
-    height: 45,
+    width: "100%",
+    height: 50,
     backgroundColor: Colors.secondary,
     padding: 10,
-    margin: 5,
+    marginBottom: 10,
     borderRadius: 10,
     border: "none",
     cursor: "pointer",

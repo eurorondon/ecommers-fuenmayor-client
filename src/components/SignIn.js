@@ -24,18 +24,12 @@ import Header from "./Header";
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Usa el hook useNavigate
-  // const {
-  //   setEmail,
-  //   setPassword,
-  //   handleSignIn,
-  //   setAuthState,
-  //   authState,
-  //   email,
-  // } = React.useContext(AuthContext);
 
   const { email, password } = useSelector((state) => state.auth);
 
-  const user = useSelector((state) => state.auth.user);
+  const { isLoading } = useSelector((state) => state.auth);
+
+  console.log(isLoading);
 
   async function handleSignIn() {
     if (!email || !password) {
@@ -56,29 +50,52 @@ const SignIn = () => {
     }
   }
 
+  const handleForgotPassword = () => {
+    navigate("/forgotpassword");
+  };
+
   return (
     <>
       <Header />
-      <div style={styles.container}>
+      <div className="container" style={styles.container}>
         <div className="mt-5"></div>
-        <MyText type="title">Sign In</MyText>
+        <MyText type="title" style={{ marginBottom: "20px" }}>
+          Login
+        </MyText>
         <MyInputs
           label={"Email"}
           onChange={(value) => dispatch(setEmail(value))}
         />
+
         <MyInputs
           label={"Password"}
           onChange={(value) => dispatch(setPassword(value))}
           secureTextEntry
         />
-        <MyButton title={"SIGN IN"} onPress={handleSignIn} />
-        <MyButton
-          title={"SIGN UP"}
-          onPress={() => {
-            navigate("/signup");
-          }}
-          variant="secondary"
-        />
+        <div style={{ position: "relative" }}>
+          <MyText
+            onpress={handleForgotPassword}
+            type="button"
+            style={{ position: "absolute", right: "5px", top: "-10px" }}
+          >
+            Olvide la Contraseña
+          </MyText>
+        </div>
+
+        <div className="mt-4">
+          <MyButton
+            title={isLoading ? "Cargando..." : "Login"}
+            onPress={handleSignIn}
+          />
+          <MyButton
+            title={"Registrate"}
+            disabled={isLoading}
+            onPress={() => {
+              navigate("/signup");
+            }}
+            variant="secondary"
+          />
+        </div>
         {/* <MyText
           type={"button"}
           onPress={() => {
@@ -98,7 +115,7 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     // justifyContent: "center",
 
     minHeight: "80vh",

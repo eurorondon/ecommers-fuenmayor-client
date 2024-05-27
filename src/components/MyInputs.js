@@ -1,10 +1,17 @@
 import React from "react";
-import { useState } from "react";
 import { Colors } from "../utils/colors";
+import MyText from "./MyText";
 
 export default function MyInputs({ label, value, onChange, secureTextEntry }) {
   return (
     <div style={styles.container}>
+      <MyText
+        style={{ fontWeight: "bold", marginBottom: "5px" }}
+        type="caption"
+      >
+        {label}
+      </MyText>
+
       <input
         type={secureTextEntry ? "password" : "text"}
         placeholder={label}
@@ -18,19 +25,22 @@ export default function MyInputs({ label, value, onChange, secureTextEntry }) {
 
 const styles = {
   container: {
-    width: "90%",
-    height: 45,
-    justifyContent: "center",
-    margin: 10,
-    padding: 5,
-    backgroundColor: Colors.ligth,
-    borderRadius: 5,
-    border: `1px solid ${Colors.primary}`,
+    marginBottom: "15px",
   },
   input: {
     width: "100%",
-    height: "100%",
-    border: "none",
-    outline: "none",
+    height: 45,
+    // justifyContent: "center",
+
+    paddingLeft: 10,
+    backgroundColor: Colors.ligth,
+    borderRadius: 10,
+    border: `1px solid ${Colors.primary}`,
   },
+  // input: {
+  //   width: "100%",
+  //   height: "100%",
+  //   border: "none",
+  //   outline: "none",
+  // },
 };

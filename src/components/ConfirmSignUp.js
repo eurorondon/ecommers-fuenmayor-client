@@ -46,9 +46,9 @@ const ConfirmSignUp = () => {
   return (
     <>
       <Header />
-      <div style={styles.container}>
+      <div className="container" style={styles.container}>
         <div className="mt-5"></div>
-        <MyText type="title">Confirm Sign Up</MyText>
+        <MyText type="title">Confirmar Registro</MyText>
         <MyInputs
           value={email}
           label={"Email"}
@@ -59,8 +59,15 @@ const ConfirmSignUp = () => {
           onChange={(value) => dispatch(setVerificationCode(value))}
           secureTextEntry
         />
-        <MyButton title={"Confirm"} onPress={handleConfirmSignUp} />
-        <MyText type={"button"}>Re-send code</MyText>
+        <MyButton title={"Confirmar"} onPress={handleConfirmSignUp} />
+        <MyButton
+          title={"Reenviar Codigo"}
+          // disabled={isLoading}
+          onPress={() => {
+            // navigate("/signup");
+          }}
+          variant="secondary"
+        />
       </div>
     </>
   );
@@ -72,7 +79,7 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     // justifyContent: "center",
     minHeight: "80vh",
     backgroundColor: "#fff",
