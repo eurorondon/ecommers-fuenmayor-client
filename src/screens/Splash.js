@@ -1,5 +1,5 @@
 import React from "react";
-import { getCurrentUser } from "aws-amplify/auth";
+import { getCurrentUser, fetchUserAttributes } from "aws-amplify/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/AuthSlice";
 
@@ -9,6 +9,7 @@ const Splash = ({ setIsLoading }) => {
     (async () => {
       try {
         const attributes = await getCurrentUser();
+
         dispath(setUser(attributes));
         setIsLoading(false);
         console.log(attributes);

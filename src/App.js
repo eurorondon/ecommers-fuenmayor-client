@@ -18,6 +18,8 @@ import SignUp from "./components/SignUp";
 import ConfirmSignUp from "./components/ConfirmSignUp";
 import ForgotPassword from "./components/ForgotPassword";
 import ConfirmForgotPassword from "./components/ConfirmForgotPassword";
+import DefaultAuth from "./components/DefaultAuth";
+import AuthScreen from "./screens/AuthScreen";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -44,14 +46,16 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/signin" element={<SignIn />} />
+        {/* <Route path="/defaultauth" element={<DefaultAuth />} /> */}
+        <Route path="/auth" element={<AuthScreen />} />
+        {/* <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/confirmsignup" element={<ConfirmSignUp />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route
+        <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
+        {/* <Route
           path="/confirmforgotpassword"
           element={<ConfirmForgotPassword />}
-        />
+        /> */}
       </Routes>
     </Router>
   );

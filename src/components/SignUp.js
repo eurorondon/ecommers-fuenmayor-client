@@ -8,9 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthState,
+  setConfirmPassword,
   setEmail,
+  setFullName,
   setLoading,
   setPassword,
+  setPhoneNumber,
 } from "../features/auth/AuthSlice";
 import { signUp } from "aws-amplify/auth";
 import Header from "./Header";
@@ -20,68 +23,96 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { email, password, isLoading } = useSelector((state) => state.auth);
+  const {
+    email,
+    password,
+    isLoading,
+    authState,
+    confirmPassword,
+    fullName,
+    phoneNumber,
+  } = useSelector((state) => state.auth);
 
-  console.log(email);
+  console.log(email, password, isLoading);
 
   async function handleSignUp() {
     if (!email || !password) {
-      alert("Please Enter an Email and Password");
+      alert("Por favor inserte correo y contraseña");
+      return;
+    }
+
+    if (!fullName) {
+      alert("Por favor inserte su Nombre Completo");
+      return;
+    }
+    if (!phoneNumber) {
+      alert("Por favor inserte numero de Telefono");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert(" Las contraseñas no coinciden");
       return;
     }
     try {
       dispatch(setLoading(true));
-      const user = await signUp({ username: email, password });
+      const user = await signUp({
+        username: email,
+        password,
+        options: { userAttributes: { name: fullName } },
+      });
       console.log(user, password);
-      alert("user sign Up");
       dispatch(setLoading(false));
-      setAuthState("confirmSignUp");
-      navigate("/confirmsignup");
+
+      dispatch(setAuthState("confirmSignUp"));
     } catch (error) {
-      alert(error.message);
       setLoading(false);
+      alert(error.message);
       console.log(error);
+      dispatch(setLoading(false));
     }
   }
 
   return (
     <>
-      <Header />
       <div className="container" style={styles.container}>
         <div className="mt-2"></div>
         <MyText type="title">Registrate</MyText>
         <MyInputs
           label={"Email"}
           onChange={(value) => dispatch(setEmail(value))}
+          value={email}
         />
         <MyInputs
           label={"Nombre Completo"}
-          onChange={(value) => dispatch(setEmail(value))}
+          onChange={(value) => dispatch(setFullName(value))}
         />
         <MyInputs
           label={"Telefono"}
-          onChange={(value) => dispatch(setEmail(value))}
+          onChange={(value) => dispatch(setPhoneNumber(value))}
         />
         <MyInputs
           label={"Contraseña"}
           onChange={(value) => dispatch(setPassword(value))}
-          // secureTextEntry
+          secureTextEntry
         />
         <MyInputs
           label={"Confirmar Contraseña"}
-          onChange={(value) => dispatch(setPassword(value))}
-          // secureTextEntry
+          onChange={(value) => dispatch(setConfirmPassword(value))}
+          secureTextEntry
         />
         <MyButton
           title={isLoading ? "Cargando..." : "Registrate"}
+          disabled={isLoading}
           onPress={handleSignUp}
         />
         <MyButton
-          title={"Login"}
+          title={"Atras"}
           variant={"secondary"}
           onPress={() => {
-            navigate("/signin");
+            dispatch(setAuthState("defaultAuth"));
           }}
+          disabled={isLoading}
         />
         {/* <MyText
         type={"button"}

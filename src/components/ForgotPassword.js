@@ -17,6 +17,7 @@ import {
   signIn,
   signUp,
   getCurrentUser,
+  resetPassword,
 } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
@@ -31,32 +32,24 @@ const ForgotPassword = () => {
 
   console.log(isLoading);
 
-  async function handleSignIn() {
-    if (!email || !password) {
-      alert("Please Enter an Email and Password");
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Por favor inserte un correo");
       return;
     }
     try {
       dispatch(setLoading(true));
-      const user = await signIn({ username: email, password });
-      console.log(user);
+      await resetPassword({ username: email });
+      dispatch(setAuthState("confirmForgotPassword"));
       dispatch(setLoading(false));
-      dispatch(setAuthState("signedIn"));
-      navigate("/");
     } catch (error) {
-      alert(error.message);
-      setLoading(false);
-      console.log(error);
+      alert(error);
+      dispatch(setLoading(false));
     }
-  }
-
-  const handleForgotPassword = () => {
-    navigate("/confirmforgotPassword");
   };
 
   return (
     <>
-      <Header />
       <div className="container" style={styles.container}>
         <div className="mt-5"></div>
         <MyText type="title" style={{ marginBottom: "20px" }}>
@@ -64,19 +57,21 @@ const ForgotPassword = () => {
         </MyText>
         <MyInputs
           label={"Email"}
+          value={email}
           onChange={(value) => dispatch(setEmail(value))}
         />
 
         <div className="mt-4">
           <MyButton
-            title={isLoading ? "Cargando..." : "Recibir Codigo"}
+            title={isLoading ? "Enviando Codigo..." : "Recibir Codigo"}
             onPress={handleForgotPassword}
+            disabled={isLoading}
           />
           <MyButton
-            title={"Volver a Login"}
+            title={"Atras"}
             disabled={isLoading}
             onPress={() => {
-              navigate("/signup");
+              dispatch(setAuthState("signIn"));
             }}
             variant="secondary"
           />

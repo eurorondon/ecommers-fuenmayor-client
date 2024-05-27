@@ -17,6 +17,8 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(cartItems.length);
   const [activeButton, setActiveButton] = useState(0);
 
+  console.log(currentUrl);
+
   useEffect(() => {
     if (currentUrl === "/") {
       setActiveButton(0);
@@ -30,12 +32,7 @@ const Header = () => {
     if (currentUrl === "/destacados") {
       setActiveButton(3);
     }
-    if (
-      currentUrl === "/perfil" ||
-      currentUrl === "/signin" ||
-      currentUrl === "/signup" ||
-      currentUrl === "/confirmsignup"
-    ) {
+    if (currentUrl === "/perfil" || currentUrl === "/auth") {
       setActiveButton(4);
     }
   }, [currentUrl]);

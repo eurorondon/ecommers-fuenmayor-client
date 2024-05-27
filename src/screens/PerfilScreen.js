@@ -4,7 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "aws-amplify/auth";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setPassword, setUser } from "../features/auth/AuthSlice";
+import {
+  setAuthState,
+  setEmail,
+  setPassword,
+  setUser,
+} from "../features/auth/AuthSlice";
 import Splash from "./Splash";
 
 function PerfilScreen() {
@@ -21,6 +26,8 @@ function PerfilScreen() {
     }
   }, [user]);
 
+  console.log("this is usuario", user);
+
   // React.useEffect(() => {
   //   // Cuando el componente se monta, actualiza el usuario en el store de Redux
   //   dispatch(setUser("EuritoLindo"));
@@ -32,7 +39,7 @@ function PerfilScreen() {
       dispatch(setEmail(""));
       dispatch(setPassword(""));
       dispatch(setUser(null));
-      navigate("/");
+      dispatch(setAuthState("defaultAuth"));
     } catch (error) {
       console.log("error signing out: ", error);
     }

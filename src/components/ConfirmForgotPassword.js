@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthState,
+  setConfirmPassword,
   setEmail,
   setLoading,
   setPassword,
+  setVerificationCode,
 } from "../features/auth/AuthSlice";
-import { signUp } from "aws-amplify/auth";
+import { confirmResetPassword, signUp } from "aws-amplify/auth";
 import Header from "./Header";
 import { Margin } from "@mui/icons-material";
 
@@ -20,61 +22,80 @@ const ConfirmForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { email, password, isLoading } = useSelector((state) => state.auth);
+  const {
+    email,
+    password,
+    confirmPassword,
+    isLoading,
+    verificationCode,
+    authState,
+  } = useSelector((state) => state.auth);
 
-  console.log(email);
+  console.log("authstate", authState);
+  console.log("username", email);
 
-  async function handleSignUp() {
-    if (!email || !password) {
-      alert("Please Enter an Email and Password");
+  async function handleConfirmForgotPassword() {
+    if (!verificationCode || verificationCode.length !== 6) {
+      alert("Por favor inserte un codigo de verificacion valido");
+      return;
+    }
+    if (!password) {
+      alert("Por favor inserta contraseña");
+      return;
+    }
+    if (!confirmPassword) {
+      alert("Por favor confirma contraseña");
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert("Las contrasenas no coinciden");
       return;
     }
     try {
       dispatch(setLoading(true));
-      const user = await signUp({ username: email, password });
-      console.log(user, password);
-      alert("user sign Up");
+      await confirmResetPassword({
+        username: email,
+        confirmationCode: verificationCode,
+        newPassword: password,
+      });
       dispatch(setLoading(false));
-      setAuthState("confirmSignUp");
-      navigate("/confirmsignup");
+      alert("Reset de contrasena exitoso");
+      dispatch(setAuthState("signIn"));
     } catch (error) {
       alert(error.message);
-      setLoading(false);
+      dispatch(setLoading(false));
       console.log(error);
     }
   }
 
   return (
     <>
-      <Header />
       <div className="container" style={styles.container}>
         <div className="mt-2"></div>
         <MyText type="title">Reset Contraseña</MyText>
         <MyInputs
           label={"Codigo de Verificacion"}
-          onChange={(value) => dispatch(setEmail(value))}
+          onChange={(value) => dispatch(setVerificationCode(value))}
         />
 
         <MyInputs
           label={"Nueva Contraseña"}
           onChange={(value) => dispatch(setPassword(value))}
-          // secureTextEntry
+          secureTextEntry
         />
         <MyInputs
           label={"Confirmar Nueva Contraseña"}
-          onChange={(value) => dispatch(setPassword(value))}
-          // secureTextEntry
+          onChange={(value) => dispatch(setConfirmPassword(value))}
+          secureTextEntry
         />
         <MyButton
           title={isLoading ? "Cargando..." : "Reset Contraseña"}
-          onPress={handleSignUp}
+          onPress={handleConfirmForgotPassword}
         />
         <MyButton
-          title={"Volver a Login"}
+          title={"Volver a Iniciar Sesion"}
           variant={"secondary"}
-          onPress={() => {
-            navigate("/signin");
-          }}
+          onPress={() => dispatch(setAuthState("signIn"))}
         />
         {/* <MyText
         type={"button"}

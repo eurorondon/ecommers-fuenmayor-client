@@ -25,9 +25,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Usa el hook useNavigate
 
-  const { email, password } = useSelector((state) => state.auth);
-
-  const { isLoading } = useSelector((state) => state.auth);
+  const { email, password, isLoading } = useSelector((state) => state.auth);
 
   console.log(isLoading);
 
@@ -56,14 +54,14 @@ const SignIn = () => {
 
   return (
     <>
-      <Header />
       <div className="container" style={styles.container}>
         <div className="mt-5"></div>
         <MyText type="title" style={{ marginBottom: "20px" }}>
-          Login
+          Iniciar Sesion
         </MyText>
         <MyInputs
           label={"Email"}
+          value={email}
           onChange={(value) => dispatch(setEmail(value))}
         />
 
@@ -74,7 +72,7 @@ const SignIn = () => {
         />
         <div style={{ position: "relative" }}>
           <MyText
-            onpress={handleForgotPassword}
+            onpress={() => dispatch(setAuthState("forgotPassword"))}
             type="button"
             style={{ position: "absolute", right: "5px", top: "-10px" }}
           >
@@ -84,15 +82,14 @@ const SignIn = () => {
 
         <div className="mt-4">
           <MyButton
-            title={isLoading ? "Cargando..." : "Login"}
+            title={isLoading ? "Cargando..." : "Iniciar Sesion"}
+            disabled={isLoading}
             onPress={handleSignIn}
           />
           <MyButton
             title={"Registrate"}
             disabled={isLoading}
-            onPress={() => {
-              navigate("/signup");
-            }}
+            onPress={() => dispatch(setAuthState("signUp"))}
             variant="secondary"
           />
         </div>

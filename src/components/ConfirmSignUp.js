@@ -2,8 +2,6 @@ import React from "react";
 import MyButton from "./MyButton";
 import MyInputs from "./MyInputs";
 import MyText from "./MyText";
-import { Colors } from "../utils/colors";
-import { AuthContext } from "../context/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthState,
@@ -11,13 +9,17 @@ import {
   setLoading,
   setVerificationCode,
 } from "../features/auth/AuthSlice";
-import { confirmSignUp } from "aws-amplify/auth";
+import { confirmSignUp, signIn, resendSignUpCode } from "aws-amplify/auth";
 import { Password } from "@mui/icons-material";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmSignUp = () => {
-  const { email, verificationCode } = useSelector((state) => state.auth);
+  const { email, verificationCode, password } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   console.log(verificationCode);
 
@@ -34,18 +36,27 @@ const ConfirmSignUp = () => {
       });
       console.log(user);
       alert("Confirmed, you can now sign in");
+      await signIn({ username: email, password });
       dispatch(setLoading(false));
-      dispatch(setAuthState("signIn"));
+      dispatch(setAuthState("signed"));
+      navigate("/");
     } catch (error) {
       alert(error.message);
       dispatch(setLoading(false));
       console.log(error);
+      return;
     }
+  }
+
+  async function handleResendVErificationCode() {
+    try {
+      await resendSignUpCode({ username: email });
+      alert("se ha reenviado el codigo");
+    } catch (error) {}
   }
 
   return (
     <>
-      <Header />
       <div className="container" style={styles.container}>
         <div className="mt-5"></div>
         <MyText type="title">Confirmar Registro</MyText>
@@ -60,11 +71,18 @@ const ConfirmSignUp = () => {
           secureTextEntry
         />
         <MyButton title={"Confirmar"} onPress={handleConfirmSignUp} />
+
         <MyButton
           title={"Reenviar Codigo"}
           // disabled={isLoading}
+          onPress={handleResendVErificationCode}
+          variant="secondary"
+        />
+        <MyButton
+          title={"Atras"}
+          // disabled={isLoading}
           onPress={() => {
-            // navigate("/signup");
+            dispatch(setAuthState("signUp"));
           }}
           variant="secondary"
         />
