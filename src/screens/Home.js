@@ -12,6 +12,7 @@ import Splash from "./Splash";
 import { Hub } from "aws-amplify/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/AuthSlice";
+import SliderCategory from "../components/homeComponents/categorias/SliderCategory";
 
 const Home = () => {
   // const { isLoading } = useSelector((state) => state.products);
@@ -53,7 +54,8 @@ const Home = () => {
       </div>
 
       <Portada />
-      <Categorias />
+      {/* <Categorias /> */}
+      <SliderCategory />
       <Ofertas />
       <NewProducts />
       <Destacados />
