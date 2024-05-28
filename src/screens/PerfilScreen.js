@@ -11,6 +11,7 @@ import {
   setUser,
 } from "../features/auth/AuthSlice";
 import Splash from "./Splash";
+import { resetUser } from "../features/auth/UserSlice";
 
 function PerfilScreen() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function PerfilScreen() {
   const user = useSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = React.useState(true);
   const [usuario, setUsuario] = React.useState(null);
+  const { fullName, email, phoneNumber } = useSelector((state) => state.user);
 
   React.useEffect(() => {
     if (user) {
@@ -40,6 +42,7 @@ function PerfilScreen() {
       dispatch(setPassword(""));
       dispatch(setUser(null));
       dispatch(setAuthState("defaultAuth"));
+      dispatch(resetUser());
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -54,11 +57,18 @@ function PerfilScreen() {
           className="d-flex align-items-center justify-content-center"
           style={{ minHeight: "60vh" }}
         >
-          <div
-            className=" alert alert-info text-center mt-3"
-            style={{ width: "100%" }}
-          >
-            <div className="mb-3">Hola {usuario}</div>
+          <div className=" alert alert-info  mt-3" style={{ width: "100%" }}>
+            <div className="mb-3">
+              <div>
+                <span>Nombre:{fullName}</span>
+              </div>
+              <div>
+                <span>email:{email}</span>
+              </div>
+              <div>
+                <span>Telefono:{phoneNumber}</span>
+              </div>
+            </div>
             <Link
               className="btn btn-success mx-5 px-5 py-2"
               to="/"
@@ -77,4 +87,4 @@ function PerfilScreen() {
   );
 }
 
-export default withAuthenticator(PerfilScreen);
+export default PerfilScreen;

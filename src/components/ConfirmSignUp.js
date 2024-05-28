@@ -9,15 +9,22 @@ import {
   setLoading,
   setVerificationCode,
 } from "../features/auth/AuthSlice";
-import { confirmSignUp, signIn, resendSignUpCode } from "aws-amplify/auth";
+import {
+  confirmSignUp,
+  signIn,
+  resendSignUpCode,
+  getCurrentUser,
+} from "aws-amplify/auth";
 import { Password } from "@mui/icons-material";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import { userFromDb } from "../utils/graphqlFunctions";
+import { setUser } from "../features/auth/UserSlice";
 
 const ConfirmSignUp = () => {
-  const { email, verificationCode, password } = useSelector(
-    (state) => state.auth
-  );
+  const { email, verificationCode, password, fullName, phoneNumber } =
+    useSelector((state) => state.auth);
+  const userstate = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,15 +37,25 @@ const ConfirmSignUp = () => {
     }
     try {
       dispatch(setLoading(true));
-      const user = await confirmSignUp({
+      await confirmSignUp({
         username: email,
         confirmationCode: verificationCode,
       });
-      console.log(user);
+
       alert("Confirmed, you can now sign in");
       await signIn({ username: email, password });
       dispatch(setLoading(false));
       dispatch(setAuthState("signed"));
+      const attributes = await getCurrentUser();
+      const user = {
+        id: attributes.userId,
+        fullName,
+        email: attributes.signInDetails.loginId,
+        phoneNumber,
+      };
+      console.log(user);
+      await userFromDb(user);
+      dispatch(setUser(user));
       navigate("/");
     } catch (error) {
       alert(error.message);

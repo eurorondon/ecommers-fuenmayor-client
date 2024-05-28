@@ -11,6 +11,7 @@ const Splash = ({ setIsLoading }) => {
         const attributes = await getCurrentUser();
 
         dispath(setUser(attributes));
+
         setIsLoading(false);
         console.log(attributes);
       } catch (error) {

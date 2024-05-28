@@ -5,18 +5,60 @@ import amplifyconfig from "../aws-exports";
 import {
   ProductsByDate,
   getProduct,
+  getUser,
   listCategories,
   listProducts,
 } from "../graphql/queries";
 import {
   createCategories,
   createProduct,
+  createUser,
   deleteCategories,
   deleteProduct,
 } from "../graphql/mutations";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
+
+export async function userFromDb({
+  id,
+  fullName,
+  profilePicture,
+  email,
+  phoneNumber,
+}) {
+  try {
+    const res = await client.graphql({
+      query: createUser,
+      variables: {
+        input: {
+          id,
+          fullName,
+          profilePicture,
+          email,
+          phoneNumber,
+        },
+      },
+    });
+
+    // Verifica y devuelve el resultado o un mensaje de éxito
+    return res.data;
+  } catch (error) {
+    // Manejo de errores: registra el error y retorna un mensaje significativo
+    console.error("Error creating user:", error);
+    throw new Error("Failed to create user in the database");
+  }
+}
+
+export async function singleUser(id) {
+  const res = await client.graphql({
+    query: getUser,
+    variables: {
+      id,
+    },
+  });
+  return res.data.getUser;
+}
 
 export async function newProduct({
   name,

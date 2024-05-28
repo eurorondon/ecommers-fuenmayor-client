@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import "./responsive.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,11 +20,32 @@ import ForgotPassword from "./components/ForgotPassword";
 import ConfirmForgotPassword from "./components/ConfirmForgotPassword";
 import DefaultAuth from "./components/DefaultAuth";
 import AuthScreen from "./screens/AuthScreen";
+import { useEffect } from "react";
+import { singleUser } from "./utils/graphqlFunctions";
+import { setUser } from "./features/auth/UserSlice";
 
 function App() {
   const productsState = useSelector((state) => state.products);
   if (productsState.productList.length > 0) {
   }
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.auth);
+  // console.log(user.user.userId);
+  useEffect(() => {
+    if (user) {
+      (async () => {
+        try {
+          const userData = await singleUser(user.user.userId);
+          dispatch(setUser(userData));
+          console.log(userData);
+        } catch (error) {
+          console.error("Error fetching single user:", error);
+        }
+      })();
+    }
+  }, [user, dispatch]);
 
   return (
     <Router>
