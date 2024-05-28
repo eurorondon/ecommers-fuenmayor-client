@@ -8,7 +8,7 @@ function DefaultAuth() {
   const { isLoading, authState } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.auth.user);
-  console.log(authState);
+
   return (
     <div className="container" style={styles.container}>
       <MyText title="Hola Bienvenido" type="title">

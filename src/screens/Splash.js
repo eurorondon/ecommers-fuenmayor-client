@@ -1,21 +1,25 @@
 import React from "react";
-import { getCurrentUser, fetchUserAttributes } from "aws-amplify/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "../features/auth/AuthSlice";
+import { getCurrentUser } from "aws-amplify/auth";
+import { useDispatch, useSelector } from "react-redux";
 
-const Splash = ({ setIsLoading }) => {
+import { singleUser } from "../utils/graphqlFunctions";
+import { setUser } from "../features/auth/UserSlice";
+import { setLoading } from "../features/auth/AuthSlice";
+
+const Splash = () => {
   const dispath = useDispatch();
   React.useEffect(() => {
     (async () => {
       try {
         const attributes = await getCurrentUser();
-
-        dispath(setUser(attributes));
-        setIsLoading(false);
-        console.log(attributes);
+        const user = await singleUser(attributes.userId);
+        console.log("user desde spalsh", user);
+        dispath(setUser(user));
+        dispath(setLoading(false));
+        // console.log(attributes);
       } catch (error) {
         console.log(error.message);
-        setIsLoading(false);
+        dispath(setLoading(false));
       }
     })();
   }, []);

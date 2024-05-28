@@ -2,7 +2,13 @@ import React from "react";
 import { Colors } from "../utils/colors";
 import MyText from "./MyText";
 
-export default function MyInputs({ label, value, onChange, secureTextEntry }) {
+export default function MyInputs({
+  label,
+  value,
+  onChange,
+  secureTextEntry,
+  ...otherProps
+}) {
   return (
     <div style={styles.container}>
       <MyText
@@ -18,6 +24,7 @@ export default function MyInputs({ label, value, onChange, secureTextEntry }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={styles.input}
+        {...otherProps}
       />
     </div>
   );

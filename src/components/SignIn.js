@@ -20,14 +20,14 @@ import {
 } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import { singleUser } from "../utils/graphqlFunctions";
+import { setUser } from "../features/auth/UserSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Usa el hook useNavigate
 
   const { email, password, isLoading } = useSelector((state) => state.auth);
-
-  console.log(isLoading);
 
   async function handleSignIn() {
     if (!email || !password) {
@@ -37,20 +37,21 @@ const SignIn = () => {
     try {
       dispatch(setLoading(true));
       const user = await signIn({ username: email, password });
-      console.log(user);
+
+      if (user) {
+        const attributes = await getCurrentUser();
+        const user = await singleUser(attributes.userId);
+        dispatch(setUser(user));
+      }
       dispatch(setLoading(false));
-      dispatch(setAuthState("signedIn"));
+
       navigate("/");
     } catch (error) {
       alert(error.message);
-      setLoading(false);
+      dispatch(setLoading(false));
       console.log(error);
     }
   }
-
-  const handleForgotPassword = () => {
-    navigate("/forgotpassword");
-  };
 
   return (
     <>
@@ -59,40 +60,43 @@ const SignIn = () => {
         <MyText type="title" style={{ marginBottom: "20px" }}>
           Iniciar Sesion
         </MyText>
-        <MyInputs
-          label={"Email"}
-          value={email}
-          onChange={(value) => dispatch(setEmail(value))}
-        />
-
-        <MyInputs
-          label={"Password"}
-          onChange={(value) => dispatch(setPassword(value))}
-          secureTextEntry
-        />
-        <div style={{ position: "relative" }}>
-          <MyText
-            onpress={() => dispatch(setAuthState("forgotPassword"))}
-            type="button"
-            style={{ position: "absolute", right: "5px", top: "-10px" }}
-          >
-            Olvide la Contraseña
-          </MyText>
-        </div>
-
-        <div className="mt-4">
-          <MyButton
-            title={isLoading ? "Cargando..." : "Iniciar Sesion"}
-            disabled={isLoading}
-            onPress={handleSignIn}
+        <>
+          <MyInputs
+            label={"Email"}
+            value={email}
+            onChange={(value) => dispatch(setEmail(value))}
           />
-          <MyButton
-            title={"Registrate"}
-            disabled={isLoading}
-            onPress={() => dispatch(setAuthState("signUp"))}
-            variant="secondary"
+
+          <MyInputs
+            label={"Password"}
+            onChange={(value) => dispatch(setPassword(value))}
+            secureTextEntry
           />
-        </div>
+          <div style={{ position: "relative" }}>
+            <MyText
+              onpress={() => dispatch(setAuthState("forgotPassword"))}
+              type="button"
+              style={{ position: "absolute", right: "5px", top: "-10px" }}
+            >
+              Olvide la Contraseña
+            </MyText>
+          </div>
+
+          <div className="mt-4">
+            <MyButton
+              title={isLoading ? "Cargando..." : "Iniciar Sesion"}
+              disabled={isLoading}
+              onPress={handleSignIn}
+            />
+            <MyButton
+              title={"Registrate"}
+              disabled={isLoading}
+              onPress={() => dispatch(setAuthState("signUp"))}
+              variant="secondary"
+            />
+          </div>
+        </>
+
         {/* <MyText
           type={"button"}
           onPress={() => {

@@ -14,7 +14,7 @@ export default function Wrapper() {
 
 function Auth() {
   const { handleSingIn, authState } = React.useContext(AuthContext);
-  console.log("test", handleSingIn);
+
   return (
     <div>
       {authState === "signIn" && <SignIn />}

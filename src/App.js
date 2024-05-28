@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import "./responsive.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,11 +20,46 @@ import ForgotPassword from "./components/ForgotPassword";
 import ConfirmForgotPassword from "./components/ConfirmForgotPassword";
 import DefaultAuth from "./components/DefaultAuth";
 import AuthScreen from "./screens/AuthScreen";
+import Splash from "./screens/Splash";
+import { setLoading } from "./features/auth/AuthSlice";
+import React from "react";
+import { resetUser, setUser } from "./features/auth/UserSlice";
+import { singleUser } from "./utils/graphqlFunctions";
+import { Hub } from "aws-amplify/utils";
 
 function App() {
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
   const productsState = useSelector((state) => state.products);
   if (productsState.productList.length > 0) {
   }
+  React.useEffect(() => {
+    dispatch(setLoading(true));
+  }, []);
+
+  if (isLoading) return <Splash />;
+
+  const listener = async (data) => {
+    console.log(data);
+    switch (data.payload.event) {
+      case "signedIn":
+        const attributes = data.payload.data;
+
+        console.log("this are attributes", attributes);
+        const user = await singleUser(attributes.userId);
+        dispatch(setUser(user));
+        console.log("user signed in from hub");
+        break;
+      case "signOut":
+        dispatch(resetUser());
+        console.log("user Signed out");
+        break;
+      default:
+        break;
+    }
+  };
+
+  Hub.listen("auth", listener);
 
   return (
     <Router>
@@ -37,7 +72,6 @@ function App() {
         <Route path="/categories" element={<GridCategories />} />
         <Route path="/ofertas" element={<OfertaScreen />} />
         <Route path="/destacados" element={<DestacadosScreen />} />
-        {/* <Route path="/perfil" element={<PerfilScreen />} /> */}
         <Route
           path="/perfil"
           element={
@@ -46,16 +80,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route path="/defaultauth" element={<DefaultAuth />} /> */}
         <Route path="/auth" element={<AuthScreen />} />
-        {/* <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/confirmsignup" element={<ConfirmSignUp />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
-        {/* <Route
-          path="/confirmforgotpassword"
-          element={<ConfirmForgotPassword />}
-        /> */}
       </Routes>
     </Router>
   );

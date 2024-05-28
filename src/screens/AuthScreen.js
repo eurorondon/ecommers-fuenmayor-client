@@ -10,7 +10,7 @@ import ConfirmForgotPassword from "../components/ConfirmForgotPassword";
 
 function AuthScreen() {
   const { authState } = useSelector((state) => state.auth);
-  console.log(authState);
+
   return (
     <>
       <Header />

@@ -6,17 +6,16 @@ export default function MyButton({
   onPress,
   variant = "primary",
   style,
-  ...otherProps
+  otherProps,
 }) {
-  console.log(otherProps);
   return (
-    <buttonW
+    <button
       style={{ ...styles[variant], ...style }}
       onClick={onPress}
       {...otherProps}
     >
       <span style={styles.buttonText}>{title}</span>
-    </buttonW>
+    </button>
   );
 }
 

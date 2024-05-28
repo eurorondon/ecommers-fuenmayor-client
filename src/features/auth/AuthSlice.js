@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     verificationCode: "",
     isLoading: false,
     fullName: "",
-    user: null,
+    // user: null,
     error: null,
   },
   reducers: {
@@ -59,7 +59,7 @@ export const {
   setPhoneNumber,
   setVerificationCode,
   setLoading,
-  setUser,
+  // setUser,
   setError,
   setFullName,
 } = authSlice.actions;

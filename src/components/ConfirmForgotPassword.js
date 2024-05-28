@@ -31,9 +31,6 @@ const ConfirmForgotPassword = () => {
     authState,
   } = useSelector((state) => state.auth);
 
-  console.log("authstate", authState);
-  console.log("username", email);
-
   async function handleConfirmForgotPassword() {
     if (!verificationCode || verificationCode.length !== 6) {
       alert("Por favor inserte un codigo de verificacion valido");

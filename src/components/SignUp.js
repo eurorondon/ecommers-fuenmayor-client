@@ -33,8 +33,6 @@ const SignUp = () => {
     phoneNumber,
   } = useSelector((state) => state.auth);
 
-  console.log(email, password, isLoading);
-
   async function handleSignUp() {
     if (!email || !password) {
       alert("Por favor inserte correo y contraseña");

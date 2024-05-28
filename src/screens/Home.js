@@ -11,41 +11,26 @@ import AuthScreen from "./Auth";
 import Splash from "./Splash";
 import { Hub } from "aws-amplify/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../features/auth/AuthSlice";
+
 import SliderCategory from "../components/homeComponents/categorias/SliderCategory";
+import { resetUser, setUser } from "../features/auth/UserSlice";
+import { singleUser } from "../utils/graphqlFunctions";
+import { setLoading } from "../features/auth/AuthSlice";
 
 const Home = () => {
-  // const { isLoading } = useSelector((state) => state.products);
+  const { isLoading } = useSelector((state) => state.auth);
+  const usuario = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   // const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  console.log(usuario);
 
   const dispatch = useDispatch();
 
-  const listener = (data) => {
-    switch (data.payload.event) {
-      case "signedIn":
-        const attributes = data.payload.data;
-        console.log("this are attributes", attributes);
-        dispatch(setUser(attributes));
-        setUser(attributes);
-        console.log("user signed in from hub");
-        break;
-      case "signOut":
-        setUser(null);
-        console.log("user Signed out");
-        break;
-      default:
-        break;
-    }
-  };
-
-  Hub.listen("auth", listener);
+  console.log(isLoading);
 
   // console.log(products.data?.listProductListFuenmayors?.items);
-
-  if (isLoading)
-    return <Splash setUser={setUser} setIsLoading={setIsLoading} />;
 
   return (
     <div className="bg-neutral-100">
