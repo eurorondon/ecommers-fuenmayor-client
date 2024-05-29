@@ -13,6 +13,8 @@ import { Hub } from "aws-amplify/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/AuthSlice";
 import SliderCategory from "../components/homeComponents/categorias/SliderCategory";
+import { singleUser } from "../utils/graphqlFunctions";
+import { toast } from "react-toastify";
 
 const Home = () => {
   // const { isLoading } = useSelector((state) => state.products);
@@ -21,28 +23,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
-
-  const listener = (data) => {
-    switch (data.payload.event) {
-      case "signedIn":
-        const attributes = data.payload.data;
-        console.log("this are attributes", attributes);
-        dispatch(setUser(attributes));
-        setUser(attributes);
-        console.log("user signed in from hub");
-        break;
-      case "signOut":
-        setUser(null);
-        console.log("user Signed out");
-        break;
-      default:
-        break;
-    }
-  };
-
-  Hub.listen("auth", listener);
-
-  // console.log(products.data?.listProductListFuenmayors?.items);
 
   if (isLoading)
     return <Splash setUser={setUser} setIsLoading={setIsLoading} />;

@@ -3,6 +3,7 @@ import MyText from "./MyText";
 import MyButton from "./MyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthState } from "../features/auth/AuthSlice";
+import { Margin } from "@mui/icons-material";
 
 function DefaultAuth() {
   const { isLoading, authState } = useSelector((state) => state.auth);
@@ -11,8 +12,12 @@ function DefaultAuth() {
   console.log(authState);
   return (
     <div className="container" style={styles.container}>
-      <MyText title="Hola Bienvenido" type="title">
-        <div style={{}}>Hola</div>
+      <MyText
+        title="Hola Bienvenido"
+        type="title"
+        style={{ fontWeight: "bold", marginBottom: "20px" }}
+      >
+        <div style={{}}>Entra y disfruta nuestras ofertas especiales</div>
       </MyText>
       <MyButton
         title={"Crear Cuenta"}

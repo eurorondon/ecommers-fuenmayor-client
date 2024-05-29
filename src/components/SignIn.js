@@ -20,6 +20,8 @@ import {
 } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -27,23 +29,27 @@ const SignIn = () => {
 
   const { email, password, isLoading } = useSelector((state) => state.auth);
 
-  console.log(isLoading);
-
   async function handleSignIn() {
     if (!email || !password) {
-      alert("Please Enter an Email and Password");
+      toast.error("Por favor inserta email y contraseña");
       return;
     }
     try {
       dispatch(setLoading(true));
-      const user = await signIn({ username: email, password });
-      console.log(user);
+      await signIn({ username: email, password });
+
       dispatch(setLoading(false));
       dispatch(setAuthState("signedIn"));
       navigate("/");
+      toast.success(
+        <div>
+          Inicio de Sesión exitoso
+          <br /> {email}
+        </div>
+      );
     } catch (error) {
-      alert(error.message);
-      setLoading(false);
+      toast.error(error.message);
+      dispatch(setLoading(false));
       console.log(error);
     }
   }
@@ -68,6 +74,7 @@ const SignIn = () => {
         <MyInputs
           label={"Password"}
           onChange={(value) => dispatch(setPassword(value))}
+          value={password}
           secureTextEntry
         />
         <div style={{ position: "relative" }}>
@@ -82,7 +89,15 @@ const SignIn = () => {
 
         <div className="mt-4">
           <MyButton
-            title={isLoading ? "Cargando..." : "Iniciar Sesion"}
+            title={
+              isLoading ? (
+                <div className=" d-flex align-items-center">
+                  <CircularProgress size={"2rem"} />
+                </div>
+              ) : (
+                "Iniciar Sesion"
+              )
+            }
             disabled={isLoading}
             onPress={handleSignIn}
           />

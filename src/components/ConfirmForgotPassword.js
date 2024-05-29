@@ -17,6 +17,8 @@ import {
 import { confirmResetPassword, signUp } from "aws-amplify/auth";
 import Header from "./Header";
 import { Margin } from "@mui/icons-material";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const ConfirmForgotPassword = () => {
   const navigate = useNavigate();
@@ -36,19 +38,19 @@ const ConfirmForgotPassword = () => {
 
   async function handleConfirmForgotPassword() {
     if (!verificationCode || verificationCode.length !== 6) {
-      alert("Por favor inserte un codigo de verificacion valido");
+      toast.error("Por favor inserte un codigo de verificacion valido");
       return;
     }
     if (!password) {
-      alert("Por favor inserta contraseña");
+      toast.error("Por favor inserta contraseña");
       return;
     }
     if (!confirmPassword) {
-      alert("Por favor confirma contraseña");
+      toast.error("Por favor confirma contraseña");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Las contrasenas no coinciden");
+      toast.error("Las contraseñas no coinciden");
       return;
     }
     try {
@@ -59,10 +61,10 @@ const ConfirmForgotPassword = () => {
         newPassword: password,
       });
       dispatch(setLoading(false));
-      alert("Reset de contrasena exitoso");
+      toast.success("Cambio de contraseña exitoso");
       dispatch(setAuthState("signIn"));
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
       dispatch(setLoading(false));
       console.log(error);
     }
@@ -72,7 +74,7 @@ const ConfirmForgotPassword = () => {
     <>
       <div className="container" style={styles.container}>
         <div className="mt-2"></div>
-        <MyText type="title">Reset Contraseña</MyText>
+        <MyText type="title">Cambio de Contraseña</MyText>
         <MyInputs
           label={"Codigo de Verificacion"}
           onChange={(value) => dispatch(setVerificationCode(value))}
@@ -89,7 +91,15 @@ const ConfirmForgotPassword = () => {
           secureTextEntry
         />
         <MyButton
-          title={isLoading ? "Cargando..." : "Reset Contraseña"}
+          title={
+            isLoading ? (
+              <div className=" d-flex align-items-center">
+                <CircularProgress size={"2rem"} />
+              </div>
+            ) : (
+              "Reset Contraseña"
+            )
+          }
           onPress={handleConfirmForgotPassword}
         />
         <MyButton

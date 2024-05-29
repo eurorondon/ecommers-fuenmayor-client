@@ -6,8 +6,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     authState: "defaultAuth",
-    email: "",
-    password: "",
+    email: "eurorondon03@gmail.com",
+    password: "12345678",
     confirmPassword: "",
     phoneNumber: "",
     verificationCode: "",

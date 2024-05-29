@@ -20,10 +20,18 @@ import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { userFromDb } from "../utils/graphqlFunctions";
 import { setUser } from "../features/auth/UserSlice";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const ConfirmSignUp = () => {
-  const { email, verificationCode, password, fullName, phoneNumber } =
-    useSelector((state) => state.auth);
+  const {
+    email,
+    verificationCode,
+    password,
+    fullName,
+    phoneNumber,
+    isLoading,
+  } = useSelector((state) => state.auth);
   const userstate = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +40,7 @@ const ConfirmSignUp = () => {
 
   async function handleConfirmSignUp() {
     if (!verificationCode) {
-      alert("Please Enter an Verification Code");
+      toast.alert("Por favor inserte un codigo de verificacion");
       return;
     }
     try {
@@ -42,7 +50,6 @@ const ConfirmSignUp = () => {
         confirmationCode: verificationCode,
       });
 
-      alert("Confirmed, you can now sign in");
       await signIn({ username: email, password });
       dispatch(setLoading(false));
       dispatch(setAuthState("signed"));
@@ -53,14 +60,20 @@ const ConfirmSignUp = () => {
         email: attributes.signInDetails.loginId,
         phoneNumber,
       };
-      console.log(user);
+
       await userFromDb(user);
       dispatch(setUser(user));
+      toast.success(
+        <div>
+          Inicio de Sesión exitoso
+          <br /> {email}
+        </div>
+      );
       navigate("/");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
       dispatch(setLoading(false));
-      console.log(error);
+
       return;
     }
   }
@@ -68,8 +81,10 @@ const ConfirmSignUp = () => {
   async function handleResendVErificationCode() {
     try {
       await resendSignUpCode({ username: email });
-      alert("se ha reenviado el codigo");
-    } catch (error) {}
+      toast.success("se ha reenviado el codigo");
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   return (
@@ -87,7 +102,18 @@ const ConfirmSignUp = () => {
           onChange={(value) => dispatch(setVerificationCode(value))}
           secureTextEntry
         />
-        <MyButton title={"Confirmar"} onPress={handleConfirmSignUp} />
+        <MyButton
+          title={
+            isLoading ? (
+              <div className=" d-flex align-items-center">
+                <CircularProgress size={"2rem"} />
+              </div>
+            ) : (
+              "Confirmar"
+            )
+          }
+          onPress={handleConfirmSignUp}
+        />
 
         <MyButton
           title={"Reenviar Codigo"}

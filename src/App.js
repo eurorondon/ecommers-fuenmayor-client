@@ -23,6 +23,8 @@ import AuthScreen from "./screens/AuthScreen";
 import { useEffect } from "react";
 import { singleUser } from "./utils/graphqlFunctions";
 import { setUser } from "./features/auth/UserSlice";
+import { toast } from "react-toastify";
+import { Hub } from "aws-amplify/utils";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -39,7 +41,6 @@ function App() {
         try {
           const userData = await singleUser(user.user.userId);
           dispatch(setUser(userData));
-          console.log(userData);
         } catch (error) {
           console.error("Error fetching single user:", error);
         }

@@ -21,6 +21,8 @@ import {
 } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -30,20 +32,19 @@ const ForgotPassword = () => {
 
   const { isLoading } = useSelector((state) => state.auth);
 
-  console.log(isLoading);
-
   const handleForgotPassword = async () => {
     if (!email) {
-      alert("Por favor inserte un correo");
+      toast.error("Por favor inserte un correo");
       return;
     }
     try {
       dispatch(setLoading(true));
       await resetPassword({ username: email });
       dispatch(setAuthState("confirmForgotPassword"));
+      toast.success(`Codigo enviado a ${email}`);
       dispatch(setLoading(false));
     } catch (error) {
-      alert(error);
+      toast.error(error.message);
       dispatch(setLoading(false));
     }
   };
@@ -63,7 +64,15 @@ const ForgotPassword = () => {
 
         <div className="mt-4">
           <MyButton
-            title={isLoading ? "Enviando Codigo..." : "Recibir Codigo"}
+            title={
+              isLoading ? (
+                <div className=" d-flex align-items-center">
+                  <CircularProgress size={"2rem"} />
+                </div>
+              ) : (
+                "Recibir Codigo"
+              )
+            }
             onPress={handleForgotPassword}
             disabled={isLoading}
           />

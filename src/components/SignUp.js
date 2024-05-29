@@ -18,6 +18,8 @@ import {
 import { signUp } from "aws-amplify/auth";
 import Header from "./Header";
 import { Margin } from "@mui/icons-material";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -37,37 +39,38 @@ const SignUp = () => {
 
   async function handleSignUp() {
     if (!email || !password) {
-      alert("Por favor inserte correo y contraseña");
+      toast.error("Por favor inserte correo y contraseña");
       return;
     }
 
     if (!fullName) {
-      alert("Por favor inserte su Nombre Completo");
+      toast.error("Por favor inserte su Nombre Completo");
       return;
     }
     if (!phoneNumber) {
-      alert("Por favor inserte numero de Telefono");
+      toast.error("Por favor inserte numero de Telefono");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert(" Las contraseñas no coinciden");
+      toast.error(" Las contraseñas no coinciden");
       return;
     }
     try {
       dispatch(setLoading(true));
-      const user = await signUp({
+      await signUp({
         username: email,
         password,
         options: { userAttributes: { name: fullName } },
       });
-      console.log(user, password);
+      toast.success(`Codigo enviado a ${email}`);
+
       dispatch(setLoading(false));
 
       dispatch(setAuthState("confirmSignUp"));
     } catch (error) {
       setLoading(false);
-      alert(error.message);
+      toast.error(error.message);
       console.log(error);
       dispatch(setLoading(false));
     }
@@ -102,7 +105,15 @@ const SignUp = () => {
           secureTextEntry
         />
         <MyButton
-          title={isLoading ? "Cargando..." : "Registrate"}
+          title={
+            isLoading ? (
+              <div className=" d-flex align-items-center">
+                <CircularProgress size={"2rem"} />
+              </div>
+            ) : (
+              "Registrate"
+            )
+          }
           disabled={isLoading}
           onPress={handleSignUp}
         />
