@@ -25,6 +25,7 @@ import { singleUser } from "./utils/graphqlFunctions";
 import { setUser } from "./features/auth/UserSlice";
 import { toast } from "react-toastify";
 import { Hub } from "aws-amplify/utils";
+import OrderScreen from "./screens/OrderScreen";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -34,12 +35,13 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth);
+  console.log(user.user);
   // console.log(user.user.userId);
   useEffect(() => {
-    if (user) {
+    if (user.user) {
       (async () => {
         try {
-          const userData = await singleUser(user.user.userId);
+          const userData = await singleUser(user?.user?.userId);
           dispatch(setUser(userData));
         } catch (error) {
           console.error("Error fetching single user:", error);
@@ -59,7 +61,14 @@ function App() {
         <Route path="/categories" element={<GridCategories />} />
         <Route path="/ofertas" element={<OfertaScreen />} />
         <Route path="/destacados" element={<DestacadosScreen />} />
-        {/* <Route path="/perfil" element={<PerfilScreen />} /> */}
+        <Route
+          path="/orderscreen"
+          element={
+            <ProtectedRoute>
+              <OrderScreen />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/perfil"
           element={

@@ -16,9 +16,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { generateClient } from "aws-amplify/api";
 import { getProduct } from "../graphql/queries";
+import { toast } from "react-toastify";
 
 const CartScreen = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
 
   const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
 
@@ -46,13 +48,22 @@ const CartScreen = () => {
   // const mensaje = `👋 Hola, mi nombre es ${name}.\n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
   const mensaje = `👋 Hola Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${total}$* \n `;
 
-  const checkOutHandler = () => {
-    const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
-      mensaje
-    )}`;
-    window.open(url, "_blank"); // Abre la URL en una nueva pestaña o ventana del navegador
+  // const checkOutHandler = () => {
+  //   const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
+  //     mensaje
+  //   )}`;
+  //   window.open(url, "_blank"); // Abre la URL en una nueva pestaña o ventana del navegador
 
-    dispatch(clearCart());
+  //   dispatch(clearCart());
+  // };
+
+  const checkOutHandler = () => {
+    if (!user) {
+      toast.info("Inicia sesion para finalizar tu compra");
+    }
+    navigate("/orderscreen");
+
+    // dispatch(clearCart());
   };
 
   const { data, isLoading, isFetching, isError, refetch } = useQuery(

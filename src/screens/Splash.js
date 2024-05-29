@@ -1,26 +1,28 @@
 import React from "react";
-import { getCurrentUser, fetchUserAttributes } from "aws-amplify/auth";
+import { getCurrentUser } from "aws-amplify/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/AuthSlice";
 import { CircularProgress } from "@mui/material";
 
 const Splash = ({ setIsLoading }) => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    (async () => {
+    const fetchUser = async () => {
       try {
         const attributes = await getCurrentUser();
 
-        dispath(setUser(attributes));
-
+        dispatch(setUser(attributes));
         setIsLoading(false);
         console.log(attributes);
       } catch (error) {
         console.log(error.message);
         setIsLoading(false);
       }
-    })();
-  }, []);
+    };
+
+    fetchUser();
+  }, [dispatch, setIsLoading]);
 
   return (
     <div style={styles.container}>
