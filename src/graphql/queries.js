@@ -112,6 +112,117 @@ export const listCategories = /* GraphQL */ `
     }
   }
 `;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      fullName
+      profilePicture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fullName
+        profilePicture
+        email
+        phoneNumber
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        idUserFilter
+        paymentMethod
+        taxPrice
+        shippingPrice
+        totalPrice
+        isPaid
+        paidAt
+        isDelivered
+        deliveredAt
+        id
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const ProductsByDate = /* GraphQL */ `
   query ProductsByDate(
     $type: String!
@@ -149,43 +260,6 @@ export const ProductsByDate = /* GraphQL */ `
         discountPercentage
         bestSellers
         id
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      fullName
-      profilePicture
-      email
-      phoneNumber
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        fullName
-        profilePicture
-        email
-        phoneNumber
-        createdAt
-        updatedAt
         __typename
       }
       nextToken

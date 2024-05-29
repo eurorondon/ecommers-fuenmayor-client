@@ -7,10 +7,12 @@ import {
   getProduct,
   getUser,
   listCategories,
+  listOrders,
   listProducts,
 } from "../graphql/queries";
 import {
   createCategories,
+  createOrder,
   createProduct,
   createUser,
   deleteCategories,
@@ -191,4 +193,60 @@ export async function ListProductsByDate() {
     variables: { type: "Producto", sortDirection: "DESC", limit: 10 },
   });
   return res.data.ProductsByDate.items;
+}
+
+export async function newOrder(orderData) {
+  console.log(orderData);
+  try {
+    const res = await client.graphql({
+      query: createOrder,
+      variables: {
+        input: {
+          idUserFilter: orderData.user.id,
+          user: {
+            id: orderData.user.id,
+            name: orderData.user.fullName,
+            email: orderData.user.email,
+            phoneNumber: orderData.user.phoneNumber,
+            // Otros campos de usuario si es necesario
+          },
+          isPaid: orderData.isPaid,
+          totalPrice: orderData.totalPrice,
+          orderItems: orderData.orderItems.map((item) => ({
+            name: item.name,
+            qty: item.qty,
+            image: item.image,
+            price: item.price,
+            // id: item.product,
+            id: item.id,
+            // Otros campos de OrderItem si es necesario
+          })),
+        },
+      },
+    });
+    console.log(res);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getOrders(id) {
+  try {
+    const res = await client.graphql({
+      query: listOrders,
+      variables: {
+        filter: { idUserFilter: { eq: id } },
+      },
+    });
+
+    // Verificar si la respuesta contiene datos y órdenes
+    if (res.data && res.data.listOrders && res.data.listOrders.items) {
+      return res.data.listOrders.items;
+    } else {
+      throw new Error("No se encontraron órdenes.");
+    }
+  } catch (error) {
+    console.error("Error al obtener las órdenes:", error);
+    throw error; // Re-lanzar el error después de registrarlo
+  }
 }

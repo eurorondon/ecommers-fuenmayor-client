@@ -229,3 +229,156 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateOrder = /* GraphQL */ `
+  mutation UpdateOrder(
+    $input: UpdateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    updateOrder(input: $input, condition: $condition) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteOrder = /* GraphQL */ `
+  mutation DeleteOrder(
+    $input: DeleteOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    deleteOrder(input: $input, condition: $condition) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

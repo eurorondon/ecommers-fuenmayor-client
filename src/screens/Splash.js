@@ -3,6 +3,7 @@ import { getCurrentUser } from "aws-amplify/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/AuthSlice";
 import { CircularProgress } from "@mui/material";
+import Header from "../components/Header";
 
 const Splash = ({ setIsLoading }) => {
   const dispatch = useDispatch();
@@ -25,9 +26,12 @@ const Splash = ({ setIsLoading }) => {
   }, [dispatch, setIsLoading]);
 
   return (
-    <div style={styles.container}>
-      <CircularProgress />
-    </div>
+    <>
+      <Header />
+      <div style={styles.container}>
+        <CircularProgress />
+      </div>
+    </>
   );
 };
 

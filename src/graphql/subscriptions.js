@@ -166,3 +166,189 @@ export const onDeleteCategories = /* GraphQL */ `
     }
   }
 `;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
+      id
+      fullName
+      profilePicture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
+      id
+      fullName
+      profilePicture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
+      id
+      fullName
+      profilePicture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onCreateOrder = /* GraphQL */ `
+  subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onCreateOrder(filter: $filter) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateOrder = /* GraphQL */ `
+  subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onUpdateOrder(filter: $filter) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteOrder = /* GraphQL */ `
+  subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onDeleteOrder(filter: $filter) {
+      idUserFilter
+      user {
+        id
+        name
+        email
+        phoneNumber
+        __typename
+      }
+      orderItems {
+        name
+        qty
+        image
+        price
+        id
+        __typename
+      }
+      shippingAddress {
+        address
+        city
+        postalCode
+        country
+        __typename
+      }
+      paymentMethod
+      paymentResult {
+        id
+        status
+        updateTime
+        emailAddress
+        __typename
+      }
+      taxPrice
+      shippingPrice
+      totalPrice
+      isPaid
+      paidAt
+      isDelivered
+      deliveredAt
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

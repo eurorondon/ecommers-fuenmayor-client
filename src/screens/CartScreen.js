@@ -62,8 +62,6 @@ const CartScreen = () => {
       toast.info("Inicia sesion para finalizar tu compra");
     }
     navigate("/orderscreen");
-
-    // dispatch(clearCart());
   };
 
   const { data, isLoading, isFetching, isError, refetch } = useQuery(
@@ -235,7 +233,7 @@ const CartScreen = () => {
               </Link>
 
               <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                <button onClick={checkOutHandler}>Concretar Compra</button>
+                <button onClick={checkOutHandler}>Verificar Compra</button>
               </div>
             </div>
           </div>
