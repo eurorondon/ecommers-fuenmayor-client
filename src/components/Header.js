@@ -148,12 +148,14 @@ const Header = () => {
                         className="fas fa-shopping-bag me-3"
                         style={{ fontSize: "1.1rem" }}
                       ></i>
-                      <div
-                        className="badge d-flex justify-center align-items-center"
-                        style={{ fontSize: "0.8rem" }}
-                      >
-                        <span className="mx-auto">{cartCount}</span>
-                      </div>
+                      {cartCount > 0 && (
+                        <div
+                          className="badge d-flex justify-center align-items-center"
+                          style={{ fontSize: "0.8rem" }}
+                        >
+                          <span className="mx-auto">{cartCount}</span>
+                        </div>
+                      )}
                     </Link>
                   </div>
                 </div>

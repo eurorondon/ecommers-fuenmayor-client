@@ -71,11 +71,15 @@ const Categorias = () => {
     ["AllCategories"],
     getCategories,
     {
-      onSuccess: () => {
-        setCategories(dataCategories);
-      },
+      // onSuccess: () => {
+      //   setCategories(dataCategories);
+      // },
     }
   );
+
+  React.useEffect(() => {
+    setCategories(dataCategories);
+  }, [dataCategories]);
 
   React.useEffect(() => {
     setCategories(dataCategories);

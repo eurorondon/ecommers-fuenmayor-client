@@ -3,7 +3,10 @@ import { CircularProgress } from "@mui/material";
 
 const Loading = () => {
   return (
-    <div className=" m-5 d-flex justify-content-center  ">
+    <div
+      className="  d-flex justify-content-center  align-items-center "
+      style={{ height: "60vh" }}
+    >
       <CircularProgress />
     </div>
   );

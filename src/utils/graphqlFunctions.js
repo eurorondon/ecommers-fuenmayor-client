@@ -4,6 +4,7 @@ import amplifyconfig from "../aws-exports";
 
 import {
   ProductsByDate,
+  getOrder,
   getProduct,
   getUser,
   listCategories,
@@ -248,5 +249,19 @@ export async function getOrders(id) {
   } catch (error) {
     console.error("Error al obtener las órdenes:", error);
     throw error; // Re-lanzar el error después de registrarlo
+  }
+}
+
+export async function singleOrder(id) {
+  try {
+    const res = await client.graphql({
+      query: getOrder,
+      variables: { id },
+    });
+
+    return res.data.getOrder;
+  } catch (error) {
+    throw error;
+    console.log(error);
   }
 }

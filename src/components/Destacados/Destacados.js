@@ -19,12 +19,12 @@ import {
 const Destacados = () => {
   const { data, isLoading, isError } = useQuery(
     ["ProductsBestSellers"],
-    getProductsBestSellers,
-    {
-      onSuccess: () => {
-        // setCategories(dataCategories);
-      },
-    }
+    getProductsBestSellers
+    // {
+    //   onSuccess: () => {
+    //     setCategories(dataCategories);
+    //   },
+    // }
   );
 
   const productList = data;

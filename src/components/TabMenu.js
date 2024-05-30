@@ -46,10 +46,6 @@ function TabMenu({ activeButton }) {
         <div
           className="pt-2    "
           style={{
-            // backgroundColor: "#040915",
-            // position: "fixed",
-            // borderTopRightRadius: "5px",
-            // borderTopLeftRadius: "5px",
             bottom: "0px",
             width: "100%",
           }}
@@ -76,7 +72,6 @@ function TabMenu({ activeButton }) {
                 }}
               >
                 <OtherHousesOutlinedIcon
-                  // fontSize="large"
                   style={
                     activeButton === 0
                       ? { color: "#007aff", fontSize: "20px" }

@@ -149,7 +149,7 @@ const CartScreen = () => {
   return (
     <>
       <Header />
-      {/* Cart */}(
+      {/* Cart */}
       <div className="container">
         {cartItems.length === 0 ? (
           <div
@@ -239,7 +239,6 @@ const CartScreen = () => {
           </div>
         )}
       </div>
-      )
     </>
   );
 };

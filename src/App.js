@@ -26,6 +26,7 @@ import { setUser } from "./features/auth/UserSlice";
 import { toast } from "react-toastify";
 import { Hub } from "aws-amplify/utils";
 import OrderScreen from "./screens/OrderScreen";
+import MyOrderScreen from "./screens/MyOrderScreen";
 
 function App() {
   const productsState = useSelector((state) => state.products);
@@ -66,6 +67,14 @@ function App() {
           element={
             <ProtectedRoute>
               <OrderScreen />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orderscreen/:id"
+          element={
+            <ProtectedRoute>
+              <MyOrderScreen />
             </ProtectedRoute>
           }
         />

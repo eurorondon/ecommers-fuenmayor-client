@@ -196,6 +196,34 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
+// export const listOrders = /* GraphQL */ `
+//   query ListOrders(
+//     $filter: ModelOrderFilterInput
+//     $limit: Int
+//     $nextToken: String
+//   ) {
+//     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+//       items {
+//         idUserFilter
+
+//         taxPrice
+//         shippingPrice
+//         totalPrice
+//         isPaid
+//         paidAt
+//         isDelivered
+//         deliveredAt
+//         id
+//         createdAt
+//         updatedAt
+//         __typename
+//       }
+//       nextToken
+//       __typename
+//     }
+//   }
+// `;
+
 export const listOrders = /* GraphQL */ `
   query ListOrders(
     $filter: ModelOrderFilterInput
@@ -205,7 +233,36 @@ export const listOrders = /* GraphQL */ `
     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         idUserFilter
+        user {
+          id
+          name
+          email
+          phoneNumber
+          __typename
+        }
+        orderItems {
+          name
+          qty
+          image
+          price
+          id
+          __typename
+        }
+        shippingAddress {
+          address
+          city
+          postalCode
+          country
+          __typename
+        }
         paymentMethod
+        paymentResult {
+          id
+          status
+          updateTime
+          emailAddress
+          __typename
+        }
         taxPrice
         shippingPrice
         totalPrice
@@ -223,6 +280,7 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
+
 export const ProductsByDate = /* GraphQL */ `
   query ProductsByDate(
     $type: String!

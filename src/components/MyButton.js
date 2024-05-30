@@ -10,13 +10,13 @@ export default function MyButton({
 }) {
   console.log(otherProps);
   return (
-    <buttonW
+    <button
       style={{ ...styles[variant], ...style }}
       onClick={onPress}
       {...otherProps}
     >
       <span style={styles.buttonText}>{title}</span>
-    </buttonW>
+    </button>
   );
 }
 

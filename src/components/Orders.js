@@ -2,59 +2,70 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getOrders } from "../utils/graphqlFunctions";
 import { useSelector } from "react-redux";
-const Orders = () => {
+import Loading from "./Loading";
+
+const Orders = ({ orders, isLoadingOrders }) => {
   const userState = useSelector((state) => state.user);
+
+  console.log(isLoadingOrders);
+
+  const formatDateToSpanish = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = new Intl.DateTimeFormat("es-ES", options).format(
+      date
+    );
+    return formattedDate;
+  };
+
+  if (isLoadingOrders) return <Loading />;
 
   return (
     <div className=" d-flex justify-content-center align-items-center flex-column">
-      <div className="col-12 alert alert-info text-center mt-3">
-        No Orders
-        <Link
-          className="btn btn-success mx-2 px-3 py-2"
-          to="/"
-          style={{
-            fontSize: "12px",
-          }}
-        >
-          START SHOPPING
-        </Link>
-      </div>
-
-      <div className="table-responsive">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>STATUS</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className={"alert-success"}>
-              <td>
-                <a href={`/`} className="link">
-                  1
-                </a>
-              </td>
-              <td>Paid</td>
-              <td>Dec 12 2021</td>
-              <td>$234</td>
-            </tr>
-            {/* Cancelled */}
-            <tr className={"alert-danger"}>
-              <td>
-                <a href={`/`} className="link">
-                  2
-                </a>
-              </td>
-              <td>Not Paid</td>
-              <td>Dec 12 2021</td>
-              <td>$34</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {orders?.length > 0 ? (
+        <div className="table-responsive">
+          <table className="table bg-white">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>STATUS</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((item, index) => (
+                <tr
+                  key={index}
+                  className={item.isPaid ? "alert-success" : "alert-danger"}
+                >
+                  <td>
+                    <Link to={`/orderscreen/${item.id}`} className="link">
+                      {index + 1}
+                    </Link>
+                  </td>
+                  <td>{item.isPaid ? "Pagado" : "No Pagado"}</td>
+                  <td>{formatDateToSpanish(item.createdAt)}</td>
+                  <td>{item.totalPrice} $</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="col-12 alert alert-info text-center mt-3">
+          No Orders
+          <Link
+            className="btn btn-success mx-2 px-3 py-2"
+            to="/"
+            style={{
+              fontSize: "12px",
+            }}
+          >
+            START SHOPPING
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
