@@ -12,10 +12,7 @@ import { ListProductsByDate, getProducts } from "../../utils/graphqlFunctions";
 const NewProducts = () => {
   const { data, isLoading, isError } = useQuery(
     ["NewProducts"],
-    ListProductsByDate,
-    {
-      onSuccess: () => {},
-    }
+    ListProductsByDate
   );
 
   const productList = data;

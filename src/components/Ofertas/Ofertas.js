@@ -17,12 +17,7 @@ import { getProductsInOfert } from "../../utils/graphqlFunctions";
 const Ofertas = () => {
   const { data, isLoading, isError } = useQuery(
     ["ProductsInOffer"],
-    getProductsInOfert,
-    {
-      onSuccess: () => {
-        // setCategories(dataCategories);
-      },
-    }
+    getProductsInOfert
   );
   const productList = data;
   const sliderRef = useRef(null);

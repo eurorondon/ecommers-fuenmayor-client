@@ -18,16 +18,8 @@ const MyOrderScreen = () => {
 
   const user = useSelector((state) => state.user);
 
-  const { data, isLoading } = useQuery(
-    ["singleOrder", id],
-    () => singleOrder(id),
-    {
-      // onSuccess: (data) => {
-      //   setOrderItems(data?.orderItems || []);
-      //   setTotalSubtotal(data?.totalPrice || 0);
-      //   setIsPaid(data?.isPaid || false);
-      // },
-    }
+  const { data, isLoading } = useQuery(["singleOrder", id], () =>
+    singleOrder(id)
   );
 
   React.useEffect(() => {

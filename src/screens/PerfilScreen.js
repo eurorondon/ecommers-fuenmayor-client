@@ -58,9 +58,6 @@ function PerfilScreen() {
     error,
     isLoading: isLoadingOrders,
   } = useQuery(["getOrder", userState.id], () => getOrders(userState.id), {
-    // onSuccess: (data) => {
-    //   setOrders(data);
-    // },
     // onError: (error) => {
     //   console.error("Error fetching orders:", error);
     // },

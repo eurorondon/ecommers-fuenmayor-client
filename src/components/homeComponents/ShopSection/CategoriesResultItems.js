@@ -64,7 +64,7 @@ const CategoriesResultItemes = () => {
         // refetchInterval: false,
         // refetchOnWindowFocus: false,
         // refetchIntervalInBackground: false,
-        // onSuccess: (data) => {},
+
         getNextPageParam: (lastPage) => {
           return lastPage.nextToken || null;
         },

@@ -22,11 +22,7 @@ function SliderCategory() {
   const { data: dataCategories, error } = useQuery(
     ["AllCategories"],
     getCategories,
-    {
-      onSuccess: (data) => {
-        setCategories(data);
-      },
-    }
+    {}
   );
 
   React.useEffect(() => {

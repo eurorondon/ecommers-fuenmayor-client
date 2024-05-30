@@ -81,10 +81,6 @@ const CartScreen = () => {
         throw err;
       }
     }
-
-    // {
-    //   onSuccess: (data) => {},
-    // }
   );
   // if (data) {
   //   data.qty = qty;

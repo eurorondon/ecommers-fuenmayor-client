@@ -69,12 +69,7 @@ const Categorias = () => {
   const [categories, setCategories] = React.useState([]);
   const { data: dataCategories, error } = useQuery(
     ["AllCategories"],
-    getCategories,
-    {
-      // onSuccess: () => {
-      //   setCategories(dataCategories);
-      // },
-    }
+    getCategories
   );
 
   React.useEffect(() => {

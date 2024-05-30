@@ -9,10 +9,7 @@
 //   const { data: dataCategories, error } = useQuery(
 //     ["AllCategories"],
 //     getCategories,
-//     {
-//       onSuccess: () => {
-//         setCategories(dataCategories);
-//       },
+//
 //     }
 //   );
 

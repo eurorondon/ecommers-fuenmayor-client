@@ -14,10 +14,6 @@ function GridCategories() {
     error,
     isLoading,
   } = useQuery(["AllCategoriesGridScreen"], getCategories, {
-    onSuccess: () => {
-      console.log("dataCategories");
-      setCategories(dataCategories);
-    },
     // refetchOnMount: false,
     // refetchInterval: false,
     // refetchOnWindowFocus: false,

@@ -99,10 +99,6 @@ const SingleProduct = ({ match }) => {
         console.error("Error fetching todos", err.errors);
         throw err;
       }
-    },
-
-    {
-      onSuccess: (data) => {},
     }
   );
   useEffect(() => {
