@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MyButton from "./MyButton";
 import MyInputs from "./MyInputs";
 import MyText from "./MyText";
@@ -47,8 +47,23 @@ const SignUp = () => {
       toast.error("Por favor inserte su Nombre Completo");
       return;
     }
-    if (!phoneNumber) {
-      toast.error("Por favor inserte numero de Telefono");
+    // if (!phoneNumber) {
+    //   toast.error("Por favor inserte numero de Telefono");
+    //   return;
+    // }
+    const regex = /^0\d{10}$/;
+    if (!phoneNumber || !regex.test(phoneNumber)) {
+      toast.error(
+        <div>
+          Número de teléfono no válido.
+          <br />
+          Ejemplo 04125243454
+        </div>,
+        {
+          autoClose: false,
+        }
+      );
+
       return;
     }
 
@@ -91,8 +106,9 @@ const SignUp = () => {
           onChange={(value) => dispatch(setFullName(value))}
         />
         <MyInputs
-          label={"Telefono"}
+          label={"Teléfono"}
           onChange={(value) => dispatch(setPhoneNumber(value))}
+          placeHolder="04126773233"
         />
         <MyInputs
           label={"Contraseña"}
@@ -144,8 +160,6 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-
-    // justifyContent: "center",
     minHeight: "80vh",
     backgroundColor: "#fff",
   },

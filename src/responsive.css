@@ -111,7 +111,7 @@
     display: none;
   }
   .order-detail {
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
 }
 @media (max-width: 575.98px) {

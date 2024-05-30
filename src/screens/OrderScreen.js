@@ -51,125 +51,117 @@ const OrderScreen = () => {
   };
   console.log(orderData);
 
+  const productos = cartItems
+    .map(
+      (item) =>
+        ` \n ✅ *${item.name}*   \n *Cantidad*: ${item.qty} \n *Precio*:${item.price}$ \n`
+    )
+    .join("");
+
+  const name = user.fullName;
+  const telefono = "+584126773234";
+  const mensaje = `👋 Hola, mi nombre es *${name}* \n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${totalSubtotal}$* \n `;
+
+  // const HandlerSendWhatsapp = () => {
+  //   const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
+  //     mensaje
+  //   )}`;
+  //   window.open(url, "_blank"); // Abre la URL en una nueva pestaña o ventana del navegador
+
+  //   // dispatch(clearCart());
+  // };
+
+  // // separate
+
+  // HandlerSendWhatsapp();
+
   const handleCreateOrder = async () => {
     if (!cartItems.length > 0) {
       toast.error("No hay Items en el carrito");
       return;
     }
+    alert(
+      "📋Te enviaremos a Whatsapp, Recuerda tu orden se ha guardado en tu perfil 🚀 "
+    );
     try {
+      const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
+        mensaje
+      )}`;
+      window.open(url, "_blank");
       await newOrder(orderData);
-      dispatch(clearCart());
+
       toast.success("Orden de compra creada con exito");
+
+      dispatch(clearCart());
+
       navigate("/");
     } catch (error) {
       console.log(error);
-    }
+      return;
+    } // Abre la URL en una nueva pestaña o ventana del navegador
   };
+
+  // const handleCreateOrder = async () => {
+  //   if (!cartItems.length > 0) {
+  //     toast.error("No hay Items en el carrito");
+  //     return;
+  //   }
+  //
+  // };
 
   return (
     <>
       <Header />
-      <div className="container">
-        <div className="row  order-detail">
-          <div className="col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0">
+      <div className="">
+        <div className="row order-detail">
+          <div className="col-lg-4 col-sm-4 mb-lg-4  mb-sm-0">
             <div className="row">
               <div className="col-md-4 center">
-                <div className="alert-success order-box">
-                  <i className="fas fa-user"></i>
-                </div>
-              </div>
-              <div className="col-md-8 center">
-                <h5>
-                  <strong>Cliente</strong>
-                </h5>
-                <p>{fullName}</p>
-                <p>
-                  <a href={`mailto:admin@example.com`}>{email}</a>
-                </p>
+                <span>
+                  {"Cliente:"} {email}
+                </span>
               </div>
             </div>
           </div>
-          {/* 2 */}
-          {/* <div className="col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0">
-            <div className="row">
-              <div className="col-md-4 center">
-                <div className="alert-success order-box">
-                  <i className="fas fa-truck-moving"></i>
-                </div>
-              </div>
-              <div className="col-md-8 center">
-                <h5>
-                  <strong>Order info</strong>
-                </h5>
-                <p>Shipping: Tanzania</p>
-                <p>Pay method: Paypal</p>
-
-                <div className="bg-info p-2 col-12">
-                  <p className="text-white text-center text-sm-start">
-                    Paid on Jan 12 2021
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          {/* 3 */}
-          {/* <div className="col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0">
-            <div className="row">
-              <div className="col-md-4 center">
-                <div className="alert-success order-box">
-                  <i className="fas fa-map-marker-alt"></i>
-                </div>
-              </div>
-              <div className="col-md-8 center">
-                <h5>
-                  <strong>Deliver to</strong>
-                </h5>
-                <p>
-                  Address: Arusha Tz, Ngaramtoni Crater, P.O BOX 1234 Arusha Tz
-                </p>
-                <div className="bg-danger p-1 col-12">
-                  <p className="text-white text-center text-sm-start">
-                    Not Delivered
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
 
-        <div className="row order-products justify-content-between ">
-          <div className="col-lg-8">
-            {!cartItems.length > 0 ? (
-              <h2 className="text-center my-2">Tu carrito esta Vacio</h2>
-            ) : (
-              <div>
-                {cartItems.map((items) => (
-                  <div className="order-product row ">
-                    <div className="col-md-3 col-6">
-                      <img src={items.photo} alt="product" />
+        <div className="row order-products justify-content-between">
+          <div className="col-lg-8 ">
+            <div>
+              {cartItems?.length > 0 ? (
+                cartItems.map((items) => (
+                  <div className="order-product row" key={items.id}>
+                    <div className="col-md-3 col-4 rounded " style={{}}>
+                      <img
+                        className=" "
+                        src={items.photo}
+                        alt="product"
+                        style={{ borderRadius: "10%" }}
+                      />
                     </div>
-                    <div className="col-md-5 col-6 d-flex align-items-center">
+                    <div className="col-md-5 col-4 d-flex align-items-center">
                       <Link to={`/`}>
                         <h6>{items.name}</h6>
-                        <h6>Precio: {items.price} $</h6>
+                        <h6> {items.price} $</h6>
                       </Link>
                     </div>
-                    <div className="mt-3 mt-md-0 col-6 col-md-2  d-flex align-items-center flex-column justify-content-center ">
-                      <h4>QUANTITY</h4>
+                    <div className="mt-3 mt-md-0 col-4 col-md-2 d-flex align-items-center flex-column justify-content-center">
+                      <h4>Cantidad</h4>
                       <h6>{items.qty}</h6>
                     </div>
-                    <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center">
-                      <h4 style={{ fontWeight: "bold" }}>SUBTOTAL</h4>
-                      <h6>{items.price * items.qty} $</h6>
+                    <div className=" mt-md-0 col-md-2 d-flex align-items-center justify-content-end  gap-1">
+                      <h6 style={{ fontWeight: "bold" }}>Sub Total: </h6>
+                      <h6> {items.price * items.qty} $</h6>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-            {/* <Message variant="alert-info mt-5">Your order is empty</Message> */}
+                ))
+              ) : (
+                <p>No hay artículos en esta orden.</p>
+              )}
+            </div>
           </div>
-          {/* total */}
-          <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
+
+          <div className="col-lg-3 d-flex align-items-end flex-column  subtotal-order">
             <table className="table table-bordered">
               <tbody>
                 <tr>
@@ -198,16 +190,11 @@ const OrderScreen = () => {
                 </tr>
               </tbody>
             </table>
-            {/* <div className="col-12">
-              <PayPalButton amount={345} />
-            </div> */}
 
-            <div className="col-12 my-5">
-              <MyButton
-                title={"Realizar orden de compra"}
-                onPress={handleCreateOrder}
-              />
-            </div>
+            <MyButton
+              title={"Realizar orden de compra"}
+              onPress={handleCreateOrder}
+            />
           </div>
         </div>
       </div>

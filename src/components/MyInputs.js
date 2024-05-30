@@ -2,7 +2,14 @@ import React from "react";
 import { Colors } from "../utils/colors";
 import MyText from "./MyText";
 
-export default function MyInputs({ label, value, onChange, secureTextEntry }) {
+export default function MyInputs({
+  label,
+  value,
+  onChange,
+  secureTextEntry,
+  ...otherProps
+}) {
+  console.log(otherProps);
   return (
     <div style={styles.container}>
       <MyText
@@ -14,10 +21,11 @@ export default function MyInputs({ label, value, onChange, secureTextEntry }) {
 
       <input
         type={secureTextEntry ? "password" : "text"}
-        placeholder={label}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={styles.input}
+        placeholder={label}
+        {...otherProps}
       />
     </div>
   );

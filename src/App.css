@@ -225,7 +225,7 @@ textarea:focus {
 .border-product {
   padding: 15px;
   border: 1px solid #f3f3f3;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .shopBack {
   height: 250px;
