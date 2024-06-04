@@ -34,8 +34,8 @@ const Home = () => {
       </div>
 
       <Portada />
-      {/* <Categorias /> */}
-      <SliderCategory />
+      <Categorias />
+      {/* <SliderCategory /> */}
       <Ofertas />
       <NewProducts />
       <Destacados />

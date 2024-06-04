@@ -43,14 +43,15 @@ const SignUp = () => {
       return;
     }
 
-    if (!fullName) {
+    if (
+      !fullName ||
+      fullName.split(" ").length < 2 ||
+      fullName.split(" ").some((word) => word.length < 2)
+    ) {
       toast.error("Por favor inserte su Nombre Completo");
       return;
     }
-    // if (!phoneNumber) {
-    //   toast.error("Por favor inserte numero de Telefono");
-    //   return;
-    // }
+
     const regex = /^0\d{10}$/;
     if (!phoneNumber || !regex.test(phoneNumber)) {
       toast.error(
@@ -58,12 +59,14 @@ const SignUp = () => {
           Número de teléfono no válido.
           <br />
           Ejemplo 04125243454
-        </div>,
-        {
-          autoClose: false,
-        }
+        </div>
       );
 
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("La contraseña debe tener al menos 8 caracteres");
       return;
     }
 

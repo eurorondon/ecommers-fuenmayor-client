@@ -77,7 +77,7 @@ function SliderCategory() {
 
   return (
     <>
-      <div>
+      <div className="mb-4">
         <div className="">
           {/* <h4 className="container my-2">Categorias</h4> */}
           <div

@@ -261,7 +261,7 @@ export async function singleOrder(id) {
 
     return res.data.getOrder;
   } catch (error) {
-    throw error;
     console.log(error);
+    throw error;
   }
 }

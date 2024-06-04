@@ -3,7 +3,7 @@ export default function Product(props) {
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
   return (
-    <div className=" card  text-start   " style={{ borderRadius: "10px" }}>
+    <div className=" card  text-start    " style={{ borderRadius: "10px" }}>
       {props.offer && (
         <div
           style={{
@@ -25,7 +25,7 @@ export default function Product(props) {
       )}
       <div
         className=" d-flex justify-content-center align-items-center  "
-        style={{ width: "100%", padding: "5px" }}
+        style={{ width: "100%" }}
       >
         {props.url ? (
           <img
@@ -54,7 +54,10 @@ export default function Product(props) {
       </div>
 
       <div className="p-2" style={{ backgroundColor: "" }}>
-        <h5 className="name" style={{ fontWeight: "bold", color: "#00789D" }}>
+        <h5
+          className="name"
+          style={{ fontWeight: "bold", color: "", fontSize: "0.85rem" }}
+        >
           {props.name}
         </h5>
         {/* <div
@@ -76,7 +79,7 @@ export default function Product(props) {
 
         {props.offer ? (
           <div className="price d-flex gap-4 " style={{}}>
-            <p style={{ color: "#3b83bd", fontWeight: "bold" }}>
+            <p style={{ color: "", fontWeight: "bold" }}>
               {props.price - props.price * (props.discountPercentage / 100)} USD{" "}
             </p>
             <p
@@ -91,7 +94,10 @@ export default function Product(props) {
             </p>
           </div>
         ) : (
-          <p className="price" style={{ color: "#3b83bd", fontWeight: "bold" }}>
+          <p
+            className=""
+            style={{ color: "", fontWeight: "bold", fontSize: "1.3rem" }}
+          >
             {props.price} $
           </p>
         )}

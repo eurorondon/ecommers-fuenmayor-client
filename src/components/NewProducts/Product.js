@@ -1,9 +1,14 @@
+import { Colors } from "../../utils/colors";
+
 export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
   return (
-    <div className=" card  text-start mx-1 " style={{ borderRadius: "10px" }}>
+    <div
+      className=" card  text-start  "
+      style={{ borderRadius: "10px", marginLeft: "1px" }}
+    >
       {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
           className="mx-auto"
@@ -18,7 +23,7 @@ export default function Product(props) {
       </div> */}
       <div
         className=" d-flex justify-content-center align-items-center  "
-        style={{ width: "100%", padding: "5px" }}
+        style={{ width: "100%" }}
       >
         {props.url ? (
           <img
@@ -47,7 +52,7 @@ export default function Product(props) {
       </div>
 
       <div className="p-2" style={{ backgroundColor: "" }}>
-        <h5 className="name" style={{ fontWeight: "bold", color: "#00789D" }}>
+        <h5 className="name" style={{ fontWeight: "bold", color: "" }}>
           {props.name}
         </h5>
         {/* <div
@@ -67,7 +72,7 @@ export default function Product(props) {
           )}
         </div> */}
 
-        <p className="price" style={{ color: "#3b83bd", fontWeight: "bold" }}>
+        <p className="price" style={{ color: "", fontWeight: "bold" }}>
           {props.price} $
         </p>
       </div>

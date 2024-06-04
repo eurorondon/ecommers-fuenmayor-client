@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function CategoriasMobile({ categories, handleCategories }) {
   return (
-    <div
-      className=" py-3"
-      style={{ backgroundColor: "#040915", color: "white" }}
-    >
+    <div className=" py-3 container " style={{ backgroundColor: "#ffff" }}>
+      <h5 className="p-2 " style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+        Explora por categorias
+      </h5>
       <div
         style={{
           display: "flex",

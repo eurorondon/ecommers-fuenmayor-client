@@ -96,22 +96,6 @@ const GridProductSearch = () => {
         <Loading />
       </div>
     );
-  // if (products.length < 1)
-  //   return (
-  //     <div style={{ minHeight: "50vh" }}>
-  //       <div
-  //         style={{
-  //           display: "flex",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         <h1>Sin Resultados </h1>
-  //         <Link to={"/"} style={{ marginLeft: "10px" }}>
-  //           X
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   );
 
   return (
     <>

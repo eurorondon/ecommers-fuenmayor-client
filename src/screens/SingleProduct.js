@@ -144,7 +144,9 @@ const SingleProduct = ({ match }) => {
 
   return (
     <>
-      <Header />
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       {/* <button onClick={handleGoBack}>Volver</button> */}
       <div className="container single-product">
         <div className="row">

@@ -13,7 +13,9 @@ function AuthScreen() {
   console.log(authState);
   return (
     <>
-      <Header />
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       <div>
         {authState === "defaultAuth" && <DefaultAuth />}
         {authState === "signIn" && <SignIn />}

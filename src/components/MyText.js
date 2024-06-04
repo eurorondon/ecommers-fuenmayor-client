@@ -21,7 +21,7 @@ const styles = {
   },
   button: {
     fontSize: 18,
-    color: "#0000FF",
+    color: Colors.Ccuarto,
   },
   caption: {
     fontSize: 14,

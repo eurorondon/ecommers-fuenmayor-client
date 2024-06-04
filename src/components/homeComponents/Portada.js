@@ -1,27 +1,34 @@
 import React from "react";
+import { Colors } from "../../utils/colors";
 
 const Portada = () => {
   if (window.innerWidth < 576)
     return (
-      <div className="py-4" style={{ backgroundColor: "#ffff" }}>
+      <div
+        className="py-4 m-3 "
+        style={{ backgroundColor: Colors.Ccuarto, borderRadius: "3%" }}
+      >
         <div className="container">
-          <div className="row">
-            <div className="col-6 m-auto my-3 ">
-              <div className="d-flex justify-content-center aling-items-center  ">
-                <img
-                  src="/images/portada.png"
-                  style={{ maxWidth: "20rem" }}
-                ></img>
+          <div className="row ">
+            <div className="col-6  col-sm-6 d-flex  justify-content-center aling-items-center container ">
+              <div className="text-white ">
+                <div className="text-start">
+                  <h1
+                    className="mb-4"
+                    style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+                  >
+                    Todo lo que necesitas
+                  </h1>
+                </div>
+                <h5 style={{ fontSize: "1rem" }}>
+                  Los mejores articulos del hogar en tu tienda favorita
+                </h5>
+                {/* <button className="btn btn-dark mt-3">Comprar Ahora</button> */}
               </div>
             </div>
-
-            <div className="col-12  col-sm-6 d-flex flex-column justify-content-center aling-items-center container ">
-              <div className=" ">
-                <div className="text-start">
-                  <h1 style={{ fontWeight: "bold" }}>Todo lo que necesitas</h1>
-                </div>
-                <h5>Los mejores articulos del hogar en tu tienda favorita</h5>
-                {/* <button className="btn btn-dark mt-3">Comprar Ahora</button> */}
+            <div className="col-6  ">
+              <div className="d-flex justify-content-center aling-items-center  ">
+                <img src="/images/portada.png" className="img-fluid" />
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { Colors } from "../../utils/colors";
 export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
@@ -18,7 +19,7 @@ export default function Product(props) {
             alignItems: "center",
             borderRadius: "50%",
             left: "10px",
-            top: "5px",
+            top: "10px",
             // zIndex: "10px",
             position: "absolute",
           }}
@@ -71,8 +72,8 @@ export default function Product(props) {
         )}
       </div>
 
-      <div className="p-2" style={{ backgroundColor: "" }}>
-        <h5 className="name" style={{ fontWeight: "bold", color: "#00789D" }}>
+      <div className="px-2" style={{ backgroundColor: "" }}>
+        <h5 className="name" style={{ fontWeight: "bold", color: "" }}>
           {props.name}
         </h5>
         {/* <div>
@@ -89,11 +90,15 @@ export default function Product(props) {
 
         <div
           className="price      "
-          style={{ display: "flex", alignItems: "center" }}
+          style={{
+            display: "flex",
+            // justifyContent: "space-around",
+            alignItems: "center",
+          }}
         >
           <p
             style={{
-              color: "#3b83bd",
+              color: Colors.primary,
               fontWeight: "bold",
               // fontSize: "14px",
               marginRight: "20px",
@@ -108,7 +113,6 @@ export default function Product(props) {
               color: "gray",
             }}
           >
-            {" "}
             {props.price}$
           </p>
         </div>

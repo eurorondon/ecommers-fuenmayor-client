@@ -99,16 +99,49 @@ const Ofertas = () => {
 
   const FeaturedProducts = () => (
     <div style={{ overflow: "hidden" }}>
-      <div className="container  my-4 ">
-        <h4 className="  my-2">Nuestras Ofertas</h4>
-        <div
-          className=""
-          style={{ position: "relative", width: "100%", margin: "auto" }}
-        >
-          <Slider {...settings} ref={sliderRef}>
-            {products}
-          </Slider>
-          {renderArrows()}
+      <div className="container  my-2 ">
+        <div className=" bg-white p-1 pt-2 ">
+          <div className="position-relative pb-2  ">
+            <h4
+              className="  "
+              style={{
+                lineHeight: "1.2",
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+                display: "block",
+                margin: 0,
+                padding: 0,
+              }}
+            >
+              Aprovecha estas ofertas
+            </h4>
+            <div
+              className="border border-danger position-absolute  rounded-pill px-2 "
+              style={{
+                right: "10px",
+                top: "0",
+                fontSize: "0.8rem",
+                borderBottom: "1px solid #f42a54",
+                color: "#ffff",
+                backgroundColor: "#f42a54",
+                fontWeight: "",
+              }}
+            >
+              <span className="" style={{ fontWeight: "" }}>
+                Desde 1$ aqui
+              </span>
+            </div>
+          </div>
+
+          <div
+            className=" "
+            style={{ position: "relative", width: "100%", margin: "auto" }}
+          >
+            <Slider {...settings} ref={sliderRef}>
+              {products}
+            </Slider>
+            {renderArrows()}
+          </div>
         </div>
       </div>
     </div>

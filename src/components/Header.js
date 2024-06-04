@@ -4,15 +4,13 @@ import { LocationOn } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import TabMenu from "./TabMenu";
-
-// import { setSearch } from "../features/categories/categorySlice";
+import { Colors } from "../utils/colors";
+import SubMenu from "./SubMenu";
 
 const Header = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
-
   const [searchInput, setSearchInput] = React.useState("");
-
   const { cartItems } = useSelector((state) => state.cart);
   const [cartCount, setCartCount] = useState(cartItems.length);
   const [activeButton, setActiveButton] = useState(0);
@@ -54,13 +52,9 @@ const Header = () => {
     <>
       <div>
         {/* Top Header */}
-        <div className="Announcement  ">
+        <div className=" " style={{ backgroundColor: Colors.Cprimary }}>
           <div className="container">
             <div className="row">
-              {/* <div className="col-md-6 d-flex align-items-center display-none">
-              <p>+255 768 356 890</p>
-              <p>info@zpunet.com</p>
-            </div> */}
               {window.innerWidth < 768 ? (
                 <p
                   className="text-white text-center"
@@ -85,21 +79,24 @@ const Header = () => {
         <div
           className="header"
           style={{
-            backgroundColor: "#040915",
+            backgroundColor: "#ffeeee",
           }}
         >
           <div className="container">
             {/* MOBILE HEADER */}
-            <div className="mobile-header ">
-              <div className="container">
+            <div className="mobile-header">
+              <div className="">
                 <div className=" row   ">
                   <div className="col-2  d-flex justify-content-center align-items-center ">
                     <Link className=" " to="/">
-                      <div className="  " style={{ minHeight: "60px" }}>
+                      <div
+                        className="bg-white rounded-circle p-1 "
+                        style={{ minHeight: "50px", minWidth: "50px" }}
+                      >
                         <img
                           alt="logo"
-                          src="/images/logo.jpg"
-                          className="rounded-circle"
+                          src="/images/logo.png"
+                          className="img-fluid"
                         />
                       </div>
                     </Link>
@@ -111,6 +108,12 @@ const Header = () => {
                         className="form-control rounded-left search"
                         placeholder="Buscar..."
                         onChange={(e) => setSearchInput(e.target.value)}
+                        style={{
+                          borderTopLeftRadius: "50px",
+                          borderBottomLeftRadius: "50px",
+                          borderTopRightRadius: "0px",
+                          borderBottomRightRadius: "0px",
+                        }}
                       />
                       <button type="submit" className="search-button">
                         <SearchIcon />
@@ -118,35 +121,10 @@ const Header = () => {
                     </form>
                   </div>
                   <div className="col-1   d-flex align-items-center justify-content-center  Login-Register">
-                    {/* <div className="btn-group">
-                    <button
-                      type="button"
-                      className="name-button dropdown-toggle text-white"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "none",
-                        fontSize: "1.3rem",
-                      }}
-                    >
-                      <PersonOutline style={{ fontSize: "1.8rem" }} />
-                    </button>
-                    <div className="dropdown-menu">
-                      <Link className="dropdown-item" to="/profile">
-                        Profile
-                      </Link>
-
-                      <Link className="dropdown-item" to="#">
-                        Logout
-                      </Link>
-                    </div>
-                  </div> */}
-                    <Link to="/cart" className="cart-mobile-icon text-white">
+                    <Link to="/cart" className="cart-mobile-icon ">
                       <i
                         className="fas fa-shopping-bag me-3"
-                        style={{ fontSize: "1.1rem" }}
+                        style={{ fontSize: "1.5rem" }}
                       ></i>
                       {cartCount > 0 && (
                         <div
@@ -160,7 +138,6 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-              <TabMenu activeButton={activeButton} />
             </div>
 
             {/* PC HEADER */}
@@ -198,27 +175,6 @@ const Header = () => {
                   </form>
                 </div>
                 <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
-                  {/* <div className="btn-group">
-                  <button
-                    type="button"
-                    className="name-button dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Hi, Admin Doe
-                  </button>
-                  <div className="dropdown-menu">
-                    <Link className="dropdown-item" to="/profile">
-                      Profile
-                    </Link>
-
-                    <Link className="dropdown-item" to="#">
-                      Logout
-                    </Link>
-                  </div>
-                </div> */}
-
                   <Link to="/cart">
                     <i
                       className="fas fa-shopping-bag me-3 text-white"
@@ -242,6 +198,8 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <SubMenu />
+      <TabMenu activeButton={activeButton} />
     </>
   );
 };

@@ -100,7 +100,9 @@ function PerfilScreen() {
 
   return (
     <div>
-      <Header />
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       {isLoadingOrders ? (
         <Loading />
       ) : (

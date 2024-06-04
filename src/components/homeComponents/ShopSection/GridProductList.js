@@ -105,25 +105,16 @@ const GridProductList = () => {
         <Loading />
       </div>
     );
-  // if (products.length < 1)
-  //   return (
-  //     <div style={{ minHeight: "50vh" }}>
-  //       <div
-  //         style={{
-  //           display: "flex",
-  //           alignItems: "center",
-  //         }}
-  //       >
-  //         <h1>Sin Resultados </h1>
-  //         <Link to={"/"} style={{ marginLeft: "10px" }}>
-  //           X
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   );
 
   return (
-    <>
+    <div
+      className=""
+      style={{
+        background: "linear-gradient(to bottom, white 0%, #efefef 100px)",
+        backgroundSize: "100% 100px", // Aplica el gradiente en los primeros 100px
+        backgroundRepeat: "no-repeat", // Evita que el gradiente se repita
+      }}
+    >
       {category ? (
         <div
           className="  px-4 py-1 mt-2 mb-4 border shadow   bg-white rounded-pill"
@@ -159,7 +150,19 @@ const GridProductList = () => {
           </Link>
         </div>
       ) : (
-        <h4 className="mb-2">Todos los Articulos</h4>
+        <h4
+          className="mb-2 p-2"
+          style={{
+            lineHeight: "1.2",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            display: "block",
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          Todos los Articulos
+        </h4>
       )}
       <div className="mb-5">
         <InfiniteScroll
@@ -172,7 +175,7 @@ const GridProductList = () => {
           //   </div>
           // }
         >
-          <div className=" grid mx-auto ">
+          <div className=" grid gap-1 mx-auto ">
             {products?.map((product) => (
               <div key={product.id}>
                 <div
@@ -207,7 +210,7 @@ const GridProductList = () => {
           Error de Conexion
         </div>
       )}
-    </>
+    </div>
   );
 };
 

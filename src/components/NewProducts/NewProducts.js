@@ -70,8 +70,8 @@ const NewProducts = () => {
       {
         breakpoint: 464,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
         },
       },
     ],
@@ -92,16 +92,66 @@ const NewProducts = () => {
 
   const FeaturedProducts = () => (
     <div style={{ overflow: "hidden" }}>
-      <div className="container mx-auto my-4">
-        <h4 className=" my-2">Lo mas Nuevo</h4>
+      <div className="container mx-auto my-2   ">
         <div
-          className=""
-          style={{ position: "relative", width: "100%", margin: "auto" }}
+          className="position-relative"
+          style={{ background: "linear-gradient(to bottom, white, #efefef)" }}
         >
-          <Slider {...settings} ref={sliderRef}>
-            {products}
-          </Slider>
-          {renderArrows()}
+          <div className=" justify-content-between ">
+            <div className=" p-2  ">
+              <div className="d-flex justify-content-between">
+                <span
+                  className=""
+                  style={{
+                    lineHeight: "1.2",
+                    fontWeight: "bold",
+                    fontSize: "1.2rem",
+                    display: "block",
+                    margin: 0,
+                    padding: 0,
+                  }}
+                >
+                  Lo más nuevo
+                </span>
+                <div
+                  className="border border-danger position-absolute  rounded-pill px-2 "
+                  style={{
+                    right: "10px",
+                    fontSize: "0.9rem",
+                    borderBottom: "1px solid #f42a54",
+                    color: "#f42a54",
+                  }}
+                >
+                  <span>Ver mas aqui</span>
+                </div>
+              </div>
+
+              <span
+                style={{
+                  lineHeight: "1.2",
+                  fontSize: "0.9rem",
+                  fontWeight: "lighter",
+                  display: "block",
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                Compra al mayor a partir de 6 piezas
+              </span>
+            </div>
+
+            {/* <button>hola</button> */}
+          </div>
+
+          <div
+            className=""
+            style={{ position: "relative", width: "100%", margin: "auto" }}
+          >
+            <Slider {...settings} ref={sliderRef}>
+              {products}
+            </Slider>
+            {renderArrows()}
+          </div>
         </div>
       </div>
     </div>

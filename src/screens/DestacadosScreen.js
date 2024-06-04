@@ -44,7 +44,9 @@ function DestacadosScreen() {
 
   return (
     <div>
-      <Header />
+      <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+        <Header />
+      </div>
       {isLoading ? (
         <div
           className="d-flex justify-content-center align-items-center"

@@ -8,6 +8,7 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 
 import { useNavigate } from "react-router-dom";
+import { Colors } from "../utils/colors";
 
 function TabMenu({ activeButton }) {
   const navigate = useNavigate();
@@ -41,10 +42,10 @@ function TabMenu({ activeButton }) {
   };
 
   return (
-    <div>
+    <div className="" style={{ backgroundColor: "#eef8ff" }}>
       {
         <div
-          className="pt-2    "
+          className="py-2    "
           style={{
             bottom: "0px",
             width: "100%",
@@ -56,11 +57,11 @@ function TabMenu({ activeButton }) {
           >
             <div
               className="col      "
-              style={
-                activeButton === 0
-                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
-                  : {}
-              }
+              // style={
+              //   activeButton === 0
+              //     ? { backgroundColor: "white", borderRadius: "0.25rem" }
+              //     : {}
+              // }
             >
               <div
                 onClick={() => handleNavigate("/")}
@@ -74,15 +75,15 @@ function TabMenu({ activeButton }) {
                 <OtherHousesOutlinedIcon
                   style={
                     activeButton === 0
-                      ? { color: "#007aff", fontSize: "20px" }
-                      : { color: "#ffff", fontSize: "20px" }
+                      ? { color: Colors.Ccuarto, fontSize: "20px" }
+                      : { color: "", fontSize: "20px" }
                   }
                 />
                 <span
                   style={
                     activeButton === 0
-                      ? { fontSize: "10px", color: "#007aff" }
-                      : { fontSize: "10px", color: "#ffff" }
+                      ? { fontSize: "10px", color: Colors.Ccuarto }
+                      : { fontSize: "10px", color: "" }
                   }
                 >
                   Home
@@ -93,7 +94,7 @@ function TabMenu({ activeButton }) {
               className="col rounded   "
               style={
                 activeButton === 1
-                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  ? { backgroundColor: "", borderRadius: "0.25rem" }
                   : {}
               }
             >
@@ -107,21 +108,19 @@ function TabMenu({ activeButton }) {
                 }}
               >
                 <CategoryOutlinedIcon
-                  // fontSize="large"
-                  // style={{ color: "#007aff", fontSize: "25px" }}
                   style={
                     activeButton === 1
-                      ? { color: "#007aff", fontSize: "20px" }
-                      : { color: "#ffff", fontSize: "20px" }
+                      ? { color: Colors.Ccuarto, fontSize: "20px" }
+                      : { color: "", fontSize: "20px" }
                   }
                 />
-                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                {/* <span className="" style={{ fontSize: "10px", color: "" }}> */}
                 <span
                   className=""
                   style={
                     activeButton === 1
-                      ? { fontSize: "10px", color: "#007aff" }
-                      : { fontSize: "10px", color: "#ffff" }
+                      ? { fontSize: "10px", color: Colors.Ccuarto }
+                      : { fontSize: "10px", color: "" }
                   }
                 >
                   Categorias
@@ -133,7 +132,7 @@ function TabMenu({ activeButton }) {
               className="col      "
               style={
                 activeButton === 2
-                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  ? { backgroundColor: "", borderRadius: "0.25rem" }
                   : {}
               }
             >
@@ -148,22 +147,19 @@ function TabMenu({ activeButton }) {
                 }}
               >
                 <LocalOfferOutlinedIcon
-                  // fontSize="large"
-
-                  // style={{ color: "#007aff", fontSize: "25px" }}
                   style={
                     activeButton === 2
-                      ? { color: "#007aff", fontSize: "20px" }
-                      : { color: "#ffff", fontSize: "20px" }
+                      ? { color: Colors.Ccuarto, fontSize: "20px" }
+                      : { color: "", fontSize: "20px" }
                   }
                 />
-                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                {/* <span className="" style={{ fontSize: "10px", color:  }}> */}
                 <span
                   className=""
                   style={
                     activeButton === 2
-                      ? { fontSize: "10px", color: "#007aff" }
-                      : { fontSize: "10px", color: "#ffff" }
+                      ? { fontSize: "10px", color: Colors.Ccuarto }
+                      : { fontSize: "10px", color: "" }
                   }
                 >
                   Ofertas
@@ -174,7 +170,7 @@ function TabMenu({ activeButton }) {
               className="col     "
               style={
                 activeButton === 3
-                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  ? { backgroundColor: "", borderRadius: "0.25rem" }
                   : {}
               }
             >
@@ -189,22 +185,19 @@ function TabMenu({ activeButton }) {
                 }}
               >
                 <BookmarkAddOutlinedIcon
-                  // fontSize="large"
-
-                  // style={{ color: "#007aff", fontSize: "25px" }}
                   style={
                     activeButton === 3
-                      ? { color: "#007aff", fontSize: "20px" }
-                      : { color: "#ffff", fontSize: "20px" }
+                      ? { color: Colors.Ccuarto, fontSize: "20px" }
+                      : { color: "", fontSize: "20px" }
                   }
                 />
-                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                {/* <span className="" style={{ fontSize: "10px", color:  }}> */}
                 <span
                   className=""
                   style={
                     activeButton === 3
-                      ? { fontSize: "10px", color: "#007aff" }
-                      : { fontSize: "10px", color: "#ffff" }
+                      ? { fontSize: "10px", color: Colors.Ccuarto }
+                      : { fontSize: "10px", color: "" }
                   }
                 >
                   +Vendidos
@@ -215,7 +208,7 @@ function TabMenu({ activeButton }) {
               className="col"
               style={
                 activeButton === 4
-                  ? { backgroundColor: "white", borderRadius: "0.25rem" }
+                  ? { backgroundColor: "", borderRadius: "0.25rem" }
                   : {}
               }
             >
@@ -230,22 +223,19 @@ function TabMenu({ activeButton }) {
                 }}
               >
                 <Person2OutlinedIcon
-                  // fontSize="large"
-
-                  // style={{ color: "#007aff", fontSize: "25px" }}
                   style={
                     activeButton === 4
-                      ? { color: "#007aff", fontSize: "20px" }
-                      : { color: "#ffff", fontSize: "20px" }
+                      ? { color: Colors.Ccuarto, fontSize: "20px" }
+                      : { color: "", fontSize: "20px" }
                   }
                 />
-                {/* <span className="" style={{ fontSize: "10px", color: "#007aff" }}> */}
+                {/* <span className="" style={{ fontSize: "10px", color: "" }}> */}
                 <span
                   className=""
                   style={
                     activeButton === 4
-                      ? { fontSize: "10px", color: "#007aff" }
-                      : { fontSize: "10px", color: "#ffff" }
+                      ? { fontSize: "10px", color: Colors.Ccuarto }
+                      : { fontSize: "10px", color: "" }
                   }
                 >
                   Perfil
