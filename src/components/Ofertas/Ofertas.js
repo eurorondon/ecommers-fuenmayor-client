@@ -99,7 +99,7 @@ const Ofertas = () => {
 
   const FeaturedProducts = () => (
     <div style={{ overflow: "hidden" }}>
-      <div className="container  my-2 ">
+      <div className="  my-2 ">
         <div className=" bg-white p-1 pt-2 ">
           <div className="position-relative pb-2  ">
             <h4

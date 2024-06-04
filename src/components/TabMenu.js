@@ -48,15 +48,15 @@ function TabMenu({ activeButton }) {
           className="py-2    "
           style={{
             bottom: "0px",
-            width: "100%",
+            // width: "100%",
           }}
         >
           <div
-            className=""
-            style={{ display: "flex", justifyContent: "space-between" }}
+            className={window.innerWidth > 1024 && "container"}
+            style={{ display: "flex", justifyContent: "space-around" }}
           >
             <div
-              className="col      "
+              className="      "
               // style={
               //   activeButton === 0
               //     ? { backgroundColor: "white", borderRadius: "0.25rem" }
@@ -65,11 +65,12 @@ function TabMenu({ activeButton }) {
             >
               <div
                 onClick={() => handleNavigate("/")}
-                className="col "
+                className=" "
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  cursor: "pointer",
                 }}
               >
                 <OtherHousesOutlinedIcon
@@ -91,7 +92,7 @@ function TabMenu({ activeButton }) {
               </div>
             </div>
             <div
-              className="col rounded   "
+              className=" rounded   "
               style={
                 activeButton === 1
                   ? { backgroundColor: "", borderRadius: "0.25rem" }
@@ -105,6 +106,7 @@ function TabMenu({ activeButton }) {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  cursor: "pointer",
                 }}
               >
                 <CategoryOutlinedIcon
@@ -129,7 +131,7 @@ function TabMenu({ activeButton }) {
             </div>
             {/* <div>Cupon</div> */}
             <div
-              className="col      "
+              className="    "
               style={
                 activeButton === 2
                   ? { backgroundColor: "", borderRadius: "0.25rem" }
@@ -144,6 +146,7 @@ function TabMenu({ activeButton }) {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  cursor: "pointer",
                 }}
               >
                 <LocalOfferOutlinedIcon
@@ -167,7 +170,7 @@ function TabMenu({ activeButton }) {
               </div>
             </div>
             <div
-              className="col     "
+              className="     "
               style={
                 activeButton === 3
                   ? { backgroundColor: "", borderRadius: "0.25rem" }
@@ -182,6 +185,7 @@ function TabMenu({ activeButton }) {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  cursor: "pointer",
                 }}
               >
                 <BookmarkAddOutlinedIcon
@@ -205,7 +209,7 @@ function TabMenu({ activeButton }) {
               </div>
             </div>
             <div
-              className="col"
+              className=""
               style={
                 activeButton === 4
                   ? { backgroundColor: "", borderRadius: "0.25rem" }
@@ -220,6 +224,7 @@ function TabMenu({ activeButton }) {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  cursor: "pointer",
                 }}
               >
                 <Person2OutlinedIcon

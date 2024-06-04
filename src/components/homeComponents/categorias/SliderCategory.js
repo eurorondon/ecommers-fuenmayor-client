@@ -8,8 +8,8 @@ import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-function SliderCategory() {
-  const [categories, setCategories] = React.useState([]);
+function SliderCategory({ categories }) {
+  // const [categories, setCategories] = React.useState([]);
   const sliderRef = useRef(null);
   const navigate = useNavigate();
 
@@ -19,17 +19,17 @@ function SliderCategory() {
     // alert("categories scroll 0,0");
   };
 
-  const { data: dataCategories, error } = useQuery(
-    ["AllCategories"],
-    getCategories,
-    {}
-  );
+  // const { data: dataCategories, error } = useQuery(
+  //   ["AllCategories"],
+  //   getCategories,
+  //   {}
+  // );
 
-  React.useEffect(() => {
-    if (dataCategories) {
-      setCategories(dataCategories);
-    }
-  }, [dataCategories]);
+  // React.useEffect(() => {
+  //   if (dataCategories) {
+  //     setCategories(dataCategories);
+  //   }
+  // }, [dataCategories]);
 
   const settings = {
     dots: true,
@@ -42,8 +42,8 @@ function SliderCategory() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToShow: 5,
+          slidesToScroll: 5,
         },
       },
       {
@@ -84,25 +84,24 @@ function SliderCategory() {
             className=" pt-3 "
             style={{
               position: "relative",
-              backgroundColor: "#040915",
-              color: "white",
+              // backgroundColor: "#040915",
+              color: "",
             }}
           >
             <ButtonBase
               sx={{
-                background: "gray",
+                backgroundColor: "	rgb(64,64,64, .3)",
                 position: "absolute",
                 left: "0",
                 top: "50%",
                 transform: "translateY(-50%)",
                 zIndex: "20",
-                opacity: 0.5,
                 height: "100%",
               }}
               className=""
               onClick={() => sliderRef.current.slickPrev()}
             >
-              <ArrowLeft sx={{ color: "#ffff" }} />
+              <ArrowLeft sx={{ color: "white", fontSize: "28px" }} />
             </ButtonBase>
 
             <div className="col-12" style={{}}>
@@ -118,8 +117,8 @@ function SliderCategory() {
                       // to={`/categories/${category.categoryName}`}
                       onClick={() => handleCategories(category)}
                       style={{
-                        width: "20vw",
-                        height: "20vw",
+                        width: window.innerWidth < 768 ? "20vw" : "13vw",
+                        height: window.innerWidth < 768 ? "20vw" : "13vw",
                         borderRadius: "50%",
                         backgroundColor: "#CCCCCC",
                         display: "flex",
@@ -140,7 +139,7 @@ function SliderCategory() {
                       />
                     </div>
                     <div
-                      className="bg-danger mt-1"
+                      className=" mt-1"
                       style={{ fontSize: "0.8rem", textAlign: "center" }}
                     >
                       <span>{category.categoryName}</span>
@@ -156,18 +155,17 @@ function SliderCategory() {
             <ButtonBase
               // className="col-1"
               sx={{
-                background: "gray",
+                backgroundColor: "	rgb(64,64,64, .3)",
                 position: "absolute",
                 right: "0",
                 top: "50%",
                 transform: "translateY(-50%)",
                 zIndex: "20",
-                opacity: 0.5,
                 height: "100%",
               }}
               onClick={() => sliderRef.current.slickNext()}
             >
-              <ArrowRight />
+              <ArrowRight sx={{ color: "white", fontSize: "28px" }} />
             </ButtonBase>
           </div>
         </div>

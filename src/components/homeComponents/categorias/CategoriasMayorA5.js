@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function CategoriasMayorA5({ categories, handleCategories }) {
   return (
     <div
-      className="py-5"
+      className="py-2"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -18,8 +18,8 @@ function CategoriasMayorA5({ categories, handleCategories }) {
             to={`/categories/${category.categoryName}`}
             onClick={() => handleCategories(category)}
             style={{
-              width: "120px",
-              height: "120px",
+              width: "100px",
+              height: "100px",
               borderRadius: "50%",
               backgroundColor: "#CCCCCC",
               display: "flex",

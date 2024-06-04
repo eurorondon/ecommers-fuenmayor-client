@@ -2,9 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function CategoriasMobile({ categories, handleCategories }) {
+  const displayedCategories =
+    window.innerWidth < 768 ? categories.slice(0, 4) : categories.slice(0, 5);
+
   return (
-    <div className=" py-3 container " style={{ backgroundColor: "#ffff" }}>
-      <h5 className="p-2 " style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+    <div className=" py-3  " style={{ backgroundColor: "#ffff" }}>
+      <h5
+        className="p-2 text-center "
+        style={
+          window.innerWidth < 768
+            ? { fontWeight: "bold", fontSize: "1.2rem" }
+            : { fontWeight: "bold", fontSize: "1.5rem" }
+        }
+      >
         Explora por categorias
       </h5>
       <div
@@ -15,7 +25,7 @@ function CategoriasMobile({ categories, handleCategories }) {
           margin: "10px 0px",
         }}
       >
-        {categories?.slice(0, 4).map((category, index) => (
+        {displayedCategories.map((category, index) => (
           <div
             className=""
             key={index}
@@ -26,8 +36,8 @@ function CategoriasMobile({ categories, handleCategories }) {
               // to={`/categories/${category.categoryName}`}
               onClick={() => handleCategories(category)}
               style={{
-                width: "20vw",
-                height: "20vw",
+                width: window.innerWidth < 768 ? "20vw" : "8rem",
+                height: window.innerWidth < 768 ? "20vw" : "8rem",
                 borderRadius: "50%",
                 backgroundColor: "#CCCCCC",
                 display: "flex",
@@ -56,14 +66,14 @@ function CategoriasMobile({ categories, handleCategories }) {
           </div>
         ))}
       </div>
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "center  ",
           // backgroundColor: "#D8EAF2",
         }}
       >
-        {categories?.slice(4, 8).map((category, index) => (
+        {categories?.slice(4, 7).map((category, index) => (
           <div
             className=""
             key={index}
@@ -103,7 +113,7 @@ function CategoriasMobile({ categories, handleCategories }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
     </div>
   );

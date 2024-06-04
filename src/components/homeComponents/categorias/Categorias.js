@@ -18,50 +18,53 @@ import CatResponsive6 from "./CatResponsive6";
 import CatResponsive8 from "./CatResponsive8";
 import CatTablet7 from "./CatTablet7";
 import CatTablet8 from "./CatTablet8";
+import SliderCategory from "./SliderCategory";
+import CategoriasMobileButtom from "./CategoriasMobileButtom";
+import CategoriaPc from "./CategoriaPc";
 Amplify.configure(amplifyconfig);
 
-const categories = [
-  // {
-  //   name: "Conservador",
-  //   products: 8,
-  //   imageUrl: "/images/cocina.png",
-  // },
-  // {
-  //   name: "Mujer",
-  //   products: 12,
-  //   imageUrl: "/images/belleza.png",
-  // },
-  // {
-  //   name: "Contenedor",
-  //   products: 12,
-  //   imageUrl: "/images/contenedores.png",
-  // },
-  // {
-  //   name: "Electricos",
-  //   products: 12,
-  //   imageUrl: "/images/limpieza.png",
-  // },
-  // {
-  //   name: "Sonido",
-  //   products: 12,
-  //   imageUrl: "/images/sonido.png",
-  // },
-  // {
-  //   name: "Coleccionables",
-  //   products: 12,
-  //   imageUrl: "/images/coleccionables.png",
-  // },
-  // {
-  //   name: "Coleccionables",
-  //   products: 12,
-  //   imageUrl: "/images/coleccionables.png",
-  // },
-  // {
-  //   name: "Coleccionables",
-  //   products: 12,
-  //   imageUrl: "/images/coleccionables.png",
-  // },
-];
+// const categories = [
+//   {
+//     name: "Conserva",
+//     products: 8,
+//     imageUrl: "/images/cocina.png",
+//   },
+//   {
+//     name: "Mujer",
+//     products: 12,
+//     imageUrl: "/images/belleza.png",
+//   },
+//   {
+//     name: "Contene",
+//     products: 12,
+//     imageUrl: "/images/contenedores.png",
+//   },
+//   {
+//     name: "Electricos",
+//     products: 12,
+//     imageUrl: "/images/limpieza.png",
+//   },
+//   {
+//     name: "Sonido",
+//     products: 12,
+//     imageUrl: "/images/sonido.png",
+//   },
+//   {
+//     name: "Coleccionables",
+//     products: 12,
+//     imageUrl: "/images/coleccionables.png",
+//   },
+//   {
+//     name: "Coleccionables",
+//     products: 12,
+//     imageUrl: "/images/coleccionables.png",
+//   },
+//   {
+//     name: "Coleccionables",
+//     products: 12,
+//     imageUrl: "/images/coleccionables.png",
+//   },
+// ];
 
 const Categorias = () => {
   const navigate = useNavigate();
@@ -76,64 +79,62 @@ const Categorias = () => {
     setCategories(dataCategories);
   }, [dataCategories]);
 
-  React.useEffect(() => {
-    setCategories(dataCategories);
-  }, [dataCategories]);
-
   const handleCategories = (category) => {
     window.scroll(0, 0);
     navigate(`/categories/${category.categoryName}`);
     // alert("categories scroll 0,0");
   };
 
+  if (!categories) {
+    return null; // O puedes devolver un indicador de carga aquí
+  }
+
+  //PC SCREENS
   if (window.innerWidth > 1150)
     return (
+      <CategoriaPc
+        categories={categories}
+        handleCategories={handleCategories}
+      />
+    );
+
+  // TABLETS SCREENS
+  if (window.innerWidth < 1150 && window.innerWidth > 768)
+    return (
       <>
-        {categories?.length >= 5 ? (
-          <CategoriasMayorA5
+        {categories.length === 6 ? (
+          <SliderCategory
             categories={categories}
             handleCategories={handleCategories}
           />
+        ) : categories.length > 6 ? (
+          <CategoriasMobileButtom
+            categories={categories}
+            setCategories={setCategories}
+            handleCategories={handleCategories}
+          />
         ) : (
-          <CategoriasMenorA5
+          <CategoriasMobile
             categories={categories}
             handleCategories={handleCategories}
           />
         )}
       </>
     );
-  if (window.innerWidth < 1150 && window.innerWidth > 768)
-    return categories?.length < 5 ? (
-      <CategoriasMenorA5
-        categories={categories}
-        handleCategories={handleCategories}
-      />
-    ) : categories?.length === 7 ? (
-      <CatTablet7 categories={categories} handleCategories={handleCategories} />
-    ) : categories?.length === 8 ? (
-      <CatTablet8 categories={categories} handleCategories={handleCategories} />
-    ) : (
-      <CategoriasMayorA5
-        categories={categories}
-        handleCategories={handleCategories}
-      />
-    );
+
+  //  MOBILE SCREENS
   if (window.innerWidth < 769 && categories?.length > 1)
     return (
       <>
         {categories.length === 5 ? (
-          <CatResponsive5
+          <SliderCategory
             categories={categories}
             handleCategories={handleCategories}
           />
-        ) : categories.length === 6 ? (
-          <CatResponsive6
+        ) : categories.length > 5 ? (
+          <CategoriasMobileButtom
             categories={categories}
-            handleCategories={handleCategories}
-          />
-        ) : categories.length === 8 ? (
-          <CatResponsive8
-            categories={categories}
+            setCategories={setCategories}
             handleCategories={handleCategories}
           />
         ) : (

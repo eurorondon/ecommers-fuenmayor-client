@@ -37,7 +37,10 @@ const Portada = () => {
     );
 
   return (
-    <div className="py-3 " style={{ backgroundColor: "#ffff" }}>
+    <div
+      className="py-3 m-4 rounded text-white "
+      style={{ backgroundColor: Colors.Ccuarto }}
+    >
       <div
         className={
           window.innerWidth < 768

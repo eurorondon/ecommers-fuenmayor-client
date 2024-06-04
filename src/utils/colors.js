@@ -10,4 +10,5 @@ export const Colors = {
   Csecondary: "#f42a54",
   Ctercer: "#72c1ff",
   Ccuarto: "#1f99f0",
+  Cquito: "#eef8ff",
 };

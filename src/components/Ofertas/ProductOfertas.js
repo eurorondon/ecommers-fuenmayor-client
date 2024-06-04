@@ -98,7 +98,7 @@ export default function Product(props) {
         >
           <p
             style={{
-              color: Colors.primary,
+              color: Colors.Cprimary,
               fontWeight: "bold",
               // fontSize: "14px",
               marginRight: "20px",

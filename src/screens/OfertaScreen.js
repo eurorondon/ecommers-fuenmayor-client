@@ -53,7 +53,7 @@ function OfertaScreen() {
           </div>
         </div>
       ) : (
-        <div className="m-3">
+        <div className="mt-3 container ">
           <h4 className="mb-3">Ofertas</h4>
           <div className="mb-5">
             <InfiniteScroll

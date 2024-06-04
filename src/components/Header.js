@@ -143,58 +143,52 @@ const Header = () => {
             {/* PC HEADER */}
             <div className="pc-header py-2">
               <div className="row">
-                <div className="col-md-3 col-4 d-flex align-items-center">
+                <div className="col-md-2 col-4 d-flex align-items-center ">
                   <Link className="navbar-brand" to="/">
                     <div className="rounded rounded-circle">
                       <img
                         alt="logo"
-                        src="/images/logo.jpg"
+                        src="/images/logo.png"
                         className="rounded-circle"
                         style={{ maxWidth: "10rem" }}
                       />
                     </div>
                   </Link>
                 </div>
-                <div className="col-md-6 col-8 d-flex align-items-center">
-                  <form className="input-group" onSubmit={handleSubmit}>
+                <div
+                  className="col-md-8 col-8 d-flex align-items-center justify-content-center "
+                  style={{}}
+                >
+                  <form className="input-group " onSubmit={handleSubmit}>
                     <input
                       type="search"
                       className="form-control rounded-left search"
                       placeholder="Buscar..."
-                      value={searchInput}
                       onChange={(e) => setSearchInput(e.target.value)}
+                      style={{
+                        borderTopLeftRadius: "50px",
+                        borderBottomLeftRadius: "50px",
+                        borderTopRightRadius: "0px",
+                        borderBottomRightRadius: "0px",
+                      }}
                     />
 
-                    <button
-                      type="search"
-                      className="search-button"
-                      // style={{ backgroundColor: "#1cb803" }}
-                    >
+                    <button type="search" className="search-button">
                       <SearchIcon />
                     </button>
                   </form>
                 </div>
-                <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
+                <div className="col-md-2 d-flex align-items-center justify-content-end Login-Register ">
                   <Link to="/cart">
                     <i
-                      className="fas fa-shopping-bag me-3 text-white"
-                      style={{ fontSize: "1.1rem" }}
+                      className="fas fa-shopping-bag me-3 "
+                      style={{ fontSize: "1.5rem" }}
                     ></i>
                     <span className="badge">{cartCount}</span>
                   </Link>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div
-          className="text-white pc-header py-2 "
-          style={{ backgroundColor: "#1A2339" }}
-        >
-          <div className="container d-flex justify-content-start gap-5">
-            <h5>Categorias</h5>
-            <h5>Contacto</h5>
-            <h5>Top Seller</h5>
           </div>
         </div>
       </div>
