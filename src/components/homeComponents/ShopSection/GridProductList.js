@@ -8,8 +8,6 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import { listProducts } from "../../../graphql/queries";
 import amplifyconfig from "../../../amplifyconfiguration.json";
-import { useDispatch, useSelector } from "react-redux";
-import { setCategories } from "../../../features/categories/categorySlice";
 import { useParams } from "react-router-dom";
 import CancelIcon from "@mui/icons-material/Cancel";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";

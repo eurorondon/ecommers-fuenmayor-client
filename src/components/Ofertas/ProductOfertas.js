@@ -6,7 +6,7 @@ export default function Product(props) {
   return (
     <div
       className="card text-start"
-      style={{ border: "none", borderRadius: "0" }}
+      style={{ border: "none", borderRadius: "0", minHeight: "13rem" }}
     >
       {props.offer && (
         <div

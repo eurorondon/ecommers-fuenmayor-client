@@ -7,7 +7,7 @@ export default function Product(props) {
   return (
     <div
       className=" card  text-start  "
-      style={{ borderRadius: "10px", marginLeft: "1px" }}
+      style={{ borderRadius: "10px", minHeight: "13rem", marginLeft: "1px" }}
     >
       {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img

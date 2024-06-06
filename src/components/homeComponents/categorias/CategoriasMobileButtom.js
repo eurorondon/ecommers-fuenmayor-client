@@ -78,7 +78,8 @@ function CategoriasMobileButtom({ categories, handleCategories }) {
             justifyContent: "center",
           }}
         >
-          <div
+          <Link
+            to={"/categories"}
             style={{
               width: window.innerWidth < 768 ? "20vw" : "12vw",
               height: window.innerWidth < 768 ? "20vw" : "12vw",
@@ -92,7 +93,7 @@ function CategoriasMobileButtom({ categories, handleCategories }) {
             }}
           >
             <AddCircleIcon sx={{ fontSize: "2.5rem" }} />
-          </div>
+          </Link>
           <span style={{ fontSize: "0.8rem" }}>{"Ver más"}</span>
         </div>
       </div>
