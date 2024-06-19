@@ -28,7 +28,7 @@ const GridProductSearch = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
-      ["infinity-products-search"],
+      [`infinity-products-search-${search}`],
 
       async ({ pageParam }) => {
         try {
@@ -90,7 +90,7 @@ const GridProductSearch = () => {
     refetch();
   }, [category, refetch, search]);
 
-  if (isLoading | isFetching)
+  if (isLoading)
     return (
       <div style={{ minHeight: "50vh" }}>
         <Loading />

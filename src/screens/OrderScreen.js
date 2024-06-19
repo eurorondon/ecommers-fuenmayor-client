@@ -62,26 +62,13 @@ const OrderScreen = () => {
   const telefono = "+584126773234";
   const mensaje = `👋 Hola, mi nombre es *${name}* \n Deseo comprar estos artículos: 💭 \n ${productos} \n Para pagar un total de 🔜 *${totalSubtotal}$* \n `;
 
-  // const HandlerSendWhatsapp = () => {
-  //   const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
-  //     mensaje
-  //   )}`;
-  //   window.open(url, "_blank"); // Abre la URL en una nueva pestaña o ventana del navegador
-
-  //   // dispatch(clearCart());
-  // };
-
-  // // separate
-
-  // HandlerSendWhatsapp();
-
   const handleCreateOrder = async () => {
     if (!cartItems.length > 0) {
       toast.error("No hay Items en el carrito");
       return;
     }
     alert(
-      "📋Te enviaremos a Whatsapp, Recuerda tu orden se ha guardado en tu perfil 🚀 "
+      "📋Te enviaremos a Whatsapp 🚀, \n por favor permite el accesso a ventana emergente "
     );
     try {
       const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
@@ -100,14 +87,6 @@ const OrderScreen = () => {
       return;
     } // Abre la URL en una nueva pestaña o ventana del navegador
   };
-
-  // const handleCreateOrder = async () => {
-  //   if (!cartItems.length > 0) {
-  //     toast.error("No hay Items en el carrito");
-  //     return;
-  //   }
-  //
-  // };
 
   return (
     <>
