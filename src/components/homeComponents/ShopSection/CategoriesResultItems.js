@@ -77,6 +77,10 @@ const CategoriesResultItemes = () => {
       []
     ) ?? [];
 
+  const productsList = products.filter(
+    (product) => product.status !== "Borrador"
+  );
+
   const handleNavigate = (id) => {
     window.scroll(0, 0);
     navigate(`/products/${id}`);
@@ -149,7 +153,7 @@ const CategoriesResultItemes = () => {
         <h2 className="mb-2">Todos los Articulos</h2>
       )}
 
-      {products.length < 1 && (
+      {productsList.length < 1 && (
         <div>
           <div className="d-flex justify-content-center">
             <img src="/images/notFound.png" style={{ maxWidth: "20rem" }}></img>
@@ -162,7 +166,7 @@ const CategoriesResultItemes = () => {
 
       <div className="mb-5">
         <InfiniteScroll
-          dataLength={products ? products.length : 0}
+          dataLength={productsList ? productsList.length : 0}
           hasMore={hasNextPage}
           next={() => fetchNextPage()}
           // loader={
@@ -172,7 +176,7 @@ const CategoriesResultItemes = () => {
           // }
         >
           <div className=" grid mx-auto ">
-            {products?.map((product) => (
+            {productsList?.map((product) => (
               <div key={product.id}>
                 <div
                   style={{ cursor: "pointer" }}
@@ -185,6 +189,7 @@ const CategoriesResultItemes = () => {
                     name={product.name}
                     description={product.description}
                     price={product.price}
+                    priceMayor={product.priceMayor}
                     offer={product.inOffer}
                     discountPercentage={product.discountPercentage}
                   />

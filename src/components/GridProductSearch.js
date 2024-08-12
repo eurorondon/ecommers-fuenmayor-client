@@ -26,17 +26,16 @@ const GridProductSearch = () => {
 
   const { category, search } = useParams();
 
+  const toLowerCase = (str) => {
+    return str.toLowerCase();
+  };
+
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
-      [`infinity-products-search-${search}`],
+      ["infinity-products-search"],
 
       async ({ pageParam }) => {
         try {
-          // const filter = {
-          //   ...(category ? { categories: { contains: category } } : {}),
-          //   // ...(search !== "" ? { name: { contains: search } } : {}),
-          // };
-
           let filter;
           if (category) {
             filter = { categories: { contains: category } };
@@ -44,7 +43,7 @@ const GridProductSearch = () => {
 
           if (search) {
             filter = {
-              name: { contains: capitalizeFirstLetter(search.slice(0, -1)) },
+              name: { contains: toLowerCase(search) },
             };
           }
 
@@ -80,6 +79,10 @@ const GridProductSearch = () => {
       (prevProducts, page) => prevProducts.concat(page.items),
       []
     ) ?? [];
+
+  const productsList = products.filter(
+    (product) => product.status !== "Borrador"
+  );
 
   const handleNavigate = (id) => {
     window.scroll(0, 0);
@@ -127,7 +130,7 @@ const GridProductSearch = () => {
         <h2 className="mb-2">Todos los Articulos</h2>
       )}
 
-      {products.length < 1 && (
+      {productsList.length < 1 && (
         <div>
           <div className="d-flex justify-content-center">
             <img src="/images/notFound.png" style={{ maxWidth: "20rem" }}></img>
@@ -149,7 +152,7 @@ const GridProductSearch = () => {
         // }
       >
         <div className=" grid mx-auto ">
-          {products?.map((product) => (
+          {productsList?.map((product) => (
             <div key={product.id}>
               <div
                 style={{ cursor: "pointer" }}

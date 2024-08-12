@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import { useQuery } from "@tanstack/react-query";
 import { getProductsInOfert } from "../../utils/graphqlFunctions";
+import { Colors } from "../../utils/colors";
 // import RenderArrows from "../RenderArrows";
 // import Loading from "../../Loading";
 // import Message from "../../LoadingError/Error";
@@ -19,7 +20,7 @@ const Ofertas = () => {
     ["ProductsInOffer"],
     getProductsInOfert
   );
-  const productList = data;
+  const productList = data?.filter((product) => product.status !== "Borrador");
   const sliderRef = useRef(null);
 
   if (isLoading) return null;
@@ -98,10 +99,10 @@ const Ofertas = () => {
     : null;
 
   const FeaturedProducts = () => (
-    <div style={{ overflow: "hidden" }}>
+    <div className="my-2" style={{ overflow: "hidden", backgroundColor: "" }}>
       <div className="  my-2 ">
-        <div className=" bg-white p-1 pt-2 ">
-          <div className="position-relative pb-2  ">
+        <div className="  p-1 pt-2  pb-2" style={{ backgroundColor: "white" }}>
+          <div className="position-relative pb-3  ">
             <h4
               className="  "
               style={{

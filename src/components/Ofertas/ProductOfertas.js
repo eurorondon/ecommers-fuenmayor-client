@@ -3,10 +3,19 @@ export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
+  const capitalizeFirstLetter = (str) => {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
     <div
       className="card text-start"
-      style={{ border: "none", borderRadius: "0", minHeight: "13rem" }}
+      style={{
+        border: "none",
+        borderRadius: "0",
+        minHeight: "10rem",
+        marginLeft: "5px",
+      }}
     >
       {props.offer && (
         <div
@@ -74,7 +83,7 @@ export default function Product(props) {
 
       <div className="px-2" style={{ backgroundColor: "" }}>
         <h5 className="name" style={{ fontWeight: "bold", color: "" }}>
-          {props.name}
+          {capitalizeFirstLetter(props.name)}
         </h5>
         {/* <div>
           {props.description ? (

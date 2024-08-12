@@ -4,10 +4,14 @@ export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
 
+  const capitalizeFirstLetter = (str) => {
+    if (str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
     <div
       className=" card  text-start  "
-      style={{ borderRadius: "10px", minHeight: "13rem", marginLeft: "1px" }}
+      style={{ borderRadius: "10px", minHeight: "10rem", marginLeft: "1px" }}
     >
       {/* <div className="mx-auto" style={{ maxWidth: "14rem" }}>
         <img
@@ -53,7 +57,7 @@ export default function Product(props) {
 
       <div className="p-2" style={{ backgroundColor: "" }}>
         <h5 className="name" style={{ fontWeight: "bold", color: "" }}>
-          {props.name}
+          {capitalizeFirstLetter(props.name)}
         </h5>
         {/* <div
           className=""
@@ -72,9 +76,17 @@ export default function Product(props) {
           )}
         </div> */}
 
-        <p className="price" style={{ color: "", fontWeight: "bold" }}>
-          {props.price} $
+        <p className="" style={{ color: "", fontSize: "0.9rem" }}>
+          Detal:{" "}
+          <span style={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+            {props.price} $
+          </span>
         </p>
+        {props.priceMayor > 0 && props.priceMayor !== null && (
+          <p className="" style={{ color: "", fontSize: "0.9rem" }}>
+            Mayor: <span style={{}}>{props.priceMayor} $</span>
+          </p>
+        )}
       </div>
     </div>
   );

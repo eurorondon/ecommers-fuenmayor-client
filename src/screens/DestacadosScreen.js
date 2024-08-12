@@ -41,6 +41,9 @@ function DestacadosScreen() {
   //   ) ?? [];
 
   const products = data?.pages.flat();
+  const productList = products?.filter(
+    (product) => product.status !== "Borrador"
+  );
 
   return (
     <div>
@@ -71,7 +74,7 @@ function DestacadosScreen() {
               // }
             >
               <div className=" grid mx-auto ">
-                {products?.map((product) => (
+                {productList?.map((product) => (
                   <div key={product.id}>
                     <div
                       style={{ cursor: "pointer" }}

@@ -28,6 +28,7 @@ export const createProduct = /* GraphQL */ `
       rating
       numReviews
       price
+      priceMayor
       countInStock
       createdAt
       type
@@ -35,6 +36,7 @@ export const createProduct = /* GraphQL */ `
       inOffer
       discountPercentage
       bestSellers
+      status
       id
       __typename
     }
@@ -67,6 +69,7 @@ export const updateProduct = /* GraphQL */ `
       rating
       numReviews
       price
+      priceMayor
       countInStock
       createdAt
       type
@@ -74,6 +77,7 @@ export const updateProduct = /* GraphQL */ `
       inOffer
       discountPercentage
       bestSellers
+      status
       id
       __typename
     }
@@ -106,6 +110,7 @@ export const deleteProduct = /* GraphQL */ `
       rating
       numReviews
       price
+      priceMayor
       countInStock
       createdAt
       type
@@ -113,6 +118,7 @@ export const deleteProduct = /* GraphQL */ `
       inOffer
       discountPercentage
       bestSellers
+      status
       id
       __typename
     }
@@ -126,7 +132,8 @@ export const createCategories = /* GraphQL */ `
     createCategories(input: $input, condition: $condition) {
       id
       categoryName
-      description
+      showInCarousel
+      bgColor
       photo {
         url
         publicId
@@ -146,7 +153,8 @@ export const updateCategories = /* GraphQL */ `
     updateCategories(input: $input, condition: $condition) {
       id
       categoryName
-      description
+      showInCarousel
+      bgColor
       photo {
         url
         publicId
@@ -166,7 +174,8 @@ export const deleteCategories = /* GraphQL */ `
     deleteCategories(input: $input, condition: $condition) {
       id
       categoryName
-      description
+      showInCarousel
+      bgColor
       photo {
         url
         publicId

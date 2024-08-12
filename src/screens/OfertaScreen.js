@@ -35,9 +35,10 @@ function OfertaScreen() {
   //   ) ?? [];
 
   const products = data?.pages.flat();
-  console.log("productos en oferta", products);
+  const productList = products?.filter(
+    (product) => product.status !== "Borrador"
+  );
 
-  // console.log("this is offer", data?.pages);
   return (
     <div>
       <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
@@ -67,7 +68,7 @@ function OfertaScreen() {
               // }
             >
               <div className=" grid mx-auto ">
-                {products?.map((product) => (
+                {productList?.map((product) => (
                   <div key={product.id}>
                     <div
                       style={{ cursor: "pointer" }}

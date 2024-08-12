@@ -5,21 +5,63 @@ import "slick-carousel/slick/slick-theme.css";
 import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import Product from "../NewProducts/Product";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ListProductsByDate, getProducts } from "../../utils/graphqlFunctions";
-import { Colors } from "../../utils/colors";
+import { listProducts } from "../../graphql/queries";
+import { generateClient } from "aws-amplify/api";
 
-const NewProducts = () => {
-  const { data, isLoading, isError } = useQuery(
-    ["NewProducts"],
-    ListProductsByDate
+const Filter = ({ name, bgColor }) => {
+  const navigate = useNavigate();
+  const handleCategories = (name) => {
+    window.scroll(0, 0);
+    navigate(`/categories/${name}`);
+    // alert("categories scroll 0,0");
+  };
+
+  const client = generateClient();
+  const {
+    data,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    refetch,
+    isFetching,
+  } = useQuery(
+    [name],
+    async () => {
+      try {
+        const productsData = await client.graphql({
+          query: listProducts,
+          variables: {
+            limit: 200,
+            filter: { categories: { contains: name } },
+            // nextToken: pageParam,
+          },
+        });
+
+        return productsData.data.listProducts;
+      } catch (err) {
+        console.error("Error fetching todos", err.errors);
+        throw err;
+      }
+    },
+    {
+      // refetchOnMount: false,
+      // refetchInterval: false,
+      // refetchOnWindowFocus: false,
+      // refetchIntervalInBackground: false,
+
+      getNextPageParam: (lastPage) => {
+        return lastPage.nextToken || null;
+      },
+    }
   );
 
-  const productList = data?.filter(
-    (products) => products.status !== "Borrador"
+  const productList = data?.items?.filter(
+    (product) => product.status !== "Borrador"
   );
-  // const productList = data?.items?.filter((product) => product.status !== "Borrador");
+
   const sliderRef = useRef(null);
   if (isLoading) return null;
   if (isError) return null;
@@ -89,6 +131,7 @@ const NewProducts = () => {
             name={item.name}
             description={item.description}
             price={item.price}
+            priceMayor={item.priceMayor}
           />
         </Link>
       ))
@@ -97,11 +140,11 @@ const NewProducts = () => {
   const FeaturedProducts = () => (
     <div
       className="my-2"
-      style={{ overflow: "hidden", backgroundColor: "white" }}
+      style={{ overflow: "hidden", backgroundColor: bgColor }}
     >
       <div
         className="container  mb-2  pb-4"
-        // style={{ backgroundColor: Colors.Cprimary }}
+        // style={{ backgroundColor: Colors.Ctercer }}
       >
         <div
           className="position-relative"
@@ -121,10 +164,11 @@ const NewProducts = () => {
                     padding: 0,
                   }}
                 >
-                  Lo más nuevo
+                  {name}
                 </span>
                 <div
                   className="border border-danger position-absolute  rounded-pill px-2 "
+                  onClick={() => handleCategories(name)}
                   style={{
                     right: "10px",
                     fontSize: "0.9rem",
@@ -212,4 +256,4 @@ const NewProducts = () => {
   );
 };
 
-export default NewProducts;
+export default Filter;

@@ -23,6 +23,8 @@ const GridProductList = () => {
 
   const { category, search } = useParams();
 
+  console.log(search, category);
+
   const {
     data,
     isLoading,
@@ -69,7 +71,7 @@ const GridProductList = () => {
     {
       // refetchOnMount: false,
       // refetchInterval: false,
-      refetchOnWindowFocus: false,
+      // refetchOnWindowFocus: false,
       // refetchIntervalInBackground: false,
 
       getNextPageParam: (lastPage) => {
@@ -82,11 +84,16 @@ const GridProductList = () => {
     console.log(error);
   }
 
+  // const products =
+  //   data?.pages.reduce(
+  //     (prevProducts, page) => prevProducts.concat(page.items),
+  //     []
+  //   ) ?? [];
+
   const products =
-    data?.pages.reduce(
-      (prevProducts, page) => prevProducts.concat(page.items),
-      []
-    ) ?? [];
+    data?.pages
+      .reduce((prevProducts, page) => prevProducts.concat(page.items), [])
+      .filter((product) => product.status !== "Borrador") ?? [];
 
   const handleNavigate = (id) => {
     window.scroll(0, 0);
@@ -187,6 +194,7 @@ const GridProductList = () => {
                     name={product.name}
                     description={product.description}
                     price={product.price}
+                    priceMayor={product.priceMayor}
                     offer={product.inOffer}
                     discountPercentage={product.discountPercentage}
                   />

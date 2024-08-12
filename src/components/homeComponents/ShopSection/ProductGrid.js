@@ -1,7 +1,11 @@
 export default function Product(props) {
   const MAX_TITLE_LENGTH = 17; // El número máximo de caracteres permitidos en el título
   const MAX_DESCRIPTION_LENGTH = 40; // El número máximo de caracteres permitidos en la descripción\
-
+  const capitalizeFirstLetter = (str) => {
+    if (str.length === 0) return str;
+    const lowerCasedStr = str.toLowerCase();
+    return lowerCasedStr.charAt(0).toUpperCase() + lowerCasedStr.slice(1);
+  };
   return (
     <div
       className=" card  text-start    "
@@ -61,7 +65,7 @@ export default function Product(props) {
           className="name"
           style={{ fontWeight: "bold", color: "", fontSize: "0.85rem" }}
         >
-          {props.name}
+          {capitalizeFirstLetter(props.name)}
         </h5>
         {/* <div
           className=""
@@ -81,28 +85,43 @@ export default function Product(props) {
         </div> */}
 
         {props.offer ? (
-          <div className="price d-flex gap-4 " style={{}}>
-            <p style={{ color: "", fontWeight: "bold" }}>
-              {props.price - props.price * (props.discountPercentage / 100)} USD{" "}
-            </p>
-            <p
-              style={{
-                textDecoration: "line-through",
-                fontSize: "16px",
-                color: "gray",
-              }}
-            >
-              {" "}
-              {props.price} USD
-            </p>
-          </div>
+          <>
+            <div className="price d-flex gap-4 " style={{}}>
+              <p style={{ color: "", fontWeight: "bold" }}>
+                {props.price - props.price * (props.discountPercentage / 100)}{" "}
+                USD{" "}
+              </p>
+
+              <p
+                style={{
+                  textDecoration: "line-through",
+                  fontSize: "16px",
+                  color: "gray",
+                }}
+              >
+                {props.price} USD
+              </p>
+            </div>
+            {props.priceMayor !== 0 && props.priceMayor !== null && (
+              <p className="" style={{ color: "", fontSize: "0.9rem" }}>
+                Mayor: <span style={{}}>{props.priceMayor} $</span>
+              </p>
+            )}
+          </>
         ) : (
-          <p
-            className=""
-            style={{ color: "", fontWeight: "bold", fontSize: "1.3rem" }}
-          >
-            {props.price} $
-          </p>
+          <>
+            <p className="" style={{ color: "", fontSize: "0.9rem" }}>
+              Detal:{" "}
+              <span style={{ fontWeight: "bold", fontSize: "1.3rem" }}>
+                {props.price} $
+              </span>
+            </p>
+            {props.priceMayor !== 0 && props.priceMayor !== null && (
+              <p className="" style={{ color: "", fontSize: "0.9rem" }}>
+                Mayor: <span style={{}}>{props.priceMayor} $</span>
+              </p>
+            )}
+          </>
         )}
       </div>
     </div>

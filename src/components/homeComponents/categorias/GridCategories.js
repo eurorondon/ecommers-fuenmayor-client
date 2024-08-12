@@ -12,6 +12,7 @@ function GridCategories() {
   const {
     data: dataCategories,
     error,
+    isError,
     isLoading,
   } = useQuery(["AllCategoriesGridScreen"], getCategories, {
     // refetchOnMount: false,
@@ -22,13 +23,21 @@ function GridCategories() {
   useEffect(() => {
     if (dataCategories) {
       setCategories(dataCategories);
+      console.log(dataCategories);
     }
-  }, [dataCategories]);
+    if (isError) {
+      console.log("isError");
+    }
+  }, [dataCategories, isError]);
 
   const handleCategories = (category) => {
     window.scroll(0, 0);
     navigate(`/categories/${category.categoryName}`);
   };
+
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
 
   return (
     <div>

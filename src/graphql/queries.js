@@ -25,6 +25,7 @@ export const getProduct = /* GraphQL */ `
       rating
       numReviews
       price
+      priceMayor
       countInStock
       createdAt
       type
@@ -32,6 +33,7 @@ export const getProduct = /* GraphQL */ `
       inOffer
       discountPercentage
       bestSellers
+      status
       id
       __typename
     }
@@ -52,6 +54,7 @@ export const listProducts = /* GraphQL */ `
         rating
         numReviews
         price
+        priceMayor
         countInStock
         createdAt
         type
@@ -59,6 +62,7 @@ export const listProducts = /* GraphQL */ `
         inOffer
         discountPercentage
         bestSellers
+        status
         id
         __typename
         photo {
@@ -76,7 +80,8 @@ export const getCategories = /* GraphQL */ `
     getCategories(id: $id) {
       id
       categoryName
-      description
+      showInCarousel
+      bgColor
       photo {
         url
         publicId
@@ -98,7 +103,8 @@ export const listCategories = /* GraphQL */ `
       items {
         id
         categoryName
-        description
+        showInCarousel
+        bgColor
         photo {
           url
           publicId
@@ -196,34 +202,6 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
-// export const listOrders = /* GraphQL */ `
-//   query ListOrders(
-//     $filter: ModelOrderFilterInput
-//     $limit: Int
-//     $nextToken: String
-//   ) {
-//     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-//       items {
-//         idUserFilter
-
-//         taxPrice
-//         shippingPrice
-//         totalPrice
-//         isPaid
-//         paidAt
-//         isDelivered
-//         deliveredAt
-//         id
-//         createdAt
-//         updatedAt
-//         __typename
-//       }
-//       nextToken
-//       __typename
-//     }
-//   }
-// `;
-
 export const listOrders = /* GraphQL */ `
   query ListOrders(
     $filter: ModelOrderFilterInput
@@ -263,6 +241,7 @@ export const listOrders = /* GraphQL */ `
           emailAddress
           __typename
         }
+        paymentMethod
         taxPrice
         shippingPrice
         totalPrice
@@ -280,7 +259,6 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
-
 export const ProductsByDate = /* GraphQL */ `
   query ProductsByDate(
     $type: String!
@@ -307,9 +285,11 @@ export const ProductsByDate = /* GraphQL */ `
           url
           publicId
         }
+
         rating
         numReviews
         price
+        priceMayor
         countInStock
         createdAt
         type
@@ -317,6 +297,7 @@ export const ProductsByDate = /* GraphQL */ `
         inOffer
         discountPercentage
         bestSellers
+        status
         id
         __typename
       }
