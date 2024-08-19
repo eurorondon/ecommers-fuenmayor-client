@@ -14,6 +14,7 @@ import amplifyconfig from "../amplifyconfiguration.json";
 import Slider from "react-slick";
 import { ButtonBase } from "@mui/material";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import { capitalizeFirstLetter } from "../utils/capitalizerFirstLetter";
 
 const settings = {
   dots: true,
@@ -181,17 +182,14 @@ const SingleProduct = ({ match }) => {
               {window.innerWidth >= 1024 &&
                 product?.photo?.length > 1 &&
                 renderArrows()}
-              {/* <img
-                src={product?.photo?.[0]?.url}
-                alt={product?.name}
-                style={{ width: "100%", borderRadius: "4%" }}
-              /> */}
             </div>
           </div>
           <div className="col-md-6">
             <div className="product-dtl">
               <div className="product-info">
-                <div className="product-name mt-5">{product?.name}</div>
+                <div className="product-name mt-5">
+                  {capitalizeFirstLetter(product?.name)}
+                </div>
               </div>
               <p>{product?.description}</p>
 

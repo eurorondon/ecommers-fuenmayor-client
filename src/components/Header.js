@@ -15,6 +15,8 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(cartItems.length);
   const [activeButton, setActiveButton] = useState(0);
 
+  console.log(searchInput);
+
   useEffect(() => {
     if (currentUrl === "/") {
       setActiveButton(0);

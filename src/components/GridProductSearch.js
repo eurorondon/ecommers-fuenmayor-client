@@ -13,7 +13,10 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { useParams } from "react-router-dom";
 import Product from "./homeComponents/ShopSection/ProductGrid";
-import { capitalizeFirstLetter } from "../utils/capitalizerFirstLetter";
+import {
+  removeLastCharacter,
+  toLowerCase,
+} from "../utils/capitalizerFirstLetter";
 
 Amplify.configure(amplifyconfig);
 const client = generateClient();
@@ -26,13 +29,11 @@ const GridProductSearch = () => {
 
   const { category, search } = useParams();
 
-  const toLowerCase = (str) => {
-    return str.toLowerCase();
-  };
+  const search1 = removeLastCharacter(search);
 
   const { data, isLoading, hasNextPage, fetchNextPage, refetch, isFetching } =
     useInfiniteQuery(
-      ["infinity-products-search"],
+      [`infinity-products-search-${search}`],
 
       async ({ pageParam }) => {
         try {
@@ -42,15 +43,16 @@ const GridProductSearch = () => {
           }
 
           if (search) {
+            const lowerCase = toLowerCase(search1);
             filter = {
-              name: { contains: toLowerCase(search) },
+              name: { contains: lowerCase },
             };
           }
 
           const productsData = await client.graphql({
             query: listProducts,
             variables: {
-              limit: 100,
+              limit: 1000,
               filter,
               nextToken: pageParam,
             },
